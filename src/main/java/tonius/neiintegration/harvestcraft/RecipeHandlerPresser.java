@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import tonius.neiintegration.Hacks;
 import tonius.neiintegration.Hacks.MethodInvoker;
+import tonius.neiintegration.NEIIntegration;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
@@ -53,7 +54,7 @@ public class RecipeHandlerPresser extends RecipeHandlerBase {
     
     @Override
     public String getGuiTexture() {
-        return "neiintegration:textures/basicProcessing.png";
+        return NEIIntegration.RESOURCE_PREFIX + "textures/basicProcessing.png";
     }
     
     @Override
