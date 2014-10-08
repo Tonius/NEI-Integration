@@ -15,7 +15,6 @@ import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityComposter;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.guihook.GuiContainerManager;
 import codechicken.nei.recipe.GuiRecipe;
@@ -30,6 +29,7 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
     private static int sewagePerOperation;
     private static int energyPerOperation;
     
+    @Override
     public void prepare() {
         fertilizer = GameRegistry.findItem("MineFactoryReloaded", "item.mfr.fertilizer");
         
@@ -94,6 +94,7 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
     @Override
     public void drawForeground(int recipe) {
         super.drawForeground(recipe);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(111, 2, 176, 0, 16, 60);
         this.drawProgressBar(129, 0, 176, 58, 8, 62, 1.0F, 3);
@@ -125,7 +126,7 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
     
     @Override
     public void loadCraftingRecipes(ItemStack result) {
-        if (NEIServerUtils.areStacksSameTypeCrafting(new ItemStack(fertilizer), result)) {
+        if (result.getItem() == fertilizer) {
             this.arecipes.add(new CachedComposterRecipe());
         }
     }

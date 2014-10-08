@@ -34,6 +34,7 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
     private static int sludgePerOperation;
     private static int energyPerOperation;
     
+    @Override
     public void prepare() {
         drops = MFRRegistry.getSludgeDrops();
         for (Item drop : drops) {
@@ -55,7 +56,7 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
         public CachedSludgeBoilerRecipe(ItemStack output, int weight) {
             this.sludgeInput = new FluidTankElement(SLUDGE, 4000, new FluidStack(FluidRegistry.getFluid("sludge"), sludgePerOperation));
             this.output = new PositionedStack(output, 48, 24);
-            this.chance = ((float) weight / (float) totalWeight);
+            this.chance = (float) weight / (float) totalWeight;
         }
         
         @Override
@@ -103,6 +104,7 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
     @Override
     public void drawForeground(int recipe) {
         super.drawForeground(recipe);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(111, 2, 176, 0, 16, 60);
         this.drawProgressBar(129, 0, 176, 58, 8, 62, 1.0F, 3);

@@ -21,6 +21,7 @@ public class RecipeHandlerPresser extends RecipeHandlerBase {
     
     private static Map<ItemStack, ItemStack> recipes = new HashMap<ItemStack, ItemStack>();
     
+    @Override
     public void prepare() {
         Class clazz = Hacks.getClass("com.pam.harvestcraft.PresserRecipes");
         if (clazz != null) {
