@@ -16,7 +16,6 @@ import powercrystals.minefactoryreloaded.tile.machine.TileEntityComposter;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
-import codechicken.nei.guihook.GuiContainerManager;
 import codechicken.nei.recipe.GuiRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -102,15 +101,10 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
     }
     
     @Override
-    public List<String> handleTooltip(GuiRecipe guiRecipe, List<String> currenttip, int recipe) {
-        super.handleTooltip(guiRecipe, currenttip, recipe);
-        if (GuiContainerManager.shouldShowTooltip(guiRecipe)) {
-            Point mouse = GuiDraw.getMousePosition();
-            Point offset = guiRecipe.getRecipePosition(recipe);
-            Point relMouse = new Point(mouse.x - (guiRecipe.width - 176) / 2 - offset.x, mouse.y - (guiRecipe.height - 166) / 2 - offset.y);
-            if (ENERGY.contains(relMouse)) {
-                currenttip.add(energyPerOperation + " RF");
-            }
+    public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
+        super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
+        if (ENERGY.contains(relMouse)) {
+            currenttip.add(energyPerOperation + " RF");
         }
         return currenttip;
     }
