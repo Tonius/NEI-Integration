@@ -33,6 +33,9 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
     
     public static Class<? extends GuiContainer> guiClass = null;
     
+    public void prepare() {
+    }
+    
     public abstract class CachedBaseRecipe extends CachedRecipe {
         public List<FluidTankElement> getFluidTanks() {
             return null;
@@ -45,6 +48,14 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
     }
     
     public void loadUsageRecipes(FluidStack ingredient) {
+    }
+    
+    public void changeToGuiTexture() {
+        GuiDraw.changeTexture(this.getGuiTexture());
+    }
+    
+    public void changeToOverlayTexture() {
+        GuiDraw.changeTexture(NEIIntegration.RESOURCE_PREFIX + "textures/overlays.png");
     }
     
     @Override

@@ -11,6 +11,7 @@ public abstract class IntegrationBase {
     public abstract void loadConfig();
     
     public static void registerHandler(RecipeHandlerBase handler) {
+        handler.prepare();
         API.registerRecipeHandler(handler);
         API.registerUsageHandler(handler);
     }

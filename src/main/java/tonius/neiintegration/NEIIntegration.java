@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.Logger;
 
 import tonius.neiintegration.harvestcraft.HarvestCraftIntegration;
+import tonius.neiintegration.minefactoryreloaded.MFRIntegration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -34,6 +35,7 @@ public class NEIIntegration {
     @EventHandler
     public void init(FMLInitializationEvent evt) {
         integrations.add(new HarvestCraftIntegration());
+        integrations.add(new MFRIntegration());
     }
     
 }

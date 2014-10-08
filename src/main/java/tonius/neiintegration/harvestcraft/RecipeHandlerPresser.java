@@ -1,6 +1,7 @@
 package tonius.neiintegration.harvestcraft;
 
 import java.awt.Rectangle;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,7 +19,23 @@ import codechicken.nei.PositionedStack;
 
 public class RecipeHandlerPresser extends RecipeHandlerBase {
     
-    private static Map<ItemStack, ItemStack> recipes;
+    private static Map<ItemStack, ItemStack> recipes = new HashMap<ItemStack, ItemStack>();
+    
+    public void prepare() {
+        Class clazz = Hacks.getClass("com.pam.harvestcraft.PresserRecipes");
+        if (clazz != null) {
+            MethodInvoker smelting = Hacks.getMethodInvoker(clazz, "smelting", null, new Class[0]);
+            if (smelting != null) {
+                Object instance = smelting.invoke(new Object[0]);
+                if (instance != null) {
+                    MethodInvoker getSmeltingList = Hacks.getMethodInvoker(clazz, "getSmeltingList", instance, new Class[0]);
+                    if (getSmeltingList != null) {
+                        recipes = (Map<ItemStack, ItemStack>) getSmeltingList.invoke(new Object[0]);
+                    }
+                }
+            }
+        }
+    }
     
     public class CachedPresserRecipe extends CachedBaseRecipe {
         
@@ -65,7 +82,7 @@ public class RecipeHandlerPresser extends RecipeHandlerBase {
     @Override
     public void drawBackground(int recipe) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GuiDraw.changeTexture(this.getGuiTexture());
+        this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 160, 65);
     }
     
@@ -101,23 +118,6 @@ public class RecipeHandlerPresser extends RecipeHandlerBase {
                 this.arecipes.add(new CachedPresserRecipe(entry.getKey(), entry.getValue()));
             }
         }
-    }
-    
-    public static boolean prepare() {
-        Class clazz = Hacks.getClass("com.pam.harvestcraft.PresserRecipes");
-        if (clazz != null) {
-            MethodInvoker smelting = Hacks.getMethodInvoker(clazz, "smelting", null, new Class[0]);
-            if (smelting != null) {
-                Object instance = smelting.invoke(new Object[0]);
-                if (instance != null) {
-                    MethodInvoker getSmeltingList = Hacks.getMethodInvoker(clazz, "getSmeltingList", instance, new Class[0]);
-                    if (getSmeltingList != null) {
-                        recipes = (Map<ItemStack, ItemStack>) getSmeltingList.invoke(new Object[0]);
-                    }
-                }
-            }
-        }
-        return recipes != null;
     }
     
 }
