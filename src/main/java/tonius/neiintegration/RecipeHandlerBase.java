@@ -37,9 +37,20 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
     }
     
     public abstract class CachedBaseRecipe extends CachedRecipe {
+        
         public List<FluidTankElement> getFluidTanks() {
+            List<FluidTankElement> tanks = new ArrayList<FluidTankElement>();
+            FluidTankElement tank = this.getFluidTank();
+            if (tank != null) {
+                tanks.add(tank);
+            }
+            return tanks;
+        }
+        
+        public FluidTankElement getFluidTank() {
             return null;
         }
+        
     }
     
     public abstract String getRecipeID();

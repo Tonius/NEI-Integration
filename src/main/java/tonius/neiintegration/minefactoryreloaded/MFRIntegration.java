@@ -18,6 +18,7 @@ public class MFRIntegration extends IntegrationBase {
     @Override
     public void loadConfig() {
         registerHandler(new RecipeHandlerComposter());
+        registerHandler(new RecipeHandlerHarvester());
         registerHandler(new RecipeHandlerLaserDrill());
         registerHandler(new RecipeHandlerSludgeBoiler());
     }

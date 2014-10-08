@@ -53,7 +53,7 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
         public float chance;
         
         public CachedSludgeBoilerRecipe(ItemStack output, int weight) {
-            this.sludgeInput = new FluidTankElement(SLUDGE, 4000, new FluidStack(FluidRegistry.getFluid("sludge"), sludgePerOperation));
+            this.sludgeInput = new FluidTankElement(SLUDGE, 4000, FluidRegistry.getFluidStack("sludge", sludgePerOperation));
             this.output = new PositionedStack(output, 48, 24);
             this.chance = (float) weight / (float) totalWeight;
         }
@@ -64,8 +64,8 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
         }
         
         @Override
-        public List<FluidTankElement> getFluidTanks() {
-            return getSingleList(this.sludgeInput);
+        public FluidTankElement getFluidTank() {
+            return this.sludgeInput;
         }
         
     }
