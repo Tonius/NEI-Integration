@@ -97,7 +97,6 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
         this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(0, 0, 11, 13, 160, 65);
         this.changeToOverlayTexture();
-        GuiDraw.drawTexturedModalRect(47, 23, 0, 30, 18, 18);
         GuiDraw.drawTexturedModalRect(76, 25, 0, 15, 22, 15);
     }
     
@@ -115,7 +114,7 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
         CachedSludgeBoilerRecipe crecipe = (CachedSludgeBoilerRecipe) this.arecipes.get(recipe);
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(2);
-        GuiDraw.drawStringC(percentFormat.format(crecipe.chance), 57, 48, 0x808080, false);
+        GuiDraw.drawStringC(percentFormat.format(crecipe.chance), 57, 44, 0x808080, false);
     }
     
     @Override
