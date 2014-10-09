@@ -63,10 +63,12 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
     
     public void changeToGuiTexture() {
         GuiDraw.changeTexture(this.getGuiTexture());
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
     
     public void changeToOverlayTexture() {
         GuiDraw.changeTexture(NEIIntegration.RESOURCE_PREFIX + "textures/overlays.png");
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
     
     @Override
@@ -252,6 +254,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
         public int capacity;
         public boolean flowingTexture = false;
         public boolean showAmount = true;
+        public boolean perTick = false;
         
         public FluidTankElement(Rectangle position, int capacity, FluidStack fluid) {
             this.position = position;
@@ -265,7 +268,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
             }
             currenttip.add(this.fluid.getLocalizedName());
             if (this.showAmount) {
-                currenttip.add(EnumChatFormatting.GRAY.toString() + this.fluid.amount + " mB");
+                currenttip.add(EnumChatFormatting.GRAY.toString() + this.fluid.amount + (this.perTick ? " mB/t" : " mB"));
             }
             return currenttip;
         }

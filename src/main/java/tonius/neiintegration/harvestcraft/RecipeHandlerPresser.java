@@ -6,9 +6,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.minecraft.item.ItemStack;
-
-import org.lwjgl.opengl.GL11;
-
 import tonius.neiintegration.Hacks;
 import tonius.neiintegration.Hacks.MethodInvoker;
 import tonius.neiintegration.NEIIntegration;
@@ -82,7 +79,6 @@ public class RecipeHandlerPresser extends RecipeHandlerBase {
     
     @Override
     public void drawBackground(int recipe) {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 160, 65);
     }

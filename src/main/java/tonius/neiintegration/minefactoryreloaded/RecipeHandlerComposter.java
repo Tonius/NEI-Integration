@@ -8,9 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-
-import org.lwjgl.opengl.GL11;
-
 import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityComposter;
 import tonius.neiintegration.RecipeHandlerBase;
@@ -77,7 +74,6 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
     
     @Override
     public void drawBackground(int recipe) {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(0, 0, 11, 13, 160, 65);
         this.changeToOverlayTexture();
@@ -87,7 +83,6 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
     @Override
     public void drawForeground(int recipe) {
         super.drawForeground(recipe);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(111, 2, 176, 0, 16, 60);
         this.drawProgressBar(129, 0, 176, 58, 8, 62, 1.0F, 3);

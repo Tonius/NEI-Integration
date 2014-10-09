@@ -19,8 +19,13 @@ public class MFRIntegration extends IntegrationBase {
     public void loadConfig() {
         registerHandler(new RecipeHandlerBioReactor());
         registerHandler(new RecipeHandlerComposter());
+        registerHandler(new RecipeHandlerGrinder());
         registerHandler(new RecipeHandlerHarvester());
         registerHandler(new RecipeHandlerLaserDrill());
+        registerHandler(new RecipeHandlerLavaFabricator());
+        registerHandler(new RecipeHandlerMeatPacker());
+        registerHandler(new RecipeHandlerSewer());
+        registerHandler(new RecipeHandlerSlaughterhouse());
         registerHandler(new RecipeHandlerSludgeBoiler());
     }
     

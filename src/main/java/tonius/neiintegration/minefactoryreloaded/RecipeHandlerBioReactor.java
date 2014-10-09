@@ -11,9 +11,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
-
-import org.lwjgl.opengl.GL11;
-
 import powercrystals.minefactoryreloaded.MFRRegistry;
 import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.api.IFactoryPlantable;
@@ -47,7 +44,7 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
         
         @Override
         public PositionedStack getResult() {
-            this.randomRenderPermutation(this.input, cycleticks / 20);
+            this.randomRenderPermutation(this.input, RecipeHandlerBioReactor.this.cycleticks / 20);
             return this.input;
         }
         
@@ -80,7 +77,6 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
     
     @Override
     public void drawBackground(int recipe) {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(8, 5, 7, 14, 54, 54);
         GuiDraw.drawTexturedModalRect(120, 0, 131, 13, 38, 65);
@@ -91,7 +87,6 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
     @Override
     public void drawForeground(int recipe) {
         super.drawForeground(recipe);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(121, 2, 176, 0, 16, 60);
         this.drawProgressBar(139, 0, 176, 58, 8, 62, 0.3F, 3);
