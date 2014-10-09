@@ -3,7 +3,6 @@ package tonius.neiintegration.minefactoryreloaded;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
@@ -28,8 +27,8 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
     private static final Rectangle SLUDGE = new Rectangle(111, 2, 16, 60);
     private static final Rectangle ENERGY = new Rectangle(129, 2, 8, 60);
     private static final Rectangle WORK = new Rectangle(139, 2, 8, 60);
-    private static List<Item> drops = new ArrayList<Item>();
-    private static int totalWeight = 0;
+    private static List<Item> drops;
+    private static int totalWeight;
     private static int sludgePerOperation;
     private static int energyPerOperation;
     
@@ -88,7 +87,6 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
     @Override
     public void loadTransferRects() {
         this.transferRects.add(new RecipeTransferRect(new Rectangle(76, 25, 22, 15), this.getRecipeID(), new Object[0]));
-        this.transferRects.add(new RecipeTransferRect(WORK, this.getRecipeID(), new Object[0]));
     }
     
     @Override

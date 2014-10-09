@@ -105,7 +105,6 @@ public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
     @Override
     public void loadTransferRects() {
         this.transferRects.add(new RecipeTransferRect(new Rectangle(104, 25, 22, 15), this.getRecipeID(), new Object[0]));
-        this.transferRects.add(new RecipeTransferRect(WORK, this.getRecipeID(), new Object[0]));
     }
     
     @Override
@@ -125,7 +124,7 @@ public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
         this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(111, 2, 176, 0, 16, 60);
         this.drawProgressBar(139, 0, 176, 58, 8, 62, 1.0F, 3);
-        this.drawProgressBar(149, 0, 185, 58, 8, 62, 40, 3);
+        this.drawProgressBar(149, 0, 185, 58, 8, 62, 60, 3);
     }
     
     @Override

@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.List;
 
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -93,8 +94,8 @@ public class RecipeHandlerHarvester extends RecipeHandlerBase {
         if (ENERGY.contains(relMouse)) {
             currenttip.add(energyPerOperation + " RF");
         } else if (PLANTS.contains(relMouse)) {
-            currenttip.add("Harvesting plants creates");
-            currenttip.add("sludge as a byproduct");
+            currenttip.add("Harvestable blocks");
+            currenttip.add(EnumChatFormatting.GRAY + "Sludge is a byproduct of harvesting.");
         }
         return currenttip;
     }

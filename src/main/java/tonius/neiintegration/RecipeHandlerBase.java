@@ -251,6 +251,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
         public FluidStack fluid;
         public int capacity;
         public boolean flowingTexture = false;
+        public boolean showAmount = true;
         
         public FluidTankElement(Rectangle position, int capacity, FluidStack fluid) {
             this.position = position;
@@ -263,7 +264,9 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
                 return currenttip;
             }
             currenttip.add(this.fluid.getLocalizedName());
-            currenttip.add(EnumChatFormatting.GRAY.toString() + this.fluid.amount + " mB");
+            if (this.showAmount) {
+                currenttip.add(EnumChatFormatting.GRAY.toString() + this.fluid.amount + " mB");
+            }
             return currenttip;
         }
         
