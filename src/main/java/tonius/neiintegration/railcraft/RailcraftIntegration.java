@@ -18,6 +18,7 @@ public class RailcraftIntegration extends IntegrationBase {
     @Override
     public void loadConfig() {
         registerHandler(new RecipeHandlerBlastFurnace());
+        registerHandler(new RecipeHandlerCokeOven());
     }
     
 }
