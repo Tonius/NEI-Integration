@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.Item;
@@ -30,8 +29,6 @@ import codechicken.nei.recipe.GuiUsageRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
-    
-    public static Class<? extends GuiContainer> guiClass = null;
     
     public void prepare() {
     }
@@ -142,11 +139,6 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
             }
         }
         return currenttip;
-    }
-    
-    @Override
-    public Class<? extends GuiContainer> getGuiClass() {
-        return guiClass;
     }
     
     @Override
