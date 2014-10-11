@@ -95,6 +95,7 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
         GuiDraw.drawTexturedModalRect(95, 13, 176, 0, 48, 47);
         this.drawProgressBar(40, 32, 177, 61, 21, 16, 100, 0);
         this.drawProgressBar(21, 15, 176, 47, 14, 14, 100, 11);
+        GuiDraw.drawStringC(((CachedCokeOvenRecipe) this.arecipes.get(recipe)).cookTime + " ticks", 64, 12, 0x808080, false);
     }
     
     @Override
