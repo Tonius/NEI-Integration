@@ -19,6 +19,7 @@ public class RailcraftIntegration extends IntegrationBase {
     public void loadConfig() {
         registerHandler(new RecipeHandlerBlastFurnace());
         registerHandler(new RecipeHandlerCokeOven());
+        registerHandler(new RecipeHandlerRockCrusher());
     }
     
 }

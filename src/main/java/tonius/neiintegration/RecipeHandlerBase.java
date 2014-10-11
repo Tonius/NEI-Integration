@@ -22,6 +22,7 @@ import org.lwjgl.opengl.GL11;
 
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIClientConfig;
+import codechicken.nei.PositionedStack;
 import codechicken.nei.guihook.GuiContainerManager;
 import codechicken.nei.recipe.GuiCraftingRecipe;
 import codechicken.nei.recipe.GuiRecipe;
@@ -130,6 +131,18 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
         return currenttip;
     }
     
+    @Override
+    public List<String> handleItemTooltip(GuiRecipe guiRecipe, ItemStack itemStack, List<String> currenttip, int recipe) {
+        super.handleItemTooltip(guiRecipe, itemStack, currenttip, recipe);
+        CachedBaseRecipe crecipe = (CachedBaseRecipe) this.arecipes.get(recipe);
+        Point mouse = GuiDraw.getMousePosition();
+        Point offset = guiRecipe.getRecipePosition(recipe);
+        Point relMouse = new Point(mouse.x - (guiRecipe.width - 176) / 2 - offset.x, mouse.y - (guiRecipe.height - 166) / 2 - offset.y);
+        
+        currenttip = this.provideItemTooltip(guiRecipe, itemStack, currenttip, crecipe, relMouse);
+        return currenttip;
+    }
+    
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         if (crecipe.getFluidTanks() != null) {
             for (FluidTankElement tank : crecipe.getFluidTanks()) {
@@ -137,6 +150,24 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
                     tank.handleTooltip(currenttip);
                 }
             }
+        }
+        return currenttip;
+    }
+    
+    public List<String> provideItemTooltip(GuiRecipe guiRecipe, ItemStack itemStack, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
+        for (PositionedStack stack : crecipe.getIngredients()) {
+            if (stack instanceof PositionedStackAdv && ((PositionedStackAdv) stack).getRect().contains(relMouse)) {
+                currenttip = ((PositionedStackAdv) stack).handleTooltip(guiRecipe, currenttip);
+            }
+        }
+        for (PositionedStack stack : crecipe.getOtherStacks()) {
+            if (stack instanceof PositionedStackAdv && ((PositionedStackAdv) stack).getRect().contains(relMouse)) {
+                currenttip = ((PositionedStackAdv) stack).handleTooltip(guiRecipe, currenttip);
+            }
+        }
+        PositionedStack stack = crecipe.getResult();
+        if (stack instanceof PositionedStackAdv && ((PositionedStackAdv) stack).getRect().contains(relMouse)) {
+            currenttip = ((PositionedStackAdv) stack).handleTooltip(guiRecipe, currenttip);
         }
         return currenttip;
     }
