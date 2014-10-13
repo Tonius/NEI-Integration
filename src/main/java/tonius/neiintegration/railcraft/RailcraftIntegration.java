@@ -20,6 +20,8 @@ public class RailcraftIntegration extends IntegrationBase {
         registerHandler(new RecipeHandlerBlastFurnace());
         registerHandler(new RecipeHandlerCokeOven());
         registerHandler(new RecipeHandlerRockCrusher());
+        registerHandler(new RecipeHandlerRollingMachineShaped());
+        registerHandler(new RecipeHandlerRollingMachineShapeless());
     }
     
 }

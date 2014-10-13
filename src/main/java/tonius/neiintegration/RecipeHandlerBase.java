@@ -53,6 +53,10 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
     
     public abstract String getRecipeID();
     
+    public String getRecipeNameSub() {
+        return null;
+    }
+    
     public void loadCraftingRecipes(FluidStack result) {
     }
     
@@ -73,6 +77,9 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
     public void drawForeground(int recipe) {
         super.drawForeground(recipe);
         this.drawFluidTanks(recipe);
+        if (recipe % this.recipiesPerPage() == 0 && this.getRecipeNameSub() != null) {
+            GuiDraw.drawStringC(this.getRecipeNameSub(), 83, -2, 0x404040, false);
+        }
     }
     
     @Override
