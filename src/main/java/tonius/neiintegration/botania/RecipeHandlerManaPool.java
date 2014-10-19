@@ -19,7 +19,7 @@ import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class RecipeHandlerManaInfusion extends RecipeHandlerBase {
+public class RecipeHandlerManaPool extends RecipeHandlerBase {
     
     private static Block centerItem;
     private static Block alchemyCatalyst;
@@ -33,14 +33,14 @@ public class RecipeHandlerManaInfusion extends RecipeHandlerBase {
         conjurationCatalyst = GameRegistry.findBlock("Botania", "conjurationCatalyst");
     }
     
-    public class CachedManaInfusionRecipe extends CachedBaseRecipe {
+    public class CachedManaPoolRecipe extends CachedBaseRecipe {
         
         public PositionedStack input;
         public PositionedStack output;
         public List<PositionedStack> otherStacks = new ArrayList<PositionedStack>();
         public int mana;
         
-        public CachedManaInfusionRecipe(RecipeManaInfusion recipe) {
+        public CachedManaPoolRecipe(RecipeManaInfusion recipe) {
             if (recipe.getInput() instanceof String) {
                 this.input = new PositionedStack(OreDictionary.getOres((String) recipe.getInput()), 42, 17);
             } else {
@@ -61,7 +61,7 @@ public class RecipeHandlerManaInfusion extends RecipeHandlerBase {
         
         @Override
         public PositionedStack getIngredient() {
-            this.randomRenderPermutation(this.input, RecipeHandlerManaInfusion.this.cycleticks / 20);
+            this.randomRenderPermutation(this.input, RecipeHandlerManaPool.this.cycleticks / 20);
             return this.input;
         }
         
@@ -79,12 +79,12 @@ public class RecipeHandlerManaInfusion extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Mana Infusion";
+        return "Mana Pool";
     }
     
     @Override
     public String getRecipeID() {
-        return "botania.manaInfusion";
+        return "botania.manaPool";
     }
     
     @Override
@@ -112,7 +112,7 @@ public class RecipeHandlerManaInfusion extends RecipeHandlerBase {
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals(this.getRecipeID())) {
             for (RecipeManaInfusion recipe : BotaniaAPI.manaInfusionRecipes) {
-                this.arecipes.add(new CachedManaInfusionRecipe(recipe));
+                this.arecipes.add(new CachedManaPoolRecipe(recipe));
             }
         } else {
             super.loadCraftingRecipes(outputId, results);
@@ -123,7 +123,7 @@ public class RecipeHandlerManaInfusion extends RecipeHandlerBase {
     public void loadCraftingRecipes(ItemStack result) {
         for (RecipeManaInfusion recipe : BotaniaAPI.manaInfusionRecipes) {
             if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getOutput(), result)) {
-                this.arecipes.add(new CachedManaInfusionRecipe(recipe));
+                this.arecipes.add(new CachedManaPoolRecipe(recipe));
             }
         }
     }
@@ -134,13 +134,13 @@ public class RecipeHandlerManaInfusion extends RecipeHandlerBase {
             if (recipe.getInput() instanceof String) {
                 for (int i : OreDictionary.getOreIDs(ingredient)) {
                     if (OreDictionary.getOreName(i).equals(recipe.getInput())) {
-                        this.arecipes.add(new CachedManaInfusionRecipe(recipe));
+                        this.arecipes.add(new CachedManaPoolRecipe(recipe));
                     }
                 }
             } else if (NEIServerUtils.areStacksSameTypeCrafting((ItemStack) recipe.getInput(), ingredient)) {
-                this.arecipes.add(new CachedManaInfusionRecipe(recipe));
+                this.arecipes.add(new CachedManaPoolRecipe(recipe));
             } else if (recipe.isAlchemy() && ingredient.getItem() == Item.getItemFromBlock(alchemyCatalyst) || recipe.isConjuration() && ingredient.getItem() == Item.getItemFromBlock(conjurationCatalyst)) {
-                this.arecipes.add(new CachedManaInfusionRecipe(recipe));
+                this.arecipes.add(new CachedManaPoolRecipe(recipe));
             }
         }
     }

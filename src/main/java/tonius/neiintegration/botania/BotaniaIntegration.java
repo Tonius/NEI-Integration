@@ -19,7 +19,7 @@ public class BotaniaIntegration extends IntegrationBase {
     public void loadConfig() {
         registerHandler(new RecipeHandlerPetals());
         registerHandler(new RecipeHandlerRunicAltar());
-        registerHandler(new RecipeHandlerManaInfusion());
+        registerHandler(new RecipeHandlerManaPool());
     }
     
 }
