@@ -16,6 +16,7 @@ public class RecipeHandlerRunicAltar extends RecipeHandlerPetals {
     
     @Override
     public void prepare() {
+        // XXX: change this when merging into Botania
         centerItem = GameRegistry.findBlock("Botania", "runeAltar");
     }
     
@@ -50,5 +51,7 @@ public class RecipeHandlerRunicAltar extends RecipeHandlerPetals {
     public CachedPetalsRecipe getCachedRecipe(RecipePetals recipe) {
         return new CachedRunicAltarRecipe((RecipeRuneAltar) recipe);
     }
+    
+    // TODO: draw mana bar
     
 }

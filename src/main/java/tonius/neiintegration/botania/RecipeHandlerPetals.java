@@ -24,6 +24,7 @@ public class RecipeHandlerPetals extends RecipeHandlerBase {
     
     @Override
     public void prepare() {
+        // XXX: change this when merging into Botania
         centerItem = GameRegistry.findBlock("Botania", "altar");
     }
     
