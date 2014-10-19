@@ -8,6 +8,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
+import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
@@ -21,15 +22,15 @@ public class RecipeHandlerSewer extends RecipeHandlerBase {
     
     public class CachedSewerRecipe extends CachedBaseRecipe {
         
-        public FluidTankElement tank;
+        public PositionedFluidTank tank;
         public boolean essenceRecipe;
         
         public CachedSewerRecipe(boolean essenceRecipe) {
             this.essenceRecipe = essenceRecipe;
             if (!essenceRecipe) {
-                this.tank = new FluidTankElement(SEWAGE, 4000, FluidRegistry.getFluidStack("sewage", 4000));
+                this.tank = new PositionedFluidTank(SEWAGE, 4000, FluidRegistry.getFluidStack("sewage", 4000));
             } else {
-                this.tank = new FluidTankElement(ESSENCE, 4000, FluidRegistry.getFluidStack("mobessence", 4000));
+                this.tank = new PositionedFluidTank(ESSENCE, 4000, FluidRegistry.getFluidStack("mobessence", 4000));
             }
             this.tank.showAmount = false;
         }
@@ -40,7 +41,7 @@ public class RecipeHandlerSewer extends RecipeHandlerBase {
         }
         
         @Override
-        public FluidTankElement getFluidTank() {
+        public PositionedFluidTank getFluidTank() {
             return this.tank;
         }
         

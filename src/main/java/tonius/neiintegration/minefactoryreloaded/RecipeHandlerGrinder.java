@@ -9,6 +9,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityGrinder;
+import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
@@ -31,10 +32,10 @@ public class RecipeHandlerGrinder extends RecipeHandlerBase {
     
     public class CachedGrinderRecipe extends CachedBaseRecipe {
         
-        FluidTankElement tank;
+        PositionedFluidTank tank;
         
         public CachedGrinderRecipe() {
-            this.tank = new FluidTankElement(ESSENCE, 4000, FluidRegistry.getFluidStack("mobessence", 4000));
+            this.tank = new PositionedFluidTank(ESSENCE, 4000, FluidRegistry.getFluidStack("mobessence", 4000));
             this.tank.showAmount = false;
         }
         
@@ -44,7 +45,7 @@ public class RecipeHandlerGrinder extends RecipeHandlerBase {
         }
         
         @Override
-        public FluidTankElement getFluidTank() {
+        public PositionedFluidTank getFluidTank() {
             return this.tank;
         }
         

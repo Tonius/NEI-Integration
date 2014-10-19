@@ -14,6 +14,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import powercrystals.minefactoryreloaded.MFRRegistry;
 import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.api.IFactoryPlantable;
+import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
@@ -34,11 +35,11 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
     public class CachedBioReactorRecipe extends CachedBaseRecipe {
         
         public PositionedStack input;
-        public FluidTankElement biofuelOutput;
+        public PositionedFluidTank biofuelOutput;
         
         public CachedBioReactorRecipe(ItemStack input) {
             this.input = new PositionedStack(input, 9, 6);
-            this.biofuelOutput = new FluidTankElement(BIOFUEL, 4000, FluidRegistry.getFluidStack("biofuel", 4000));
+            this.biofuelOutput = new PositionedFluidTank(BIOFUEL, 4000, FluidRegistry.getFluidStack("biofuel", 4000));
             this.biofuelOutput.showAmount = false;
         }
         
@@ -49,7 +50,7 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
         }
         
         @Override
-        public FluidTankElement getFluidTank() {
+        public PositionedFluidTank getFluidTank() {
             return this.biofuelOutput;
         }
         

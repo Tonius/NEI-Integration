@@ -10,6 +10,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityMeatPacker;
+import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
@@ -39,11 +40,11 @@ public class RecipeHandlerMeatPacker extends RecipeHandlerBase {
     
     public class CachedMeatPackerRecipe extends CachedBaseRecipe {
         
-        public FluidTankElement fluidInput;
+        public PositionedFluidTank fluidInput;
         public PositionedStack output;
         
         public CachedMeatPackerRecipe(FluidStack input, ItemStack output) {
-            this.fluidInput = new FluidTankElement(TANK, 4000, input);
+            this.fluidInput = new PositionedFluidTank(TANK, 4000, input);
             this.output = new PositionedStack(output, 48, 24);
         }
         
@@ -53,7 +54,7 @@ public class RecipeHandlerMeatPacker extends RecipeHandlerBase {
         }
         
         @Override
-        public FluidTankElement getFluidTank() {
+        public PositionedFluidTank getFluidTank() {
             return this.fluidInput;
         }
         

@@ -1,17 +1,12 @@
 package tonius.neiintegration;
 
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -24,9 +19,7 @@ import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIClientConfig;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.guihook.GuiContainerManager;
-import codechicken.nei.recipe.GuiCraftingRecipe;
 import codechicken.nei.recipe.GuiRecipe;
-import codechicken.nei.recipe.GuiUsageRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
@@ -36,16 +29,16 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
     
     public abstract class CachedBaseRecipe extends CachedRecipe {
         
-        public List<FluidTankElement> getFluidTanks() {
-            List<FluidTankElement> tanks = new ArrayList<FluidTankElement>();
-            FluidTankElement tank = this.getFluidTank();
+        public List<PositionedFluidTank> getFluidTanks() {
+            List<PositionedFluidTank> tanks = new ArrayList<PositionedFluidTank>();
+            PositionedFluidTank tank = this.getFluidTank();
             if (tank != null) {
                 tanks.add(tank);
             }
             return tanks;
         }
         
-        public FluidTankElement getFluidTank() {
+        public PositionedFluidTank getFluidTank() {
             return null;
         }
         
@@ -152,7 +145,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
     
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         if (crecipe.getFluidTanks() != null) {
-            for (FluidTankElement tank : crecipe.getFluidTanks()) {
+            for (PositionedFluidTank tank : crecipe.getFluidTanks()) {
                 if (tank.position.contains(relMouse)) {
                     tank.handleTooltip(currenttip);
                 }
@@ -214,20 +207,9 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
         Point relMouse = new Point(mousepos.x - (guiRecipe.width - 176) / 2 - offset.x, mousepos.y - (guiRecipe.height - 166) / 2 - offset.y);
         
         if (crecipe.getFluidTanks() != null) {
-            for (FluidTankElement tank : crecipe.getFluidTanks()) {
+            for (PositionedFluidTank tank : crecipe.getFluidTanks()) {
                 if (tank.position.contains(relMouse)) {
-                    if (tank.fluid != null && tank.fluid.amount > 0) {
-                        if (usage) {
-                            if (!GuiUsageRecipe.openRecipeGui("liquid", new Object[] { tank.fluid })) {
-                                return false;
-                            }
-                        } else {
-                            if (!GuiCraftingRecipe.openRecipeGui("liquid", new Object[] { tank.fluid })) {
-                                return false;
-                            }
-                        }
-                        return true;
-                    }
+                    return tank.transfer(usage);
                 }
             }
         }
@@ -238,7 +220,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
     public void drawFluidTanks(int recipe) {
         CachedBaseRecipe crecipe = (CachedBaseRecipe) this.arecipes.get(recipe);
         if (crecipe.getFluidTanks() != null) {
-            for (FluidTankElement fluidTank : crecipe.getFluidTanks()) {
+            for (PositionedFluidTank fluidTank : crecipe.getFluidTanks()) {
                 fluidTank.draw();
             }
         }
@@ -276,80 +258,6 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
             return false;
         }
         return fluidStack1.isFluidEqual(fluidStack2);
-    }
-    
-    public static class FluidTankElement {
-        public Rectangle position;
-        public FluidStack fluid;
-        public int capacity;
-        public boolean flowingTexture = false;
-        public boolean showAmount = true;
-        public boolean perTick = false;
-        
-        public FluidTankElement(Rectangle position, int capacity, FluidStack fluid) {
-            this.position = position;
-            this.capacity = capacity;
-            this.fluid = fluid;
-        }
-        
-        public List<String> handleTooltip(List<String> currenttip) {
-            if (this.fluid == null || this.fluid.getFluid() == null || this.fluid.amount <= 0) {
-                return currenttip;
-            }
-            currenttip.add(this.fluid.getLocalizedName());
-            if (this.showAmount) {
-                currenttip.add(EnumChatFormatting.GRAY.toString() + this.fluid.amount + (this.perTick ? " mB/t" : " mB"));
-            }
-            return currenttip;
-        }
-        
-        public void draw() {
-            if (this.fluid == null || this.fluid.getFluid() == null || this.fluid.amount <= 0) {
-                return;
-            }
-            IIcon fluidIcon = null;
-            if (this.flowingTexture && this.fluid.getFluid().getFlowingIcon() != null) {
-                fluidIcon = this.fluid.getFluid().getFlowingIcon();
-            } else if (this.fluid.getFluid().getStillIcon() != null) {
-                fluidIcon = this.fluid.getFluid().getStillIcon();
-            } else {
-                return;
-            }
-            
-            GuiDraw.changeTexture(TextureMap.locationBlocksTexture);
-            int color = this.fluid.getFluid().getColor(this.fluid);
-            GL11.glColor3ub((byte) (color >> 16 & 0xFF), (byte) (color >> 8 & 0xFF), (byte) (color & 0xFF));
-            GL11.glDisable(GL11.GL_BLEND);
-            
-            int amount = Math.max(Math.min(this.position.height, this.fluid.amount * this.position.height / this.capacity), 1);
-            int posY = this.position.y + this.position.height - amount;
-            
-            for (int i = 0; i < this.position.width; i += 16) {
-                for (int j = 0; j < amount; j += 16) {
-                    int drawWidth = Math.min(this.position.width - i, 16);
-                    int drawHeight = Math.min(amount - j, 16);
-                    
-                    int drawX = this.position.x + i;
-                    int drawY = posY + j;
-                    
-                    double minU = fluidIcon.getMinU();
-                    double maxU = fluidIcon.getMaxU();
-                    double minV = fluidIcon.getMinV();
-                    double maxV = fluidIcon.getMaxV();
-                    
-                    Tessellator tessellator = Tessellator.instance;
-                    tessellator.startDrawingQuads();
-                    tessellator.addVertexWithUV(drawX, drawY + drawHeight, 0, minU, minV + (maxV - minV) * drawHeight / 16F);
-                    tessellator.addVertexWithUV(drawX + drawWidth, drawY + drawHeight, 0, minU + (maxU - minU) * drawWidth / 16F, minV + (maxV - minV) * drawHeight / 16F);
-                    tessellator.addVertexWithUV(drawX + drawWidth, drawY, 0, minU + (maxU - minU) * drawWidth / 16F, minV);
-                    tessellator.addVertexWithUV(drawX, drawY, 0, minU, minV);
-                    tessellator.draw();
-                }
-            }
-            
-            GL11.glEnable(GL11.GL_BLEND);
-        }
-        
     }
     
 }

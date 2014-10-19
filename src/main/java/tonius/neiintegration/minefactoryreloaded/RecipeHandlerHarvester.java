@@ -9,6 +9,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityHarvester;
+import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
@@ -32,10 +33,10 @@ public class RecipeHandlerHarvester extends RecipeHandlerBase {
     
     public class CachedHarvesterRecipe extends CachedBaseRecipe {
         
-        public FluidTankElement sludgeOutput;
+        public PositionedFluidTank sludgeOutput;
         
         public CachedHarvesterRecipe() {
-            this.sludgeOutput = new FluidTankElement(SLUDGE, 4000, FluidRegistry.getFluidStack("sludge", sludgePerOperation));
+            this.sludgeOutput = new PositionedFluidTank(SLUDGE, 4000, FluidRegistry.getFluidStack("sludge", sludgePerOperation));
         }
         
         @Override
@@ -44,7 +45,7 @@ public class RecipeHandlerHarvester extends RecipeHandlerBase {
         }
         
         @Override
-        public FluidTankElement getFluidTank() {
+        public PositionedFluidTank getFluidTank() {
             return this.sludgeOutput;
         }
         

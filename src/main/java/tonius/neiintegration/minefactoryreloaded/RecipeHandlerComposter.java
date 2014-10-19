@@ -10,6 +10,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityComposter;
+import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
@@ -37,11 +38,11 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
     
     public class CachedComposterRecipe extends CachedBaseRecipe {
         
-        public FluidTankElement sewageInput;
+        public PositionedFluidTank sewageInput;
         public PositionedStack output;
         
         public CachedComposterRecipe() {
-            this.sewageInput = new FluidTankElement(SEWAGE, 4000, FluidRegistry.getFluidStack("sewage", sewagePerOperation));
+            this.sewageInput = new PositionedFluidTank(SEWAGE, 4000, FluidRegistry.getFluidStack("sewage", sewagePerOperation));
             this.output = new PositionedStack(new ItemStack(fertilizer), 48, 24);
         }
         
@@ -51,7 +52,7 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
         }
         
         @Override
-        public FluidTankElement getFluidTank() {
+        public PositionedFluidTank getFluidTank() {
             return this.sewageInput;
         }
         

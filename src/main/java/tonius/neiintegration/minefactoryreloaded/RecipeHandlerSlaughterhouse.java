@@ -10,6 +10,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntitySlaughterhouse;
+import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
@@ -33,13 +34,13 @@ public class RecipeHandlerSlaughterhouse extends RecipeHandlerBase {
     
     public class CachedSlaughterhouseRecipe extends CachedBaseRecipe {
         
-        public List<FluidTankElement> tanks = new ArrayList<FluidTankElement>();
+        public List<PositionedFluidTank> tanks = new ArrayList<PositionedFluidTank>();
         
         public CachedSlaughterhouseRecipe() {
-            FluidTankElement tank = new FluidTankElement(MEAT, 4000, FluidRegistry.getFluidStack("meat", 4000));
+            PositionedFluidTank tank = new PositionedFluidTank(MEAT, 4000, FluidRegistry.getFluidStack("meat", 4000));
             tank.showAmount = false;
             this.tanks.add(tank);
-            tank = new FluidTankElement(PINKSLIME, 4000, FluidRegistry.getFluidStack("pinkslime", 4000));
+            tank = new PositionedFluidTank(PINKSLIME, 4000, FluidRegistry.getFluidStack("pinkslime", 4000));
             tank.showAmount = false;
             this.tanks.add(tank);
         }
@@ -50,7 +51,7 @@ public class RecipeHandlerSlaughterhouse extends RecipeHandlerBase {
         }
         
         @Override
-        public List<FluidTankElement> getFluidTanks() {
+        public List<PositionedFluidTank> getFluidTanks() {
             return this.tanks;
         }
         

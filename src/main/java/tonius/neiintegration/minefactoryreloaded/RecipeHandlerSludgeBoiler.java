@@ -12,6 +12,7 @@ import net.minecraftforge.fluids.FluidStack;
 import powercrystals.minefactoryreloaded.MFRRegistry;
 import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntitySludgeBoiler;
+import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
@@ -44,12 +45,12 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
     
     public class CachedSludgeBoilerRecipe extends CachedBaseRecipe {
         
-        public FluidTankElement sludgeInput;
+        public PositionedFluidTank sludgeInput;
         public PositionedStack output;
         public float chance;
         
         public CachedSludgeBoilerRecipe(ItemStack output, int weight) {
-            this.sludgeInput = new FluidTankElement(SLUDGE, 4000, FluidRegistry.getFluidStack("sludge", sludgePerOperation));
+            this.sludgeInput = new PositionedFluidTank(SLUDGE, 4000, FluidRegistry.getFluidStack("sludge", sludgePerOperation));
             this.output = new PositionedStack(output, 48, 24);
             this.chance = (float) weight / (float) totalWeight;
         }
@@ -60,7 +61,7 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
         }
         
         @Override
-        public FluidTankElement getFluidTank() {
+        public PositionedFluidTank getFluidTank() {
             return this.sludgeInput;
         }
         

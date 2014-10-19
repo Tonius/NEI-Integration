@@ -8,6 +8,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityLavaFabricator;
+import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
@@ -30,10 +31,10 @@ public class RecipeHandlerLavaFabricator extends RecipeHandlerBase {
     
     public class CachedLavaFabricatorRecipe extends CachedBaseRecipe {
         
-        public FluidTankElement lavaOutput;
+        public PositionedFluidTank lavaOutput;
         
         public CachedLavaFabricatorRecipe() {
-            this.lavaOutput = new FluidTankElement(LAVA, 4000, FluidRegistry.getFluidStack("lava", lavaPerOperation));
+            this.lavaOutput = new PositionedFluidTank(LAVA, 4000, FluidRegistry.getFluidStack("lava", lavaPerOperation));
         }
         
         @Override
@@ -42,7 +43,7 @@ public class RecipeHandlerLavaFabricator extends RecipeHandlerBase {
         }
         
         @Override
-        public FluidTankElement getFluidTank() {
+        public PositionedFluidTank getFluidTank() {
             return this.lavaOutput;
         }
         

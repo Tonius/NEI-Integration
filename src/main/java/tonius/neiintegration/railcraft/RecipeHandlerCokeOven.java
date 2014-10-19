@@ -7,6 +7,7 @@ import mods.railcraft.api.crafting.RailcraftCraftingManager;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.Hacks;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
@@ -29,13 +30,13 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
         
         public PositionedStack input;
         public PositionedStack output;
-        public FluidTankElement fluidOutput;
+        public PositionedFluidTank fluidOutput;
         public int cookTime;
         
         public CachedCokeOvenRecipe(ICokeOvenRecipe recipe) {
             this.input = new PositionedStack(recipe.getInput(), 21, 32);
             this.output = new PositionedStack(recipe.getOutput(), 67, 32);
-            this.fluidOutput = new FluidTankElement(CREOSOTE, 64000, recipe.getFluidOutput());
+            this.fluidOutput = new PositionedFluidTank(CREOSOTE, 64000, recipe.getFluidOutput());
             this.cookTime = recipe.getCookTime();
         }
         
@@ -51,7 +52,7 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
         }
         
         @Override
-        public FluidTankElement getFluidTank() {
+        public PositionedFluidTank getFluidTank() {
             return this.fluidOutput;
         }
         
