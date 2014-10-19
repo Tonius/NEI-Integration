@@ -45,13 +45,13 @@ public class PositionedFluidTank {
     }
     
     public boolean transfer(boolean usage) {
-        if (tank.getFluid() != null && tank.getFluid().amount > 0) {
+        if (this.tank.getFluid() != null && this.tank.getFluid().amount > 0) {
             if (usage) {
-                if (!GuiUsageRecipe.openRecipeGui("liquid", new Object[] { tank.getFluid() })) {
+                if (!GuiUsageRecipe.openRecipeGui("liquid", new Object[] { this.tank.getFluid() })) {
                     return false;
                 }
             } else {
-                if (!GuiCraftingRecipe.openRecipeGui("liquid", new Object[] { tank.getFluid() })) {
+                if (!GuiCraftingRecipe.openRecipeGui("liquid", new Object[] { this.tank.getFluid() })) {
                     return false;
                 }
             }
