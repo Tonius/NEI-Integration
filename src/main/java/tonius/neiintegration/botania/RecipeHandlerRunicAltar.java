@@ -10,7 +10,7 @@ import vazkii.botania.api.recipe.RecipeRuneAltar;
 import codechicken.nei.PositionedStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class RecipeHandlerRunicAltar extends RecipeHandlerPetals {
+public class RecipeHandlerRunicAltar extends RecipeHandlerPetalApothecary {
     
     private static Block centerItem;
     
@@ -20,7 +20,7 @@ public class RecipeHandlerRunicAltar extends RecipeHandlerPetals {
         centerItem = GameRegistry.findBlock("Botania", "runeAltar");
     }
     
-    public class CachedRunicAltarRecipe extends CachedPetalsRecipe {
+    public class CachedRunicAltarRecipe extends CachedPetalApothecaryRecipe {
         
         public int manaUsage;
         
@@ -48,7 +48,7 @@ public class RecipeHandlerRunicAltar extends RecipeHandlerPetals {
     }
     
     @Override
-    public CachedPetalsRecipe getCachedRecipe(RecipePetals recipe) {
+    public CachedPetalApothecaryRecipe getCachedRecipe(RecipePetals recipe) {
         return new CachedRunicAltarRecipe((RecipeRuneAltar) recipe);
     }
     

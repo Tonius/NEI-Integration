@@ -13,6 +13,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = NEIIntegration.MODID)
 public class NEIIntegration {
@@ -35,9 +36,11 @@ public class NEIIntegration {
     
     @EventHandler
     public void init(FMLInitializationEvent evt) {
-        integrations.add(new BotaniaIntegration());
-        integrations.add(new MFRIntegration());
-        integrations.add(new RailcraftIntegration());
+        if (evt.getSide() == Side.CLIENT) {
+            integrations.add(new BotaniaIntegration());
+            integrations.add(new MFRIntegration());
+            integrations.add(new RailcraftIntegration());
+        }
     }
     
 }

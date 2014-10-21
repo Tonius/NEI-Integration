@@ -17,9 +17,10 @@ public class BotaniaIntegration extends IntegrationBase {
     
     @Override
     public void loadConfig() {
-        registerHandler(new RecipeHandlerPetals());
-        registerHandler(new RecipeHandlerRunicAltar());
+        registerHandler(new RecipeHandlerElvenTrade());
         registerHandler(new RecipeHandlerManaPool());
+        registerHandler(new RecipeHandlerPetalApothecary());
+        registerHandler(new RecipeHandlerRunicAltar());
     }
     
 }

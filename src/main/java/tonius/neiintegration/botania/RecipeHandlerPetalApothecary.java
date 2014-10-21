@@ -18,7 +18,7 @@ import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class RecipeHandlerPetals extends RecipeHandlerBase {
+public class RecipeHandlerPetalApothecary extends RecipeHandlerBase {
     
     private static Block centerItem;
     
@@ -28,12 +28,12 @@ public class RecipeHandlerPetals extends RecipeHandlerBase {
         centerItem = GameRegistry.findBlock("Botania", "altar");
     }
     
-    public class CachedPetalsRecipe extends CachedBaseRecipe {
+    public class CachedPetalApothecaryRecipe extends CachedBaseRecipe {
         
         public List<PositionedStack> inputs = new ArrayList<PositionedStack>();
         public PositionedStack output;
         
-        public CachedPetalsRecipe(RecipePetals recipe, boolean addCenterItem) {
+        public CachedPetalApothecaryRecipe(RecipePetals recipe, boolean addCenterItem) {
             this.setIngredients(recipe.getInputs());
             this.output = new PositionedStack(recipe.getOutput(), 111, 21);
             if (addCenterItem) {
@@ -41,7 +41,7 @@ public class RecipeHandlerPetals extends RecipeHandlerBase {
             }
         }
         
-        public CachedPetalsRecipe(RecipePetals recipe) {
+        public CachedPetalApothecaryRecipe(RecipePetals recipe) {
             this(recipe, true);
         }
         
@@ -64,7 +64,7 @@ public class RecipeHandlerPetals extends RecipeHandlerBase {
         
         @Override
         public List<PositionedStack> getIngredients() {
-            return this.getCycledIngredients(RecipeHandlerPetals.this.cycleticks / 20, this.inputs);
+            return this.getCycledIngredients(RecipeHandlerPetalApothecary.this.cycleticks / 20, this.inputs);
         }
         
         @Override
@@ -81,7 +81,7 @@ public class RecipeHandlerPetals extends RecipeHandlerBase {
     
     @Override
     public String getRecipeID() {
-        return "botania.petals";
+        return "botania.petalApothecary";
     }
     
     @Override
@@ -112,8 +112,8 @@ public class RecipeHandlerPetals extends RecipeHandlerBase {
         return BotaniaAPI.petalRecipes;
     }
     
-    public CachedPetalsRecipe getCachedRecipe(RecipePetals recipe) {
-        return new CachedPetalsRecipe(recipe);
+    public CachedPetalApothecaryRecipe getCachedRecipe(RecipePetals recipe) {
+        return new CachedPetalApothecaryRecipe(recipe);
     }
     
     @Override
