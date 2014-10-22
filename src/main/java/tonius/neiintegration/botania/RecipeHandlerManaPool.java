@@ -131,16 +131,9 @@ public class RecipeHandlerManaPool extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         for (RecipeManaInfusion recipe : BotaniaAPI.manaInfusionRecipes) {
-            if (recipe.getInput() instanceof String) {
-                for (int i : OreDictionary.getOreIDs(ingredient)) {
-                    if (OreDictionary.getOreName(i).equals(recipe.getInput())) {
-                        this.arecipes.add(new CachedManaPoolRecipe(recipe));
-                    }
-                }
-            } else if (NEIServerUtils.areStacksSameTypeCrafting((ItemStack) recipe.getInput(), ingredient)) {
-                this.arecipes.add(new CachedManaPoolRecipe(recipe));
-            } else if (recipe.isAlchemy() && ingredient.getItem() == Item.getItemFromBlock(alchemyCatalyst) || recipe.isConjuration() && ingredient.getItem() == Item.getItemFromBlock(conjurationCatalyst)) {
-                this.arecipes.add(new CachedManaPoolRecipe(recipe));
+            CachedManaPoolRecipe crecipe = new CachedManaPoolRecipe(recipe);
+            if (crecipe.contains(crecipe.getIngredients(), ingredient)) {
+                this.arecipes.add(crecipe);
             }
         }
     }

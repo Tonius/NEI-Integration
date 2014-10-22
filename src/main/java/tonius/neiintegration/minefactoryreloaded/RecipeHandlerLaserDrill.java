@@ -101,7 +101,7 @@ public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(104, 25, 22, 15), this.getRecipeID(), new Object[0]));
+        this.transferRects.add(new RecipeTransferRect(new Rectangle(104, 25, 22, 15), this.getRecipeID()));
     }
     
     @Override

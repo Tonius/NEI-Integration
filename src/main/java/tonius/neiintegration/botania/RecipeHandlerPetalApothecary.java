@@ -139,18 +139,9 @@ public class RecipeHandlerPetalApothecary extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         for (RecipePetals recipe : this.getRecipes()) {
-            inputs: for (Object o : recipe.getInputs()) {
-                if (o instanceof String) {
-                    for (int i : OreDictionary.getOreIDs(ingredient)) {
-                        if (OreDictionary.getOreName(i).equals(o)) {
-                            this.arecipes.add(this.getCachedRecipe(recipe));
-                            break inputs;
-                        }
-                    }
-                } else if (NEIServerUtils.areStacksSameTypeCrafting((ItemStack) o, ingredient)) {
-                    this.arecipes.add(this.getCachedRecipe(recipe));
-                    break;
-                }
+            CachedPetalApothecaryRecipe crecipe = this.getCachedRecipe(recipe);
+            if (crecipe.contains(crecipe.inputs, ingredient)) {
+                this.arecipes.add(crecipe);
             }
         }
     }

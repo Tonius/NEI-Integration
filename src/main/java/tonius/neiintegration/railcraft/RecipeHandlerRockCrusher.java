@@ -89,7 +89,7 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(68, 9, 29, 53), this.getRecipeID(), new Object[0]));
+        this.transferRects.add(new RecipeTransferRect(new Rectangle(68, 9, 29, 53), this.getRecipeID()));
     }
     
     @Override

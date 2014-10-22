@@ -104,8 +104,7 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
         this.changeToGuiTexture();
         this.drawProgressBar(90, 7, 176, 17, 4, 71, 100, 3);
         
-        CachedAssemblyTableRecipe crecipe = (CachedAssemblyTableRecipe) this.arecipes.get(recipe);
-        GuiDraw.drawStringC(crecipe.energy + " RF", 93, 84, 0x808080, false);
+        GuiDraw.drawStringC(((CachedAssemblyTableRecipe) this.arecipes.get(recipe)).energy + " RF", 93, 84, 0x808080, false);
     }
     
     @Override
@@ -141,18 +140,10 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
     public void loadUsageRecipes(ItemStack ingredient) {
         for (IFlexibleRecipe<ItemStack> recipe : BuildcraftRecipeRegistry.assemblyTable.getRecipes()) {
             if (recipe instanceof IFlexibleRecipeViewable) {
-                inputs: for (Object o : ((IFlexibleRecipeViewable) recipe).getInputs()) {
-                    if (o instanceof List) {
-                        for (Object entry : (List) o) {
-                            if (NEIServerUtils.areStacksSameTypeCrafting((ItemStack) entry, ingredient)) {
-                                this.arecipes.add(new CachedAssemblyTableRecipe((IFlexibleRecipeViewable) recipe));
-                                break inputs;
-                            }
-                        }
-                    } else if (NEIServerUtils.areStacksSameTypeCrafting((ItemStack) o, ingredient)) {
-                        this.arecipes.add(new CachedAssemblyTableRecipe((IFlexibleRecipeViewable) recipe));
-                        break;
-                    }
+                CachedAssemblyTableRecipe crecipe = new CachedAssemblyTableRecipe((IFlexibleRecipeViewable) recipe);
+                if (crecipe.contains(crecipe.inputs, ingredient)) {
+                    crecipe.setIngredientPermutation(crecipe.inputs, ingredient);
+                    this.arecipes.add(crecipe);
                 }
             }
         }

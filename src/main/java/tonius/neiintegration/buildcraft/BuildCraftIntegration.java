@@ -2,6 +2,7 @@ package tonius.neiintegration.buildcraft;
 
 import tonius.neiintegration.IntegrationBase;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModContainer;
 
 public class BuildCraftIntegration extends IntegrationBase {
     
@@ -12,13 +13,18 @@ public class BuildCraftIntegration extends IntegrationBase {
     
     @Override
     public boolean isValid() {
-        return Loader.isModLoaded("BuildCraft|Core");
+        for (ModContainer mod : Loader.instance().getModList()) {
+            if (mod.getVersion().startsWith("6.1")) {
+                return true;
+            }
+        }
+        return false;
     }
     
     @Override
     public void loadConfig() {
         if (Loader.isModLoaded("BuildCraft|Factory")) {
-            // registerHandler(new RecipeHandlerRefinery());
+            registerHandler(new RecipeHandlerRefinery());
         }
         if (Loader.isModLoaded("BuildCraft|Silicon")) {
             registerHandler(new RecipeHandlerAssemblyTable());

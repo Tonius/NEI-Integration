@@ -108,8 +108,10 @@ public class RecipeHandlerElvenTrade extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals(this.getRecipeID()) && hasElvenKnowledge()) {
-            for (RecipeElvenTrade recipe : BotaniaAPI.elvenTradeRecipes) {
-                this.arecipes.add(new CachedElvenTradeRecipe(recipe));
+            if (hasElvenKnowledge()) {
+                for (RecipeElvenTrade recipe : BotaniaAPI.elvenTradeRecipes) {
+                    this.arecipes.add(new CachedElvenTradeRecipe(recipe));
+                }
             }
         } else {
             super.loadCraftingRecipes(outputId, results);
@@ -131,18 +133,9 @@ public class RecipeHandlerElvenTrade extends RecipeHandlerBase {
     public void loadUsageRecipes(ItemStack ingredient) {
         if (hasElvenKnowledge()) {
             for (RecipeElvenTrade recipe : BotaniaAPI.elvenTradeRecipes) {
-                inputs: for (Object o : recipe.getInputs()) {
-                    if (o instanceof String) {
-                        for (int i : OreDictionary.getOreIDs(ingredient)) {
-                            if (OreDictionary.getOreName(i).equals(o)) {
-                                this.arecipes.add(new CachedElvenTradeRecipe(recipe));
-                                break inputs;
-                            }
-                        }
-                    } else if (NEIServerUtils.areStacksSameTypeCrafting((ItemStack) o, ingredient)) {
-                        this.arecipes.add(new CachedElvenTradeRecipe(recipe));
-                        break;
-                    }
+                CachedElvenTradeRecipe crecipe = new CachedElvenTradeRecipe(recipe);
+                if (crecipe.contains(crecipe.inputs, ingredient)) {
+                    this.arecipes.add(crecipe);
                 }
             }
         }
