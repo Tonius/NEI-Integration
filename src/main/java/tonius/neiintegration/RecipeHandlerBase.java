@@ -226,12 +226,6 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
         }
     }
     
-    public static List getSingleList(Object o) {
-        List list = new ArrayList();
-        list.add(o);
-        return list;
-    }
-    
     public static FluidStack getFluidStack(ItemStack stack) {
         if (stack == null) {
             return null;
