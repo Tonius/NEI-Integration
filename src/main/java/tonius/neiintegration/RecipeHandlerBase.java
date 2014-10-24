@@ -2,11 +2,13 @@ package tonius.neiintegration;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -17,6 +19,7 @@ import org.lwjgl.opengl.GL11;
 
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIClientConfig;
+import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.guihook.GuiContainerManager;
 import codechicken.nei.recipe.GuiRecipe;
@@ -24,6 +27,7 @@ import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements IRecipeHandlerBase {
     
+    @Override
     public void prepare() {
     }
     
@@ -40,6 +44,23 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
         
         public PositionedFluidTank getFluidTank() {
             return null;
+        }
+        
+        public void setIngredientPermutationNBT(Collection<PositionedStack> ingredients, ItemStack ingredient) {
+            for (PositionedStack stack : ingredients) {
+                for (int i = 0; i < stack.items.length; i++) {
+                    if (NEIServerUtils.areStacksSameType(ingredient, stack.items[i])) {
+                        stack.item = stack.items[i];
+                        stack.item.setItemDamage(ingredient.getItemDamage());
+                        if (ingredient.getTagCompound() != null) {
+                            stack.item.setTagCompound((NBTTagCompound) ingredient.getTagCompound().copy());
+                        }
+                        stack.items = new ItemStack[] { stack.item };
+                        stack.setPermutationToRender(0);
+                        break;
+                    }
+                }
+            }
         }
         
     }
