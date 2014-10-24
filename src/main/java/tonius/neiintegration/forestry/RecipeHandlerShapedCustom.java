@@ -11,7 +11,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
-import forestry.core.interfaces.IDescriptiveRecipe;
+import forestry.core.utils.ShapedRecipeCustom;
 
 public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
     
@@ -25,11 +25,11 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
             this.output = new PositionedStack(out, 119, 24);
         }
         
-        public CachedShapedCustomRecipe(IDescriptiveRecipe recipe) {
+        public CachedShapedCustomRecipe(ShapedRecipeCustom recipe) {
             this(recipe, false);
         }
         
-        public CachedShapedCustomRecipe(IDescriptiveRecipe recipe, boolean genPerms) {
+        public CachedShapedCustomRecipe(ShapedRecipeCustom recipe, boolean genPerms) {
             this(recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getRecipeOutput());
             if (genPerms) {
                 this.generatePermutations();
@@ -101,8 +101,8 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals(this.getRecipeID())) {
             for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
-                if (recipe instanceof IDescriptiveRecipe) {
-                    this.arecipes.add(new CachedShapedCustomRecipe((IDescriptiveRecipe) recipe, true));
+                if (recipe instanceof ShapedRecipeCustom) {
+                    this.arecipes.add(new CachedShapedCustomRecipe((ShapedRecipeCustom) recipe, true));
                 }
             }
         } else {
@@ -113,8 +113,8 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
-            if (recipe instanceof IDescriptiveRecipe && NEIServerUtils.areStacksSameTypeCrafting(((IDescriptiveRecipe) recipe).getRecipeOutput(), result)) {
-                this.arecipes.add(new CachedShapedCustomRecipe((IDescriptiveRecipe) recipe, true));
+            if (recipe instanceof ShapedRecipeCustom && NEIServerUtils.areStacksSameTypeCrafting(((ShapedRecipeCustom) recipe).getRecipeOutput(), result)) {
+                this.arecipes.add(new CachedShapedCustomRecipe((ShapedRecipeCustom) recipe, true));
             }
         }
     }
@@ -122,8 +122,8 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
-            if (recipe instanceof IDescriptiveRecipe) {
-                CachedShapedCustomRecipe crecipe = new CachedShapedCustomRecipe((IDescriptiveRecipe) recipe);
+            if (recipe instanceof ShapedRecipeCustom) {
+                CachedShapedCustomRecipe crecipe = new CachedShapedCustomRecipe((ShapedRecipeCustom) recipe);
                 if (crecipe.contains(crecipe.inputs, ingredient)) {
                     crecipe.generatePermutations();
                     crecipe.setIngredientPermutationNBT(crecipe.inputs, ingredient);
