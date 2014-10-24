@@ -46,7 +46,7 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
         private void setResults(List<Entry<ItemStack, Float>> outputs) {
             int i = 0;
             for (Entry<ItemStack, Float> output : outputs) {
-                if (i > RESULTS.length) {
+                if (i >= RESULTS.length) {
                     return;
                 }
                 this.outputs.add(new PositionedStackAdv(output.getKey(), 102 + RESULTS[i][0] * 18, 10 + RESULTS[i][1] * 18, output.getValue()));

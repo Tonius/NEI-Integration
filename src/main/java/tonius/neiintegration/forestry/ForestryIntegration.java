@@ -19,6 +19,8 @@ public class ForestryIntegration extends IntegrationBase {
     public void loadConfig() {
         registerHandler(new RecipeHandlerShapedCustom());
         registerHandler(new RecipeHandlerCarpenter());
+        registerHandler(new RecipeHandlerCentrifuge());
+        registerHandler(new RecipeHandlerSqueezer());
     }
     
 }

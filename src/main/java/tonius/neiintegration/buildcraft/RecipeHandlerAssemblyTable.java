@@ -44,6 +44,9 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
         public void setIngredients(List<Object> inputs) {
             int i = 0;
             for (Object o : inputs) {
+                if (i >= INPUTS.length) {
+                    return;
+                }
                 this.inputs.add(new PositionedStack(o, 3 + INPUTS[i][0] * 18, 8 + INPUTS[i][1] * 18));
                 i++;
             }

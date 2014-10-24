@@ -119,6 +119,7 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
         super.drawForeground(recipe);
         this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(145, 3, 176, 0, 16, 58);
+        this.drawProgressBar(93, 36, 176, 59, 4, 18, 80, 3);
     }
     
     @Override
