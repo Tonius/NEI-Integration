@@ -22,7 +22,7 @@ import codechicken.nei.guihook.GuiContainerManager;
 import codechicken.nei.recipe.GuiRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
-public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
+public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements IRecipeHandlerBase {
     
     public void prepare() {
     }
@@ -43,8 +43,6 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
         }
         
     }
-    
-    public abstract String getRecipeID();
     
     public String getRecipeNameSub() {
         return null;
