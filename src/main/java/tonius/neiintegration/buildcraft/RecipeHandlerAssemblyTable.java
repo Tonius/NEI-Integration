@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
-import tonius.neiintegration.Hacks;
+import tonius.neiintegration.Utils;
 import tonius.neiintegration.RecipeHandlerBase;
 import buildcraft.api.facades.IFacadeItem;
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
@@ -26,7 +26,7 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
     
     @Override
     public void prepare() {
-        guiClass = Hacks.getClass("buildcraft.silicon.gui.GuiAssemblyTable");
+        guiClass = Utils.getClass("buildcraft.silicon.gui.GuiAssemblyTable");
     }
     
     public class CachedAssemblyTableRecipe extends CachedBaseRecipe {

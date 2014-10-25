@@ -5,15 +5,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidBlock;
-import net.minecraftforge.fluids.IFluidContainerItem;
 
 import org.lwjgl.opengl.GL11;
 
@@ -52,7 +46,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
                     if (NEIServerUtils.areStacksSameType(ingredient, stack.items[i])) {
                         stack.item = stack.items[i];
                         stack.item.setItemDamage(ingredient.getItemDamage());
-                        if (ingredient.getTagCompound() != null) {
+                        if (ingredient.hasTagCompound()) {
                             stack.item.setTagCompound((NBTTagCompound) ingredient.getTagCompound().copy());
                         }
                         stack.items = new ItemStack[] { stack.item };
@@ -109,7 +103,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     
     @Override
     public void loadCraftingRecipes(ItemStack result) {
-        FluidStack fluid = getFluidStack(result);
+        FluidStack fluid = Utils.getFluidStack(result);
         if (fluid != null) {
             this.loadCraftingRecipes(fluid);
         }
@@ -130,7 +124,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     
     @Override
     public void loadUsageRecipes(ItemStack ingred) {
-        FluidStack fluid = getFluidStack(ingred);
+        FluidStack fluid = Utils.getFluidStack(ingred);
         if (fluid != null) {
             this.loadUsageRecipes(fluid);
         }
@@ -243,34 +237,6 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
                 fluidTank.draw();
             }
         }
-    }
-    
-    public static FluidStack getFluidStack(ItemStack stack) {
-        if (stack == null) {
-            return null;
-        }
-        Item item = stack.getItem();
-        FluidStack fluidStack = null;
-        if (item instanceof IFluidContainerItem) {
-            fluidStack = ((IFluidContainerItem) item).getFluid(stack);
-        }
-        if (fluidStack == null) {
-            fluidStack = FluidContainerRegistry.getFluidForFilledItem(stack);
-        }
-        if (fluidStack == null && Block.getBlockFromItem(stack.getItem()) instanceof IFluidBlock) {
-            Fluid fluid = ((IFluidBlock) Block.getBlockFromItem(stack.getItem())).getFluid();
-            if (fluid != null) {
-                return new FluidStack(fluid, 1000);
-            }
-        }
-        return fluidStack;
-    }
-    
-    public static boolean areFluidsEqual(FluidStack fluidStack1, FluidStack fluidStack2) {
-        if (fluidStack1 == null || fluidStack2 == null) {
-            return false;
-        }
-        return fluidStack1.isFluidEqual(fluidStack2);
     }
     
 }

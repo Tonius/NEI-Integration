@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
-import tonius.neiintegration.Hacks;
+import tonius.neiintegration.Utils;
 import tonius.neiintegration.PositionedStackAdv;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.nei.NEIServerUtils;
@@ -17,12 +17,12 @@ import forestry.factory.gadgets.MachineCentrifuge;
 
 public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
     
-    public static final int[][] OUTPUTS = new int[][] { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 0, 1 }, { 1, 1 }, { 2, 1 }, { 0, 2 }, { 1, 2 }, { 2, 2 } };
+    private static final int[][] OUTPUTS = new int[][] { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 0, 1 }, { 1, 1 }, { 2, 1 }, { 0, 2 }, { 1, 2 }, { 2, 2 } };
     private static Class<? extends GuiContainer> guiClass;
     
     @Override
     public void prepare() {
-        guiClass = Hacks.getClass("forestry.factory.gui.GuiCentrifuge");
+        guiClass = Utils.getClass("forestry.factory.gui.GuiCentrifuge");
     }
     
     public class CachedCentrifugeRecipe extends CachedBaseRecipe {
@@ -91,15 +91,15 @@ public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
     }
     
     @Override
+    public Class<? extends GuiContainer> getGuiClass() {
+        return guiClass;
+    }
+    
+    @Override
     public void drawForeground(int recipe) {
         super.drawForeground(recipe);
         this.changeToGuiTexture();
         this.drawProgressBar(57, 25, 176, 0, 4, 17, 80, 3);
-    }
-    
-    @Override
-    public Class<? extends GuiContainer> getGuiClass() {
-        return guiClass;
     }
     
     @Override

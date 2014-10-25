@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
-import tonius.neiintegration.Hacks;
+import tonius.neiintegration.Utils;
 import tonius.neiintegration.PositionedStackAdv;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.nei.NEIServerUtils;
@@ -29,7 +29,7 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
     
     @Override
     public void prepare() {
-        guiClass = Hacks.getClass("mods.railcraft.client.gui.GuiRockCrusher");
+        guiClass = Utils.getClass("mods.railcraft.client.gui.GuiRockCrusher");
         API.setGuiOffset(guiClass, -3, 11);
     }
     

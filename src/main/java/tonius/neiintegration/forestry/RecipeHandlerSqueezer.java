@@ -7,10 +7,10 @@ import java.util.List;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import tonius.neiintegration.Hacks;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.PositionedStackAdv;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -24,7 +24,7 @@ public class RecipeHandlerSqueezer extends RecipeHandlerBase {
     
     @Override
     public void prepare() {
-        guiClass = Hacks.getClass("forestry.factory.gui.GuiSqueezer");
+        guiClass = Utils.getClass("forestry.factory.gui.GuiSqueezer");
     }
     
     public class CachedSqueezerRecipe extends CachedBaseRecipe {
@@ -141,7 +141,7 @@ public class RecipeHandlerSqueezer extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(FluidStack result) {
         for (MachineSqueezer.Recipe recipe : MachineSqueezer.RecipeManager.recipes) {
-            if (recipe.liquid != null && recipe.liquid.getFluid() == result.getFluid()) {
+            if (Utils.areFluidsSameType(recipe.liquid, result)) {
                 this.arecipes.add(new CachedSqueezerRecipe(recipe, true));
             }
         }

@@ -30,7 +30,7 @@ public class PositionedFluidTank {
     }
     
     public PositionedFluidTank(Rectangle position, int capacity, FluidStack fluid) {
-        this(position, new FluidTank(fluid, capacity));
+        this(position, new FluidTank(fluid != null ? fluid.copy() : null, capacity));
     }
     
     public List<String> handleTooltip(List<String> currenttip) {

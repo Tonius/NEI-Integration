@@ -7,9 +7,9 @@ import java.util.List;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import tonius.neiintegration.Hacks;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -19,12 +19,12 @@ import forestry.factory.gadgets.MachineCarpenter;
 
 public class RecipeHandlerCarpenter extends RecipeHandlerBase {
     
-    public static final Rectangle TANK = new Rectangle(145, 3, 16, 58);
+    private static final Rectangle TANK = new Rectangle(145, 3, 16, 58);
     private static Class<? extends GuiContainer> guiClass;
     
     @Override
     public void prepare() {
-        guiClass = Hacks.getClass("forestry.factory.gui.GuiCarpenter");
+        guiClass = Utils.getClass("forestry.factory.gui.GuiCarpenter");
         API.setGuiOffset(guiClass, 5, 14);
     }
     
@@ -109,6 +109,11 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
     }
     
     @Override
+    public Class<? extends GuiContainer> getGuiClass() {
+        return guiClass;
+    }
+    
+    @Override
     public void drawBackground(int recipe) {
         this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(0, 0, 5, 14, 166, 65);
@@ -120,11 +125,6 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
         this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(145, 3, 176, 0, 16, 58);
         this.drawProgressBar(93, 36, 176, 59, 4, 18, 80, 3);
-    }
-    
-    @Override
-    public Class<? extends GuiContainer> getGuiClass() {
-        return guiClass;
     }
     
     @Override
@@ -163,7 +163,7 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(FluidStack ingredient) {
         for (MachineCarpenter.Recipe recipe : MachineCarpenter.RecipeManager.recipes) {
-            if (recipe.getLiquid() != null && recipe.getLiquid().getFluid() == ingredient.getFluid()) {
+            if (recipe.getLiquid() != null && Utils.areFluidsSameType(recipe.getLiquid(), ingredient)) {
                 this.arecipes.add(new CachedCarpenterRecipe(recipe, true));
             }
         }

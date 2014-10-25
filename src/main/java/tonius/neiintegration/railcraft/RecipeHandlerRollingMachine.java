@@ -3,7 +3,7 @@ package tonius.neiintegration.railcraft;
 import java.awt.Rectangle;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
-import tonius.neiintegration.Hacks;
+import tonius.neiintegration.Utils;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 
@@ -13,7 +13,7 @@ public abstract class RecipeHandlerRollingMachine extends RecipeHandlerBase {
     
     @Override
     public void prepare() {
-        guiClass = Hacks.getClass("mods.railcraft.client.gui.GuiRollingMachine");
+        guiClass = Utils.getClass("mods.railcraft.client.gui.GuiRollingMachine");
     }
     
     @Override

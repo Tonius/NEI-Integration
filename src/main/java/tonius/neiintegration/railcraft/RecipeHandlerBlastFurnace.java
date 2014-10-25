@@ -7,7 +7,7 @@ import mods.railcraft.api.crafting.IBlastFurnaceRecipe;
 import mods.railcraft.api.crafting.RailcraftCraftingManager;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
-import tonius.neiintegration.Hacks;
+import tonius.neiintegration.Utils;
 import tonius.neiintegration.RecipeHandlerBase;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
@@ -20,7 +20,7 @@ public class RecipeHandlerBlastFurnace extends RecipeHandlerBase {
     
     @Override
     public void prepare() {
-        guiClass = Hacks.getClass("mods.railcraft.client.gui.GuiBlastFurnace");
+        guiClass = Utils.getClass("mods.railcraft.client.gui.GuiBlastFurnace");
         fuels = RailcraftCraftingManager.blastFurnace.getFuels();
     }
     

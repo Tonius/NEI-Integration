@@ -9,9 +9,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 import org.lwjgl.opengl.GL11;
 
-import tonius.neiintegration.Hacks;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 import buildcraft.api.recipes.IFlexibleRecipe;
 import buildcraft.api.recipes.IFlexibleRecipeViewable;
@@ -28,7 +28,7 @@ public class RecipeHandlerRefinery extends RecipeHandlerBase {
     
     @Override
     public void prepare() {
-        guiClass = Hacks.getClass("buildcraft.factory.gui.GuiRefinery");
+        guiClass = Utils.getClass("buildcraft.factory.gui.GuiRefinery");
         API.setGuiOffset(guiClass, 0, 31);
     }
     
@@ -133,7 +133,7 @@ public class RecipeHandlerRefinery extends RecipeHandlerBase {
         for (IFlexibleRecipe<FluidStack> recipe : BuildcraftRecipeRegistry.refinery.getRecipes()) {
             if (recipe instanceof IFlexibleRecipeViewable) {
                 for (Object o : ((IFlexibleRecipeViewable) recipe).getInputs()) {
-                    if (((FluidStack) o).getFluid() == ingredient.getFluid()) {
+                    if (Utils.areFluidsSameType((FluidStack) o, ingredient)) {
                         this.arecipes.add(new CachedRefineryRecipe((IFlexibleRecipeViewable) recipe));
                     }
                 }

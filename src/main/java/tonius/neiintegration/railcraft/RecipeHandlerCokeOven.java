@@ -7,9 +7,9 @@ import mods.railcraft.api.crafting.RailcraftCraftingManager;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import tonius.neiintegration.Hacks;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -22,7 +22,7 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     
     @Override
     public void prepare() {
-        guiClass = Hacks.getClass("mods.railcraft.client.gui.GuiCokeOven");
+        guiClass = Utils.getClass("mods.railcraft.client.gui.GuiCokeOven");
         API.setGuiOffset(guiClass, -6, 11);
     }
     
@@ -133,7 +133,7 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(FluidStack result) {
         for (ICokeOvenRecipe recipe : RailcraftCraftingManager.cokeOven.getRecipes()) {
-            if (RecipeHandlerBase.areFluidsEqual(recipe.getFluidOutput(), result)) {
+            if (Utils.areFluidStacksEqual(recipe.getFluidOutput(), result)) {
                 this.arecipes.add(new CachedCokeOvenRecipe(recipe));
             }
         }
