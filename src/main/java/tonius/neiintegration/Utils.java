@@ -1,6 +1,7 @@
 package tonius.neiintegration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 
 public class Utils {
     
-    public static List<ItemStack> getNBTVariations(ItemStack base) {
+    public static List<ItemStack> getItemVariations(ItemStack base) {
         List<ItemStack> variations = new ArrayList<ItemStack>();
         base.getItem().getSubItems(base.getItem(), null, variations);
         Iterator<ItemStack> itr = variations.iterator();
@@ -24,6 +25,9 @@ public class Utils {
             if (!base.isItemEqual(stack) || !stack.hasTagCompound()) {
                 itr.remove();
             }
+        }
+        if (variations.isEmpty()) {
+            return Collections.singletonList(base);
         }
         return variations;
     }

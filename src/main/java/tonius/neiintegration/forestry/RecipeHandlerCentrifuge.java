@@ -8,9 +8,9 @@ import java.util.Map.Entry;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
-import tonius.neiintegration.Utils;
 import tonius.neiintegration.PositionedStackAdv;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import forestry.factory.gadgets.MachineCentrifuge;

@@ -3,8 +3,8 @@ package tonius.neiintegration.railcraft;
 import java.awt.Rectangle;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
-import tonius.neiintegration.Utils;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 
 public abstract class RecipeHandlerRollingMachine extends RecipeHandlerBase {
