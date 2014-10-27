@@ -1,7 +1,6 @@
 package tonius.neiintegration;
 
 import codechicken.nei.api.API;
-import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public abstract class IntegrationBase {
     
@@ -11,10 +10,8 @@ public abstract class IntegrationBase {
     
     public abstract void loadConfig();
     
-    public static void registerHandler(TemplateRecipeHandler handler) {
-        if (handler instanceof IRecipeHandlerBase) {
-            ((IRecipeHandlerBase) handler).prepare();
-        }
+    public static void registerHandler(IRecipeHandlerBase handler) {
+        handler.prepare();
         API.registerRecipeHandler(handler);
         API.registerUsageHandler(handler);
     }

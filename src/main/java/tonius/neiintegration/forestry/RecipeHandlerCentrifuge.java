@@ -87,7 +87,7 @@ public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(49, 8, 20, 52), this.getRecipeID()));
+        this.transferRects.add(new RecipeTransferRect(new Rectangle(57, 26, 4, 18), this.getRecipeID()));
     }
     
     @Override

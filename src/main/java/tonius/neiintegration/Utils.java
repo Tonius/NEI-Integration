@@ -52,13 +52,6 @@ public class Utils {
         return null;
     }
     
-    public static boolean areFluidStacksEqual(FluidStack fluidStack1, FluidStack fluidStack2) {
-        if (fluidStack1 == null || fluidStack2 == null) {
-            return false;
-        }
-        return fluidStack1.isFluidEqual(fluidStack2);
-    }
-    
     public static boolean areFluidsSameType(FluidStack fluidStack1, FluidStack fluidStack2) {
         if (fluidStack1 == null || fluidStack2 == null) {
             return false;

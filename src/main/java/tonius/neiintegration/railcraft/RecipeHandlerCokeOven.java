@@ -133,7 +133,7 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(FluidStack result) {
         for (ICokeOvenRecipe recipe : RailcraftCraftingManager.cokeOven.getRecipes()) {
-            if (Utils.areFluidStacksEqual(recipe.getFluidOutput(), result)) {
+            if (Utils.areFluidsSameType(recipe.getFluidOutput(), result)) {
                 this.arecipes.add(new CachedCokeOvenRecipe(recipe));
             }
         }
