@@ -105,7 +105,7 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(93, 36, 4, 18), this.getRecipeID(), new Object[0]));
+        this.transferRects.add(new RecipeTransferRect(new Rectangle(93, 36, 4, 18), this.getRecipeID()));
     }
     
     @Override

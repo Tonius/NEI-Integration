@@ -20,20 +20,16 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
         public List<PositionedStack> inputs = new ArrayList<PositionedStack>();
         public PositionedStack output;
         
-        public CachedShapedCustomRecipe(int width, int height, Object[] items, ItemStack out) {
-            this.setIngredients(width, height, items);
-            this.output = new PositionedStack(out, 119, 24);
+        public CachedShapedCustomRecipe(ShapedRecipeCustom recipe, boolean genPerms) {
+            this.setIngredients(recipe.getWidth(), recipe.getHeight(), recipe.getIngredients());
+            this.output = new PositionedStack(recipe.getRecipeOutput(), 119, 24);
+            if (genPerms) {
+                this.generatePermutations();
+            }
         }
         
         public CachedShapedCustomRecipe(ShapedRecipeCustom recipe) {
             this(recipe, false);
-        }
-        
-        public CachedShapedCustomRecipe(ShapedRecipeCustom recipe, boolean genPerms) {
-            this(recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getRecipeOutput());
-            if (genPerms) {
-                this.generatePermutations();
-            }
         }
         
         public void setIngredients(int width, int height, Object[] items) {
