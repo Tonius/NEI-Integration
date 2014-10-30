@@ -49,7 +49,7 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
                 if (i >= RESULTS.length) {
                     return;
                 }
-                this.outputs.add(new PositionedStackAdv(output.getKey(), 102 + RESULTS[i][0] * 18, 10 + RESULTS[i][1] * 18, output.getValue()));
+                this.outputs.add(new PositionedStackAdv(output.getKey(), 102 + RESULTS[i][0] * 18, 10 + RESULTS[i][1] * 18).setChance(output.getValue()));
                 i++;
             }
         }

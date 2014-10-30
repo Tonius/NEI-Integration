@@ -22,22 +22,32 @@ public class PositionedStackAdv extends PositionedStack {
         this.addToTooltip(tooltip);
     }
     
-    public PositionedStackAdv(Object object, int x, int y, float chance) {
-        super(object, x, y);
-        this.setChance(chance);
-    }
-    
     public Rectangle getRect() {
         return new Rectangle(this.relx - 1, this.rely - 1, 18, 18);
     }
     
-    public void addToTooltip(List<String> lines) {
+    public List<String> handleTooltip(GuiRecipe guiRecipe, List<String> currenttip) {
+        if (!this.tooltip.isEmpty()) {
+            for (String tip : this.tooltip) {
+                currenttip.add(tip);
+            }
+        }
+        return currenttip;
+    }
+    
+    public PositionedStackAdv addToTooltip(List<String> lines) {
         for (String tip : lines) {
             this.tooltip.add(tip);
         }
+        return this;
     }
     
-    public void setChance(float chance) {
+    public PositionedStackAdv addToTooltip(String line) {
+        this.tooltip.add(line);
+        return this;
+    }
+    
+    public PositionedStackAdv setChance(float chance) {
         if (chance <= 0.0F) {
             this.tooltip.add(EnumChatFormatting.GRAY + "Chance: Never");
         } else if (chance < 0.01F) {
@@ -47,15 +57,7 @@ public class PositionedStackAdv extends PositionedStack {
             percentFormat.setMaximumFractionDigits(2);
             this.tooltip.add(EnumChatFormatting.GRAY + "Chance: " + percentFormat.format(chance));
         }
-    }
-    
-    public List<String> handleTooltip(GuiRecipe guiRecipe, List<String> currenttip) {
-        if (this.tooltip != null) {
-            for (String tip : this.tooltip) {
-                currenttip.add(tip);
-            }
-        }
-        return currenttip;
+        return this;
     }
     
 }

@@ -45,7 +45,7 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
         public PositionedStack output;
         
         public CachedFabricatorRecipe(MachineFabricator.Recipe recipe, boolean genPerms) {
-            tank = new PositionedFluidTank(TANK, 2000, recipe.getLiquid());
+            this.tank = new PositionedFluidTank(TANK, 2000, recipe.getLiquid());
             
             ShapedRecipeCustom irecipe = (ShapedRecipeCustom) recipe.asIRecipe();
             this.setIngredients(irecipe.getWidth(), irecipe.getHeight(), irecipe.getIngredients());
@@ -80,12 +80,12 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
         
         @Override
         public List<PositionedStack> getOtherStacks() {
-            return this.getCycledIngredients(cycleticks / 40, this.smeltingInput);
+            return this.getCycledIngredients(RecipeHandlerFabricator.this.cycleticks / 40, this.smeltingInput);
         }
         
         @Override
         public List<PositionedStack> getIngredients() {
-            return this.getCycledIngredients(cycleticks / 20, this.inputs);
+            return this.getCycledIngredients(RecipeHandlerFabricator.this.cycleticks / 20, this.inputs);
         }
         
         @Override

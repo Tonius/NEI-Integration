@@ -37,8 +37,7 @@ public class RecipeHandlerSqueezer extends RecipeHandlerBase {
             this.setIngredients(recipe.resources);
             this.tank = new PositionedFluidTank(TANK, 10000, recipe.liquid);
             if (recipe.remnants != null) {
-                this.remnants = new PositionedStackAdv(recipe.remnants, 118, 8);
-                this.remnants.setChance(recipe.chance / 100F);
+                this.remnants = new PositionedStackAdv(recipe.remnants, 118, 8).setChance(recipe.chance / 100F);
             }
             
             if (genPerms) {
