@@ -2,7 +2,7 @@
 {
   "modid": "neiintegration",
   "name": "NEI Integration",
-  "description": "NEI Integration's goal is to add Not Enough Items integration to most commonly used mods.",
+  "description": "NEI handlers for all of the mods, one at a time.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "logoFile": "",
