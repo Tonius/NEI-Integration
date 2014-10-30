@@ -14,7 +14,7 @@ public class BuildCraftIntegration extends IntegrationBase {
     @Override
     public boolean isValid() {
         for (ModContainer mod : Loader.instance().getModList()) {
-            if (mod.getVersion().startsWith("6.1")) {
+            if (mod.getModId().equals("BuildCraft|Core") && mod.getVersion().startsWith("6.1")) {
                 return true;
             }
         }
