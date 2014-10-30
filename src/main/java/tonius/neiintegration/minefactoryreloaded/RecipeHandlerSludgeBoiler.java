@@ -22,9 +22,6 @@ import cofh.lib.util.WeightedRandomItemStack;
 
 public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
     
-    private static final Rectangle SLUDGE = new Rectangle(111, 2, 16, 60);
-    private static final Rectangle ENERGY = new Rectangle(129, 2, 8, 60);
-    private static final Rectangle WORK = new Rectangle(139, 2, 8, 60);
     private static List<Item> drops;
     private static int totalWeight;
     private static int sludgePerOperation;
@@ -50,7 +47,7 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
         public float chance;
         
         public CachedSludgeBoilerRecipe(ItemStack output, int weight) {
-            this.sludgeInput = new PositionedFluidTank(SLUDGE, 4000, FluidRegistry.getFluidStack("sludge", sludgePerOperation));
+            this.sludgeInput = new PositionedFluidTank(FluidRegistry.getFluidStack("sludge", sludgePerOperation), 4000, new Rectangle(111, 2, 16, 60), RecipeHandlerSludgeBoiler.this.getGuiTexture(), new Point(176, 0));
             this.output = new PositionedStack(output, 48, 24);
             this.chance = (float) weight / (float) totalWeight;
         }
@@ -96,16 +93,10 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(111, 2, 176, 0, 16, 60);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(129, 0, 176, 58, 8, 62, 1.0F, 3);
         this.drawProgressBar(139, 0, 185, 58, 8, 62, 40, 3);
-    }
-    
-    @Override
-    public void drawExtras(int recipe) {
+        
         CachedSludgeBoilerRecipe crecipe = (CachedSludgeBoilerRecipe) this.arecipes.get(recipe);
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(2);
@@ -115,22 +106,18 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
     @Override
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
-        if (ENERGY.contains(relMouse)) {
+        if (new Rectangle(129, 2, 8, 60).contains(relMouse)) {
             currenttip.add(energyPerOperation + " RF");
         }
         return currenttip;
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (Item drop : drops) {
-                if (drop instanceof WeightedRandomItemStack) {
-                    this.arecipes.add(new CachedSludgeBoilerRecipe(((WeightedRandomItemStack) drop).getStack(), drop.itemWeight));
-                }
+    public void loadAllRecipes() {
+        for (Item drop : drops) {
+            if (drop instanceof WeightedRandomItemStack) {
+                this.arecipes.add(new CachedSludgeBoilerRecipe(((WeightedRandomItemStack) drop).getStack(), drop.itemWeight));
             }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
         }
     }
     
@@ -148,11 +135,7 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(FluidStack ingredient) {
         if (ingredient.getFluid().getName().equals("sludge")) {
-            for (Item drop : drops) {
-                if (drop instanceof WeightedRandomItemStack) {
-                    this.arecipes.add(new CachedSludgeBoilerRecipe(((WeightedRandomItemStack) drop).getStack(), drop.itemWeight));
-                }
-            }
+            this.loadAllRecipes();
         }
     }
     

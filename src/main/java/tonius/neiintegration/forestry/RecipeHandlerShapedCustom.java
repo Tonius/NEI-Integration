@@ -94,15 +94,11 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
-                if (recipe instanceof ShapedRecipeCustom) {
-                    this.arecipes.add(new CachedShapedCustomRecipe((ShapedRecipeCustom) recipe, true));
-                }
+    public void loadAllRecipes() {
+        for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
+            if (recipe instanceof ShapedRecipeCustom) {
+                this.arecipes.add(new CachedShapedCustomRecipe((ShapedRecipeCustom) recipe, true));
             }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
         }
     }
     

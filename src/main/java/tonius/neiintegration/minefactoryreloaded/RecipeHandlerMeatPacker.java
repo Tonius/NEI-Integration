@@ -19,9 +19,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class RecipeHandlerMeatPacker extends RecipeHandlerBase {
     
-    private static final Rectangle TANK = new Rectangle(111, 2, 16, 60);
-    private static final Rectangle ENERGY = new Rectangle(129, 2, 8, 60);
-    private static final Rectangle WORK = new Rectangle(139, 2, 8, 60);
     private static Item meatIngot;
     private static Item meatNugget;
     private static int fluidPerOperation;
@@ -44,7 +41,7 @@ public class RecipeHandlerMeatPacker extends RecipeHandlerBase {
         public PositionedStack output;
         
         public CachedMeatPackerRecipe(FluidStack input, ItemStack output) {
-            this.fluidInput = new PositionedFluidTank(TANK, 4000, input);
+            this.fluidInput = new PositionedFluidTank(input, 4000, new Rectangle(111, 2, 16, 60), RecipeHandlerMeatPacker.this.getGuiTexture(), new Point(176, 0));
             this.output = new PositionedStack(output, 48, 24);
         }
         
@@ -89,10 +86,7 @@ public class RecipeHandlerMeatPacker extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(111, 2, 176, 0, 16, 60);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(129, 0, 176, 58, 8, 62, 1.0F, 3);
         this.drawProgressBar(139, 0, 185, 58, 8, 62, 20, 3);
     }
@@ -100,20 +94,16 @@ public class RecipeHandlerMeatPacker extends RecipeHandlerBase {
     @Override
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
-        if (ENERGY.contains(relMouse)) {
+        if (new Rectangle(129, 2, 8, 60).contains(relMouse)) {
             currenttip.add(energyPerOperation + " RF");
         }
         return currenttip;
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            this.arecipes.add(new CachedMeatPackerRecipe(FluidRegistry.getFluidStack("meat", fluidPerOperation), new ItemStack(meatIngot)));
-            this.arecipes.add(new CachedMeatPackerRecipe(FluidRegistry.getFluidStack("pinkslime", fluidPerOperation), new ItemStack(meatNugget)));
-        } else {
-            super.loadCraftingRecipes(outputId, results);
-        }
+    public void loadAllRecipes() {
+        this.arecipes.add(new CachedMeatPackerRecipe(FluidRegistry.getFluidStack("meat", fluidPerOperation), new ItemStack(meatIngot)));
+        this.arecipes.add(new CachedMeatPackerRecipe(FluidRegistry.getFluidStack("pinkslime", fluidPerOperation), new ItemStack(meatNugget)));
     }
     
     @Override

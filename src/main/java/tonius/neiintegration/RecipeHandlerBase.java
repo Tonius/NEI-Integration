@@ -59,14 +59,10 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
         
     }
     
-    public String getRecipeNameSub() {
+    public abstract String getRecipeID();
+    
+    public String getRecipeSubName() {
         return null;
-    }
-    
-    public void loadCraftingRecipes(FluidStack result) {
-    }
-    
-    public void loadUsageRecipes(FluidStack ingredient) {
     }
     
     public void changeToGuiTexture() {
@@ -83,9 +79,10 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     public void drawForeground(int recipe) {
         super.drawForeground(recipe);
         this.drawFluidTanks(recipe);
-        if (recipe % this.recipiesPerPage() == 0 && this.getRecipeNameSub() != null) {
-            GuiDraw.drawStringC(this.getRecipeNameSub(), 83, -2, 0x404040, false);
+        if (recipe % this.recipiesPerPage() == 0 && this.getRecipeSubName() != null) {
+            GuiDraw.drawStringC(this.getRecipeSubName(), 83, -2, 0x404040, false);
         }
+        this.changeToGuiTexture();
     }
     
     @Override
@@ -93,6 +90,8 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
         try {
             if (outputId.equals("liquid") && results.length == 1 && results[0] instanceof FluidStack) {
                 this.loadCraftingRecipes((FluidStack) results[0]);
+            } else if (outputId.equals(this.getRecipeID())) {
+                this.loadAllRecipes();
             } else {
                 super.loadCraftingRecipes(outputId, results);
             }
@@ -101,12 +100,18 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
         }
     }
     
+    public void loadAllRecipes() {
+    }
+    
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         FluidStack fluid = Utils.getFluidStack(result);
         if (fluid != null) {
             this.loadCraftingRecipes(fluid);
         }
+    }
+    
+    public void loadCraftingRecipes(FluidStack result) {
     }
     
     @Override
@@ -128,6 +133,9 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
         if (fluid != null) {
             this.loadUsageRecipes(fluid);
         }
+    }
+    
+    public void loadUsageRecipes(FluidStack ingredient) {
     }
     
     @Override

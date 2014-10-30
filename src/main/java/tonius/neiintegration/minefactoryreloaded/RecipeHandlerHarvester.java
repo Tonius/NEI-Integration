@@ -17,10 +17,6 @@ import codechicken.nei.recipe.GuiRecipe;
 
 public class RecipeHandlerHarvester extends RecipeHandlerBase {
     
-    private static final Rectangle PLANTS = new Rectangle(48, 24, 16, 16);
-    private static final Rectangle SLUDGE = new Rectangle(111, 2, 16, 60);
-    private static final Rectangle ENERGY = new Rectangle(129, 2, 8, 60);
-    private static final Rectangle WORK = new Rectangle(139, 2, 8, 60);
     private static int sludgePerOperation = 10;
     private static int energyPerOperation;
     
@@ -36,7 +32,7 @@ public class RecipeHandlerHarvester extends RecipeHandlerBase {
         public PositionedFluidTank sludgeOutput;
         
         public CachedHarvesterRecipe() {
-            this.sludgeOutput = new PositionedFluidTank(SLUDGE, 4000, FluidRegistry.getFluidStack("sludge", sludgePerOperation));
+            this.sludgeOutput = new PositionedFluidTank(FluidRegistry.getFluidStack("sludge", sludgePerOperation), 4000, new Rectangle(111, 2, 16, 60), RecipeHandlerHarvester.this.getGuiTexture(), new Point(176, 0));
         }
         
         @Override
@@ -76,10 +72,7 @@ public class RecipeHandlerHarvester extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(111, 2, 176, 0, 16, 60);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(129, 0, 176, 58, 8, 62, 1.0F, 3);
         this.drawProgressBar(139, 0, 185, 58, 8, 62, 10, 3);
     }
@@ -87,9 +80,9 @@ public class RecipeHandlerHarvester extends RecipeHandlerBase {
     @Override
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
-        if (ENERGY.contains(relMouse)) {
+        if (new Rectangle(129, 2, 8, 60).contains(relMouse)) {
             currenttip.add(energyPerOperation + " RF");
-        } else if (PLANTS.contains(relMouse)) {
+        } else if (new Rectangle(48, 24, 16, 16).contains(relMouse)) {
             currenttip.add("Harvestable blocks");
             currenttip.add(EnumChatFormatting.GRAY + "Sludge is a byproduct of harvesting.");
         }
@@ -97,18 +90,14 @@ public class RecipeHandlerHarvester extends RecipeHandlerBase {
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            this.arecipes.add(new CachedHarvesterRecipe());
-        } else {
-            super.loadCraftingRecipes(outputId, results);
-        }
+    public void loadAllRecipes() {
+        this.arecipes.add(new CachedHarvesterRecipe());
     }
     
     @Override
     public void loadCraftingRecipes(FluidStack result) {
         if (result.getFluid().getName().equals("sludge")) {
-            this.arecipes.add(new CachedHarvesterRecipe());
+            this.loadAllRecipes();
         }
     }
     

@@ -16,17 +16,28 @@ public class RecipeHandlerRollingMachineShaped extends RecipeHandlerRollingMachi
     
     public class CachedRollingMachineShapedRecipe extends CachedBaseRecipe {
         
-        public ArrayList<PositionedStack> inputs;
+        public List<PositionedStack> inputs = new ArrayList<PositionedStack>();
         public PositionedStack output;
         
-        public CachedRollingMachineShapedRecipe(int width, int height, Object[] items, ItemStack output) {
-            this.output = new PositionedStack(output, 88, 18);
-            this.inputs = new ArrayList<PositionedStack>();
+        public CachedRollingMachineShapedRecipe(int width, int height, Object[] items, ItemStack output, boolean genPerms) {
             this.setIngredients(width, height, items);
+            this.output = new PositionedStack(output, 88, 18);
+            
+            if (genPerms) {
+                this.generatePermutations();
+            }
+        }
+        
+        public CachedRollingMachineShapedRecipe(int width, int height, Object[] items, ItemStack output) {
+            this(width, height, items, output, false);
+        }
+        
+        public CachedRollingMachineShapedRecipe(ShapedRecipes recipe, boolean genPerms) {
+            this(recipe.recipeWidth, recipe.recipeHeight, recipe.recipeItems, recipe.getRecipeOutput(), genPerms);
         }
         
         public CachedRollingMachineShapedRecipe(ShapedRecipes recipe) {
-            this(recipe.recipeWidth, recipe.recipeHeight, recipe.recipeItems, recipe.getRecipeOutput());
+            this(recipe, false);
         }
         
         public void setIngredients(int width, int height, Object[] items) {
@@ -36,7 +47,7 @@ public class RecipeHandlerRollingMachineShaped extends RecipeHandlerRollingMachi
                         continue;
                     }
                     
-                    PositionedStack stack = new PositionedStack(items[y * width + x], 25 + x * 18, 8 + y * 18);
+                    PositionedStack stack = new PositionedStack(items[y * width + x], 25 + x * 18, 8 + y * 18, false);
                     stack.setMaxSize(1);
                     this.inputs.add(stack);
                 }
@@ -53,63 +64,30 @@ public class RecipeHandlerRollingMachineShaped extends RecipeHandlerRollingMachi
             return this.output;
         }
         
+        public void generatePermutations() {
+            for (PositionedStack p : this.inputs) {
+                p.generatePermutations();
+            }
+        }
+        
     }
     
     @Override
-    public String getRecipeNameSub() {
+    public String getRecipeSubName() {
         return "Shaped";
     }
     
-    @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (IRecipe irecipe : RailcraftCraftingManager.rollingMachine.getRecipeList()) {
-                CachedRollingMachineShapedRecipe recipe = this.getCachedRecipe(irecipe);
-                if (recipe != null) {
-                    this.arecipes.add(recipe);
-                }
-            }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
-        }
-    }
-    
-    @Override
-    public void loadCraftingRecipes(ItemStack result) {
-        for (IRecipe irecipe : RailcraftCraftingManager.rollingMachine.getRecipeList()) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(irecipe.getRecipeOutput(), result)) {
-                CachedRollingMachineShapedRecipe recipe = this.getCachedRecipe(irecipe);
-                if (recipe != null) {
-                    this.arecipes.add(recipe);
-                }
-            }
-        }
-    }
-    
-    @Override
-    public void loadUsageRecipes(ItemStack ingredient) {
-        for (IRecipe irecipe : RailcraftCraftingManager.rollingMachine.getRecipeList()) {
-            CachedRollingMachineShapedRecipe recipe = this.getCachedRecipe(irecipe);
-            if (recipe != null) {
-                if (recipe.contains(recipe.inputs, ingredient)) {
-                    recipe.setIngredientPermutation(recipe.inputs, ingredient);
-                    this.arecipes.add(recipe);
-                }
-            }
-        }
-    }
-    
-    private CachedRollingMachineShapedRecipe getCachedRecipe(IRecipe irecipe) {
+    private CachedRollingMachineShapedRecipe getCachedRecipe(IRecipe irecipe, boolean genPerms) {
         CachedRollingMachineShapedRecipe recipe = null;
         if (irecipe instanceof ShapedRecipes) {
-            recipe = new CachedRollingMachineShapedRecipe((ShapedRecipes) irecipe);
+            recipe = new CachedRollingMachineShapedRecipe((ShapedRecipes) irecipe, genPerms);
         } else if (irecipe instanceof ShapedOreRecipe) {
-            recipe = this.getCachedOreRecipe((ShapedOreRecipe) irecipe);
+            recipe = this.getCachedOreRecipe((ShapedOreRecipe) irecipe, genPerms);
         }
         return recipe;
     }
     
-    private CachedRollingMachineShapedRecipe getCachedOreRecipe(ShapedOreRecipe recipe) {
+    private CachedRollingMachineShapedRecipe getCachedOreRecipe(ShapedOreRecipe recipe, boolean genPerms) {
         int width;
         int height;
         try {
@@ -126,7 +104,43 @@ public class RecipeHandlerRollingMachineShaped extends RecipeHandlerRollingMachi
             }
         }
         
-        return new CachedRollingMachineShapedRecipe(width, height, items, recipe.getRecipeOutput());
+        return new CachedRollingMachineShapedRecipe(width, height, items, recipe.getRecipeOutput(), genPerms);
+    }
+    
+    @Override
+    public void loadAllRecipes() {
+        for (IRecipe irecipe : RailcraftCraftingManager.rollingMachine.getRecipeList()) {
+            CachedRollingMachineShapedRecipe recipe = this.getCachedRecipe(irecipe, true);
+            if (recipe != null) {
+                this.arecipes.add(recipe);
+            }
+        }
+    }
+    
+    @Override
+    public void loadCraftingRecipes(ItemStack result) {
+        for (IRecipe irecipe : RailcraftCraftingManager.rollingMachine.getRecipeList()) {
+            if (NEIServerUtils.areStacksSameTypeCrafting(irecipe.getRecipeOutput(), result)) {
+                CachedRollingMachineShapedRecipe recipe = this.getCachedRecipe(irecipe, true);
+                if (recipe != null) {
+                    this.arecipes.add(recipe);
+                }
+            }
+        }
+    }
+    
+    @Override
+    public void loadUsageRecipes(ItemStack ingredient) {
+        for (IRecipe irecipe : RailcraftCraftingManager.rollingMachine.getRecipeList()) {
+            CachedRollingMachineShapedRecipe recipe = this.getCachedRecipe(irecipe, false);
+            if (recipe != null) {
+                if (recipe.contains(recipe.inputs, ingredient)) {
+                    recipe.generatePermutations();
+                    recipe.setIngredientPermutation(recipe.inputs, ingredient);
+                    this.arecipes.add(recipe);
+                }
+            }
+        }
     }
     
 }

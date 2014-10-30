@@ -18,11 +18,6 @@ import codechicken.nei.recipe.GuiRecipe;
 
 public class RecipeHandlerSlaughterhouse extends RecipeHandlerBase {
     
-    private static final Rectangle ANIMALS = new Rectangle(28, 24, 16, 16);
-    private static final Rectangle MEAT = new Rectangle(111, 2, 16, 60);
-    private static final Rectangle PINKSLIME = new Rectangle(91, 2, 16, 60);
-    private static final Rectangle ENERGY = new Rectangle(129, 2, 8, 60);
-    private static final Rectangle WORK = new Rectangle(139, 2, 8, 60);
     private static int energyPerOperation;
     
     @Override
@@ -37,10 +32,10 @@ public class RecipeHandlerSlaughterhouse extends RecipeHandlerBase {
         public List<PositionedFluidTank> tanks = new ArrayList<PositionedFluidTank>();
         
         public CachedSlaughterhouseRecipe() {
-            PositionedFluidTank tank = new PositionedFluidTank(MEAT, 4000, FluidRegistry.getFluidStack("meat", 4000));
+            PositionedFluidTank tank = new PositionedFluidTank(FluidRegistry.getFluidStack("meat", 4000), 4000, new Rectangle(111, 2, 16, 60), RecipeHandlerSlaughterhouse.this.getGuiTexture(), new Point(176, 0));
             tank.showAmount = false;
             this.tanks.add(tank);
-            tank = new PositionedFluidTank(PINKSLIME, 4000, FluidRegistry.getFluidStack("pinkslime", 4000));
+            tank = new PositionedFluidTank(FluidRegistry.getFluidStack("pinkslime", 4000), 4000, new Rectangle(91, 2, 16, 60), RecipeHandlerSlaughterhouse.this.getGuiTexture(), new Point(176, 0));
             tank.showAmount = false;
             this.tanks.add(tank);
         }
@@ -82,11 +77,7 @@ public class RecipeHandlerSlaughterhouse extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(91, 2, 176, 0, 16, 60);
-        GuiDraw.drawTexturedModalRect(111, 2, 176, 0, 16, 60);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(129, 0, 176, 58, 8, 62, 1.0F, 3);
         this.drawProgressBar(139, 0, 185, 58, 8, 62, 20, 3);
     }
@@ -94,28 +85,24 @@ public class RecipeHandlerSlaughterhouse extends RecipeHandlerBase {
     @Override
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
-        if (ANIMALS.contains(relMouse)) {
+        if (new Rectangle(28, 24, 16, 16).contains(relMouse)) {
             currenttip.add("Animals");
             currenttip.add(EnumChatFormatting.GRAY + "Larger animals produce more meat.");
-        } else if (ENERGY.contains(relMouse)) {
+        } else if (new Rectangle(129, 2, 8, 60).contains(relMouse)) {
             currenttip.add(energyPerOperation + " RF");
         }
         return currenttip;
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            this.arecipes.add(new CachedSlaughterhouseRecipe());
-        } else {
-            super.loadCraftingRecipes(outputId, results);
-        }
+    public void loadAllRecipes() {
+        this.arecipes.add(new CachedSlaughterhouseRecipe());
     }
     
     @Override
     public void loadCraftingRecipes(FluidStack result) {
         if (result.getFluid().getName().equals("meat") || result.getFluid().getName().equals("pinkslime")) {
-            this.arecipes.add(new CachedSlaughterhouseRecipe());
+            this.loadAllRecipes();
         }
     }
     

@@ -1,5 +1,6 @@
 package tonius.neiintegration.forestry;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,6 @@ import forestry.factory.gadgets.MachineCarpenter;
 
 public class RecipeHandlerCarpenter extends RecipeHandlerBase {
     
-    private static final Rectangle TANK = new Rectangle(145, 3, 16, 58);
     private static Class<? extends GuiContainer> guiClass;
     
     @Override
@@ -40,7 +40,7 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
             if (recipe.getBox() != null) {
                 this.inputs.add(new PositionedStack(recipe.getBox(), 78, 6));
             }
-            this.tank = new PositionedFluidTank(TANK, 10000, recipe.getLiquid());
+            this.tank = new PositionedFluidTank(recipe.getLiquid(), 10000, new Rectangle(145, 3, 16, 58), RecipeHandlerCarpenter.this.getGuiTexture(), new Point(176, 0));
             this.output = new PositionedStack(recipe.getCraftingResult(), 75, 37);
             
             if (genPerms) {
@@ -120,21 +120,14 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(145, 3, 176, 0, 16, 58);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(93, 36, 176, 59, 4, 18, 80, 3);
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (MachineCarpenter.Recipe recipe : MachineCarpenter.RecipeManager.recipes) {
-                this.arecipes.add(new CachedCarpenterRecipe(recipe, true));
-            }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
+    public void loadAllRecipes() {
+        for (MachineCarpenter.Recipe recipe : MachineCarpenter.RecipeManager.recipes) {
+            this.arecipes.add(new CachedCarpenterRecipe(recipe, true));
         }
     }
     

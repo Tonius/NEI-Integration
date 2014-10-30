@@ -99,13 +99,9 @@ public class RecipeHandlerBlastFurnace extends RecipeHandlerBase {
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (IBlastFurnaceRecipe recipe : RailcraftCraftingManager.blastFurnace.getRecipes()) {
-                this.arecipes.add(new CachedBlastFurnaceRecipe(recipe));
-            }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
+    public void loadAllRecipes() {
+        for (IBlastFurnaceRecipe recipe : RailcraftCraftingManager.blastFurnace.getRecipes()) {
+            this.arecipes.add(new CachedBlastFurnaceRecipe(recipe));
         }
     }
     

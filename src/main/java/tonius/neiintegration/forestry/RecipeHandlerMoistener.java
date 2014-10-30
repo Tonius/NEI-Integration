@@ -1,5 +1,6 @@
 package tonius.neiintegration.forestry;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,6 @@ import net.minecraftforge.fluids.FluidStack;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
-import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import forestry.api.fuels.FuelManager;
@@ -20,7 +20,6 @@ import forestry.factory.gadgets.MachineMoistener;
 
 public class RecipeHandlerMoistener extends RecipeHandlerBase {
     
-    private static final Rectangle TANK = new Rectangle(11, 5, 16, 58);
     private static Class<? extends GuiContainer> guiClass;
     
     @Override
@@ -36,7 +35,7 @@ public class RecipeHandlerMoistener extends RecipeHandlerBase {
         public PositionedStack output;
         
         public CachedMoistenerRecipe(MachineMoistener.Recipe recipe, MoistenerFuel fuel) {
-            this.tank = new PositionedFluidTank(TANK, 10000, FluidRegistry.getFluidStack("water", 10000));
+            this.tank = new PositionedFluidTank(FluidRegistry.getFluidStack("water", 10000), 10000, new Rectangle(11, 5, 16, 58), RecipeHandlerMoistener.this.getGuiTexture(), new Point(176, 0));
             this.tank.showAmount = false;
             this.fuels.add(new PositionedStack(fuel.item, 34, 47));
             this.fuels.add(new PositionedStack(fuel.product, 100, 26));
@@ -98,23 +97,16 @@ public class RecipeHandlerMoistener extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(11, 5, 176, 0, 16, 58);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(119, 25, 176, 74, 16, 15, 160, 0);
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (MachineMoistener.Recipe recipe : MachineMoistener.RecipeManager.recipes) {
-                for (MoistenerFuel fuel : FuelManager.moistenerResource.values()) {
-                    this.arecipes.add(new CachedMoistenerRecipe(recipe, fuel));
-                }
+    public void loadAllRecipes() {
+        for (MachineMoistener.Recipe recipe : MachineMoistener.RecipeManager.recipes) {
+            for (MoistenerFuel fuel : FuelManager.moistenerResource.values()) {
+                this.arecipes.add(new CachedMoistenerRecipe(recipe, fuel));
             }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
         }
     }
     
@@ -144,11 +136,7 @@ public class RecipeHandlerMoistener extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(FluidStack ingredient) {
         if (ingredient.getFluid() == FluidRegistry.WATER) {
-            for (MachineMoistener.Recipe recipe : MachineMoistener.RecipeManager.recipes) {
-                for (MoistenerFuel fuel : FuelManager.moistenerResource.values()) {
-                    this.arecipes.add(new CachedMoistenerRecipe(recipe, fuel));
-                }
-            }
+            this.loadAllRecipes();
         }
     }
     

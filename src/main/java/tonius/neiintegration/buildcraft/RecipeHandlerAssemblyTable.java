@@ -6,9 +6,6 @@ import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
-
-import org.lwjgl.opengl.GL11;
-
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import buildcraft.api.facades.IFacadeItem;
@@ -35,10 +32,18 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
         public PositionedStack output;
         public int energy;
         
-        public CachedAssemblyTableRecipe(IFlexibleRecipeViewable recipe) {
+        public CachedAssemblyTableRecipe(IFlexibleRecipeViewable recipe, boolean generatePermutations) {
             this.setIngredients((List<Object>) recipe.getInputs());
             this.output = new PositionedStack(recipe.getOutput(), 129, 8);
             this.energy = recipe.getEnergyCost();
+            
+            if (generatePermutations) {
+                this.generatePermutations();
+            }
+        }
+        
+        public CachedAssemblyTableRecipe(IFlexibleRecipeViewable recipe) {
+            this(recipe, false);
         }
         
         public void setIngredients(List<Object> inputs) {
@@ -47,7 +52,7 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
                 if (i >= INPUTS.length) {
                     return;
                 }
-                this.inputs.add(new PositionedStack(o, 3 + INPUTS[i][0] * 18, 8 + INPUTS[i][1] * 18));
+                this.inputs.add(new PositionedStack(o, 3 + INPUTS[i][0] * 18, 8 + INPUTS[i][1] * 18, false));
                 i++;
             }
         }
@@ -60,6 +65,12 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
         @Override
         public PositionedStack getResult() {
             return this.output;
+        }
+        
+        public void generatePermutations() {
+            for (PositionedStack p : this.inputs) {
+                p.generatePermutations();
+            }
         }
         
     }
@@ -90,39 +101,31 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawBackground(int recipe) {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GuiDraw.changeTexture(this.getGuiTexture());
-        GuiDraw.drawTexturedModalRect(0, 5, 5, 33, 166, 76);
-    }
-    
-    @Override
     public int recipiesPerPage() {
         return 1;
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
+    public void drawBackground(int recipe) {
         this.changeToGuiTexture();
+        GuiDraw.drawTexturedModalRect(0, 5, 5, 33, 166, 76);
+    }
+    
+    @Override
+    public void drawExtras(int recipe) {
         this.drawProgressBar(90, 7, 176, 17, 4, 71, 100, 3);
-        
         GuiDraw.drawStringC(((CachedAssemblyTableRecipe) this.arecipes.get(recipe)).energy + " RF", 93, 84, 0x808080, false);
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (IFlexibleRecipe<ItemStack> recipe : BuildcraftRecipeRegistry.assemblyTable.getRecipes()) {
-                if (recipe instanceof IFlexibleRecipeViewable) {
-                    ItemStack output = (ItemStack) ((IFlexibleRecipeViewable) recipe).getOutput();
-                    if (!(output.getItem() instanceof IFacadeItem)) {
-                        this.arecipes.add(new CachedAssemblyTableRecipe((IFlexibleRecipeViewable) recipe));
-                    }
+    public void loadAllRecipes() {
+        for (IFlexibleRecipe<ItemStack> recipe : BuildcraftRecipeRegistry.assemblyTable.getRecipes()) {
+            if (recipe instanceof IFlexibleRecipeViewable) {
+                ItemStack output = (ItemStack) ((IFlexibleRecipeViewable) recipe).getOutput();
+                if (!(output.getItem() instanceof IFacadeItem)) {
+                    this.arecipes.add(new CachedAssemblyTableRecipe((IFlexibleRecipeViewable) recipe, true));
                 }
             }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
         }
     }
     
@@ -133,7 +136,7 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
                 IFlexibleRecipeViewable recipeViewable = (IFlexibleRecipeViewable) recipe;
                 ItemStack output = (ItemStack) recipeViewable.getOutput();
                 if (output.stackTagCompound != null && NEIServerUtils.areStacksSameType(output, result) || output.stackTagCompound == null && NEIServerUtils.areStacksSameTypeCrafting(output, result)) {
-                    this.arecipes.add(new CachedAssemblyTableRecipe((IFlexibleRecipeViewable) recipe));
+                    this.arecipes.add(new CachedAssemblyTableRecipe((IFlexibleRecipeViewable) recipe, true));
                 }
             }
         }
@@ -145,6 +148,7 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
             if (recipe instanceof IFlexibleRecipeViewable) {
                 CachedAssemblyTableRecipe crecipe = new CachedAssemblyTableRecipe((IFlexibleRecipeViewable) recipe);
                 if (crecipe.contains(crecipe.inputs, ingredient)) {
+                    crecipe.generatePermutations();
                     crecipe.setIngredientPermutation(crecipe.inputs, ingredient);
                     this.arecipes.add(crecipe);
                 }

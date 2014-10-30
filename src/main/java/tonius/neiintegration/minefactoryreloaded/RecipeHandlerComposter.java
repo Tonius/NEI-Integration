@@ -19,9 +19,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class RecipeHandlerComposter extends RecipeHandlerBase {
     
-    private static final Rectangle SEWAGE = new Rectangle(111, 2, 16, 60);
-    private static final Rectangle ENERGY = new Rectangle(129, 2, 8, 60);
-    private static final Rectangle WORK = new Rectangle(139, 2, 8, 60);
     private static Item fertilizer;
     private static int sewagePerOperation;
     private static int energyPerOperation;
@@ -42,7 +39,7 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
         public PositionedStack output;
         
         public CachedComposterRecipe() {
-            this.sewageInput = new PositionedFluidTank(SEWAGE, 4000, FluidRegistry.getFluidStack("sewage", sewagePerOperation));
+            this.sewageInput = new PositionedFluidTank(FluidRegistry.getFluidStack("sewage", sewagePerOperation), 4000, new Rectangle(111, 2, 16, 60), RecipeHandlerComposter.this.getGuiTexture(), new Point(176, 0));
             this.output = new PositionedStack(new ItemStack(fertilizer), 48, 24);
         }
         
@@ -82,10 +79,7 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(111, 2, 176, 0, 16, 60);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(129, 0, 176, 58, 8, 62, 1.0F, 3);
         this.drawProgressBar(139, 0, 185, 58, 8, 62, 40, 3);
     }
@@ -93,32 +87,28 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
     @Override
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
-        if (ENERGY.contains(relMouse)) {
+        if (new Rectangle(129, 2, 8, 60).contains(relMouse)) {
             currenttip.add(energyPerOperation + " RF");
         }
         return currenttip;
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            this.arecipes.add(new CachedComposterRecipe());
-        } else {
-            super.loadCraftingRecipes(outputId, results);
-        }
+    public void loadAllRecipes() {
+        this.arecipes.add(new CachedComposterRecipe());
     }
     
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         if (result.getItem() == fertilizer) {
-            this.arecipes.add(new CachedComposterRecipe());
+            this.loadAllRecipes();
         }
     }
     
     @Override
     public void loadUsageRecipes(FluidStack ingredient) {
         if (ingredient.getFluid().getName().equals("sewage")) {
-            this.arecipes.add(new CachedComposterRecipe());
+            this.loadAllRecipes();
         }
     }
     

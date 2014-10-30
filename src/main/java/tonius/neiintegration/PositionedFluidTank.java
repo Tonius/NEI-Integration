@@ -1,5 +1,6 @@
 package tonius.neiintegration;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.List;
 
@@ -18,19 +19,31 @@ import codechicken.nei.recipe.GuiUsageRecipe;
 
 public class PositionedFluidTank {
     
-    public Rectangle position;
     public FluidTank tank;
+    public Rectangle position;
+    public String overlayTexture;
+    public Point overlayTexturePos;
     public boolean flowingTexture = false;
     public boolean showAmount = true;
     public boolean perTick = false;
     
-    public PositionedFluidTank(Rectangle position, FluidTank tank) {
+    public PositionedFluidTank(FluidTank tank, Rectangle position, String overlayTexture, Point overlayTexturePos) {
         this.position = position;
         this.tank = tank;
+        this.overlayTexture = overlayTexture;
+        this.overlayTexturePos = overlayTexturePos;
     }
     
-    public PositionedFluidTank(Rectangle position, int capacity, FluidStack fluid) {
-        this(position, new FluidTank(fluid != null ? fluid.copy() : null, capacity));
+    public PositionedFluidTank(FluidTank tank, Rectangle position) {
+        this(tank, position, null, null);
+    }
+    
+    public PositionedFluidTank(FluidStack fluid, int capacity, Rectangle position, String overlayTexture, Point overlayTexturePos) {
+        this(new FluidTank(fluid != null ? fluid.copy() : null, capacity), position, overlayTexture, overlayTexturePos);
+    }
+    
+    public PositionedFluidTank(FluidStack fluid, int capacity, Rectangle position) {
+        this(fluid, capacity, position, null, null);
     }
     
     public List<String> handleTooltip(List<String> currenttip) {
@@ -105,6 +118,11 @@ public class PositionedFluidTank {
         }
         
         GL11.glEnable(GL11.GL_BLEND);
+        
+        if (this.overlayTexture != null && this.overlayTexturePos != null) {
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            GuiDraw.changeTexture(this.overlayTexture);
+            GuiDraw.drawTexturedModalRect(this.position.x, this.position.y, this.overlayTexturePos.x, this.overlayTexturePos.y, this.position.width, this.position.height);
+        }
     }
-    
 }

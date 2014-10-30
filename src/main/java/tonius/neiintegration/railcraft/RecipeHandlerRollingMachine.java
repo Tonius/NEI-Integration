@@ -48,9 +48,7 @@ public abstract class RecipeHandlerRollingMachine extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
+    public void drawExtras(int recipe) {
         this.drawProgressBar(84, 36, 176, 0, 25, 12, 60, 0);
     }
     

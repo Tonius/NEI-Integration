@@ -7,6 +7,4 @@ public interface IRecipeHandlerBase extends ICraftingHandler, IUsageHandler {
     
     public void prepare();
     
-    public String getRecipeID();
-    
 }

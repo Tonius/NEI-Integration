@@ -24,8 +24,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
     
-    private static final Rectangle ENERGY = new Rectangle(139, 2, 8, 60);
-    private static final Rectangle WORK = new Rectangle(149, 2, 8, 60);
     private static List<WeightedRandom.Item> laserOres;
     private static int totalWeight;
     private static Map<Integer, List<ItemStack>> laserPreferredOres;
@@ -114,16 +112,11 @@ public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
+    public void drawExtras(int recipe) {
         GuiDraw.drawTexturedModalRect(111, 2, 176, 0, 16, 60);
         this.drawProgressBar(139, 0, 176, 58, 8, 62, 1.0F, 3);
         this.drawProgressBar(149, 0, 185, 58, 8, 62, 60, 3);
-    }
-    
-    @Override
-    public void drawExtras(int recipe) {
+        
         CachedLaserDrillRecipe crecipe = (CachedLaserDrillRecipe) this.arecipes.get(recipe);
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(2);
@@ -134,32 +127,28 @@ public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
     @Override
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
-        if (ENERGY.contains(relMouse)) {
+        if (new Rectangle(139, 2, 8, 60).contains(relMouse)) {
             currenttip.add(energyPerOperation + " RF");
         }
         return currenttip;
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (WeightedRandom.Item drop : laserOres) {
-                if (drop instanceof WeightedRandomItemStack) {
-                    ItemStack dropStack = ((WeightedRandomItemStack) drop).getStack();
-                    for (int i : laserPreferredOres.keySet()) {
-                        List<ItemStack> preferredStacks = laserPreferredOres.get(i);
-                        if (preferredStacks != null) {
-                            for (ItemStack preferredStack : preferredStacks) {
-                                if (NEIServerUtils.areStacksSameTypeCrafting(preferredStack, dropStack)) {
-                                    this.arecipes.add(new CachedLaserDrillRecipe(dropStack, drop.itemWeight, i));
-                                }
+    public void loadAllRecipes() {
+        for (WeightedRandom.Item drop : laserOres) {
+            if (drop instanceof WeightedRandomItemStack) {
+                ItemStack dropStack = ((WeightedRandomItemStack) drop).getStack();
+                for (int i : laserPreferredOres.keySet()) {
+                    List<ItemStack> preferredStacks = laserPreferredOres.get(i);
+                    if (preferredStacks != null) {
+                        for (ItemStack preferredStack : preferredStacks) {
+                            if (NEIServerUtils.areStacksSameTypeCrafting(preferredStack, dropStack)) {
+                                this.arecipes.add(new CachedLaserDrillRecipe(dropStack, drop.itemWeight, i));
                             }
                         }
                     }
                 }
             }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
         }
     }
     

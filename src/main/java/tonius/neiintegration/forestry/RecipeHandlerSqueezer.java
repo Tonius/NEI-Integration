@@ -1,5 +1,6 @@
 package tonius.neiintegration.forestry;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,15 +12,13 @@ import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.PositionedStackAdv;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
-import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import forestry.factory.gadgets.MachineSqueezer;
 
 public class RecipeHandlerSqueezer extends RecipeHandlerBase {
     
-    public static final int[][] INPUTS = new int[][] { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 0, 1 }, { 1, 1 }, { 2, 1 }, { 0, 2 }, { 1, 2 }, { 2, 2 } };
-    public static final Rectangle TANK = new Rectangle(80, 4, 16, 58);
+    private static final int[][] INPUTS = new int[][] { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 0, 1 }, { 1, 1 }, { 2, 1 }, { 0, 2 }, { 1, 2 }, { 2, 2 } };
     private static Class<? extends GuiContainer> guiClass;
     
     @Override
@@ -35,7 +34,7 @@ public class RecipeHandlerSqueezer extends RecipeHandlerBase {
         
         public CachedSqueezerRecipe(MachineSqueezer.Recipe recipe, boolean genPerms) {
             this.setIngredients(recipe.resources);
-            this.tank = new PositionedFluidTank(TANK, 10000, recipe.liquid);
+            this.tank = new PositionedFluidTank(recipe.liquid, 10000, new Rectangle(80, 4, 16, 58), RecipeHandlerSqueezer.this.getGuiTexture(), new Point(176, 0));
             if (recipe.remnants != null) {
                 this.remnants = new PositionedStackAdv(recipe.remnants, 118, 8).setChance(recipe.chance / 100F);
             }
@@ -104,10 +103,7 @@ public class RecipeHandlerSqueezer extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(80, 4, 176, 0, 16, 58);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(70, 8, 176, 60, 43, 18, 80, 0);
     }
     
@@ -117,13 +113,9 @@ public class RecipeHandlerSqueezer extends RecipeHandlerBase {
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (MachineSqueezer.Recipe recipe : MachineSqueezer.RecipeManager.recipes) {
-                this.arecipes.add(new CachedSqueezerRecipe(recipe, true));
-            }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
+    public void loadAllRecipes() {
+        for (MachineSqueezer.Recipe recipe : MachineSqueezer.RecipeManager.recipes) {
+            this.arecipes.add(new CachedSqueezerRecipe(recipe, true));
         }
     }
     

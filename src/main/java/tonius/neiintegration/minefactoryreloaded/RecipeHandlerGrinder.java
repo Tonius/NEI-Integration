@@ -17,10 +17,6 @@ import codechicken.nei.recipe.GuiRecipe;
 
 public class RecipeHandlerGrinder extends RecipeHandlerBase {
     
-    private static final Rectangle MOBS = new Rectangle(44, 24, 16, 16);
-    private static final Rectangle ESSENCE = new Rectangle(111, 2, 16, 60);
-    private static final Rectangle ENERGY = new Rectangle(129, 2, 8, 60);
-    private static final Rectangle WORK = new Rectangle(139, 2, 8, 60);
     private static int energyPerOperation;
     
     @Override
@@ -35,7 +31,7 @@ public class RecipeHandlerGrinder extends RecipeHandlerBase {
         PositionedFluidTank tank;
         
         public CachedGrinderRecipe() {
-            this.tank = new PositionedFluidTank(ESSENCE, 4000, FluidRegistry.getFluidStack("mobessence", 4000));
+            this.tank = new PositionedFluidTank(FluidRegistry.getFluidStack("mobessence", 4000), 4000, new Rectangle(111, 2, 16, 60), RecipeHandlerGrinder.this.getGuiTexture(), new Point(176, 0));
             this.tank.showAmount = false;
         }
         
@@ -76,10 +72,7 @@ public class RecipeHandlerGrinder extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(111, 2, 176, 0, 16, 60);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(129, 0, 176, 58, 8, 62, 1.0F, 3);
         this.drawProgressBar(139, 0, 185, 58, 8, 62, 20, 3);
     }
@@ -87,29 +80,25 @@ public class RecipeHandlerGrinder extends RecipeHandlerBase {
     @Override
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
-        if (MOBS.contains(relMouse)) {
+        if (new Rectangle(44, 24, 16, 16).contains(relMouse)) {
             currenttip.add("Mobs");
             currenttip.add(EnumChatFormatting.GRAY + "Mobs that drop more XP");
             currenttip.add(EnumChatFormatting.GRAY + "produce more Essence.");
-        } else if (ENERGY.contains(relMouse)) {
+        } else if (new Rectangle(129, 2, 8, 60).contains(relMouse)) {
             currenttip.add(energyPerOperation + " RF");
         }
         return currenttip;
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            this.arecipes.add(new CachedGrinderRecipe());
-        } else {
-            super.loadCraftingRecipes(outputId, results);
-        }
+    public void loadAllRecipes() {
+        this.arecipes.add(new CachedGrinderRecipe());
     }
     
     @Override
     public void loadCraftingRecipes(FluidStack result) {
         if (result.getFluid().getName().equals("mobessence")) {
-            this.arecipes.add(new CachedGrinderRecipe());
+            this.loadAllRecipes();
         }
     }
     

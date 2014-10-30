@@ -16,10 +16,6 @@ import codechicken.nei.recipe.GuiRecipe;
 
 public class RecipeHandlerSewer extends RecipeHandlerBase {
     
-    private static final Rectangle MOBS = new Rectangle(48, 24, 16, 16);
-    private static final Rectangle SEWAGE = new Rectangle(141, 2, 16, 60);
-    private static final Rectangle ESSENCE = new Rectangle(121, 2, 16, 60);
-    
     public class CachedSewerRecipe extends CachedBaseRecipe {
         
         public PositionedFluidTank tank;
@@ -28,9 +24,9 @@ public class RecipeHandlerSewer extends RecipeHandlerBase {
         public CachedSewerRecipe(boolean essenceRecipe) {
             this.essenceRecipe = essenceRecipe;
             if (!essenceRecipe) {
-                this.tank = new PositionedFluidTank(SEWAGE, 4000, FluidRegistry.getFluidStack("sewage", 4000));
+                this.tank = new PositionedFluidTank(FluidRegistry.getFluidStack("sewage", 4000), 4000, new Rectangle(141, 2, 16, 60), RecipeHandlerSewer.this.getGuiTexture(), new Point(176, 0));
             } else {
-                this.tank = new PositionedFluidTank(ESSENCE, 4000, FluidRegistry.getFluidStack("mobessence", 4000));
+                this.tank = new PositionedFluidTank(FluidRegistry.getFluidStack("mobessence", 4000), 4000, new Rectangle(121, 2, 16, 60), RecipeHandlerSewer.this.getGuiTexture(), new Point(176, 0));
             }
             this.tank.showAmount = false;
         }
@@ -82,17 +78,9 @@ public class RecipeHandlerSewer extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(121, 2, 176, 0, 16, 60);
-        GuiDraw.drawTexturedModalRect(141, 2, 176, 0, 16, 60);
-    }
-    
-    @Override
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
-        if (MOBS.contains(relMouse)) {
+        if (new Rectangle(48, 24, 16, 16).contains(relMouse)) {
             if (!((CachedSewerRecipe) crecipe).essenceRecipe) {
                 currenttip.add("Animals or villagers");
                 currenttip.add(EnumChatFormatting.GRAY + "Larger animals produce more sewage.");
@@ -105,13 +93,9 @@ public class RecipeHandlerSewer extends RecipeHandlerBase {
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            this.arecipes.add(new CachedSewerRecipe(false));
-            this.arecipes.add(new CachedSewerRecipe(true));
-        } else {
-            super.loadCraftingRecipes(outputId, results);
-        }
+    public void loadAllRecipes() {
+        this.arecipes.add(new CachedSewerRecipe(false));
+        this.arecipes.add(new CachedSewerRecipe(true));
     }
     
     @Override

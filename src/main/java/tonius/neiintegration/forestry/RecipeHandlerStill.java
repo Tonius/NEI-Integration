@@ -1,5 +1,6 @@
 package tonius.neiintegration.forestry;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,6 @@ import forestry.factory.gadgets.MachineStill;
 
 public class RecipeHandlerStill extends RecipeHandlerBase {
     
-    private static final Rectangle INPUT = new Rectangle(30, 4, 16, 58);
-    private static final Rectangle OUTPUT = new Rectangle(120, 4, 16, 58);
     private static Class<? extends GuiContainer> guiClass;
     
     @Override
@@ -29,8 +28,8 @@ public class RecipeHandlerStill extends RecipeHandlerBase {
         public List<PositionedFluidTank> tanks = new ArrayList<PositionedFluidTank>();
         
         public CachedStillRecipe(MachineStill.Recipe recipe) {
-            this.tanks.add(new PositionedFluidTank(INPUT, 10000, recipe.input));
-            this.tanks.add(new PositionedFluidTank(OUTPUT, 10000, recipe.output));
+            this.tanks.add(new PositionedFluidTank(recipe.input, 10000, new Rectangle(30, 4, 16, 58), RecipeHandlerStill.this.getGuiTexture(), new Point(176, 0)));
+            this.tanks.add(new PositionedFluidTank(recipe.output, 10000, new Rectangle(120, 4, 16, 58), RecipeHandlerStill.this.getGuiTexture(), new Point(176, 0)));
         }
         
         @Override
@@ -77,23 +76,15 @@ public class RecipeHandlerStill extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(30, 4, 176, 0, 16, 58);
-        GuiDraw.drawTexturedModalRect(120, 4, 176, 0, 16, 58);
-        GuiDraw.drawTexturedModalRect(77, 46, 176, 60, 14, 14);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(79, 6, 176, 74, 4, 18, 80, 11);
+        GuiDraw.drawTexturedModalRect(77, 46, 176, 60, 14, 14);
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (MachineStill.Recipe recipe : MachineStill.RecipeManager.recipes) {
-                this.arecipes.add(new CachedStillRecipe(recipe));
-            }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
+    public void loadAllRecipes() {
+        for (MachineStill.Recipe recipe : MachineStill.RecipeManager.recipes) {
+            this.arecipes.add(new CachedStillRecipe(recipe));
         }
     }
     

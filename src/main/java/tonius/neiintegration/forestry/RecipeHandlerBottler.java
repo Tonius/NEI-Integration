@@ -1,5 +1,6 @@
 package tonius.neiintegration.forestry;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,6 @@ import forestry.factory.gadgets.MachineBottler;
 
 public class RecipeHandlerBottler extends RecipeHandlerBase {
     
-    private static final Rectangle FLUID = new Rectangle(48, 6, 16, 58);
     private static Class<? extends GuiContainer> guiClass;
     private static List<MachineBottler.Recipe> recipes = new ArrayList<MachineBottler.Recipe>();
     
@@ -41,7 +41,7 @@ public class RecipeHandlerBottler extends RecipeHandlerBase {
         public PositionedStack output;
         
         public CachedBottlerRecipe(MachineBottler.Recipe recipe) {
-            this.fluid = new PositionedFluidTank(FLUID, 10000, recipe.input);
+            this.fluid = new PositionedFluidTank(recipe.input, 10000, new Rectangle(48, 6, 16, 58), RecipeHandlerBottler.this.getGuiTexture(), new Point(176, 0));
             this.input = new PositionedStack(recipe.can, 111, 8);
             this.output = new PositionedStack(recipe.bottled, 111, 44);
         }
@@ -95,20 +95,9 @@ public class RecipeHandlerBottler extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(48, 6, 176, 0, 16, 58);
-    }
-    
-    @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (MachineBottler.Recipe recipe : recipes) {
-                this.arecipes.add(new CachedBottlerRecipe(recipe));
-            }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
+    public void loadAllRecipes() {
+        for (MachineBottler.Recipe recipe : recipes) {
+            this.arecipes.add(new CachedBottlerRecipe(recipe));
         }
     }
     

@@ -21,7 +21,6 @@ import forestry.factory.gadgets.MachineFabricator;
 
 public class RecipeHandlerFabricator extends RecipeHandlerBase {
     
-    private static final Rectangle TANK = new Rectangle(21, 37, 16, 16);
     private static Class<? extends GuiContainer> guiClass;
     private static Map<Fluid, List<ItemStack>> smeltingInputs = new HashMap<Fluid, List<ItemStack>>();
     
@@ -45,7 +44,7 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
         public PositionedStack output;
         
         public CachedFabricatorRecipe(MachineFabricator.Recipe recipe, boolean genPerms) {
-            this.tank = new PositionedFluidTank(TANK, 2000, recipe.getLiquid());
+            this.tank = new PositionedFluidTank(recipe.getLiquid(), 2000, new Rectangle(21, 37, 16, 16));
             
             ShapedRecipeCustom irecipe = (ShapedRecipeCustom) recipe.asIRecipe();
             this.setIngredients(irecipe.getWidth(), irecipe.getHeight(), irecipe.getIngredients());
@@ -132,13 +131,9 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (MachineFabricator.Recipe recipe : MachineFabricator.RecipeManager.recipes) {
-                this.arecipes.add(new CachedFabricatorRecipe(recipe, true));
-            }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
+    public void loadAllRecipes() {
+        for (MachineFabricator.Recipe recipe : MachineFabricator.RecipeManager.recipes) {
+            this.arecipes.add(new CachedFabricatorRecipe(recipe, true));
         }
     }
     

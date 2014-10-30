@@ -1,6 +1,9 @@
 package tonius.neiintegration.railcraft;
 
+import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.Collections;
+import java.util.List;
 
 import mods.railcraft.api.crafting.ICokeOvenRecipe;
 import mods.railcraft.api.crafting.RailcraftCraftingManager;
@@ -17,7 +20,6 @@ import codechicken.nei.api.API;
 
 public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     
-    private static final Rectangle CREOSOTE = new Rectangle(95, 13, 48, 47);
     private static Class<? extends GuiContainer> guiClass;
     
     @Override
@@ -28,22 +30,21 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     
     public class CachedCokeOvenRecipe extends CachedBaseRecipe {
         
-        public PositionedStack input;
+        public List<PositionedStack> input;
         public PositionedStack output;
         public PositionedFluidTank fluidOutput;
         public int cookTime;
         
         public CachedCokeOvenRecipe(ICokeOvenRecipe recipe) {
-            this.input = new PositionedStack(recipe.getInput(), 21, 32);
+            this.input = Collections.singletonList(new PositionedStack(recipe.getInput(), 21, 32));
             this.output = new PositionedStack(recipe.getOutput(), 67, 32);
-            this.fluidOutput = new PositionedFluidTank(CREOSOTE, 64000, recipe.getFluidOutput());
+            this.fluidOutput = new PositionedFluidTank(recipe.getFluidOutput(), 64000, new Rectangle(95, 13, 48, 47), RecipeHandlerCokeOven.this.getGuiTexture(), new Point(176, 0));
             this.cookTime = recipe.getCookTime();
         }
         
         @Override
-        public PositionedStack getIngredient() {
-            this.randomRenderPermutation(this.input, RecipeHandlerCokeOven.this.cycleticks / 20);
-            return this.input;
+        public List<PositionedStack> getIngredients() {
+            return this.getCycledIngredients(RecipeHandlerCokeOven.this.cycleticks / 20, this.input);
         }
         
         @Override
@@ -90,23 +91,16 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(95, 13, 176, 0, 48, 47);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(40, 32, 177, 61, 21, 16, 100, 0);
         this.drawProgressBar(21, 15, 176, 47, 14, 14, 100, 11);
         GuiDraw.drawStringC(((CachedCokeOvenRecipe) this.arecipes.get(recipe)).cookTime + " ticks", 64, 12, 0x808080, false);
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (ICokeOvenRecipe recipe : RailcraftCraftingManager.cokeOven.getRecipes()) {
-                this.arecipes.add(new CachedCokeOvenRecipe(recipe));
-            }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
+    public void loadAllRecipes() {
+        for (ICokeOvenRecipe recipe : RailcraftCraftingManager.cokeOven.getRecipes()) {
+            this.arecipes.add(new CachedCokeOvenRecipe(recipe));
         }
     }
     
@@ -125,7 +119,9 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
         super.loadUsageRecipes(ingred);
         for (ICokeOvenRecipe recipe : RailcraftCraftingManager.cokeOven.getRecipes()) {
             if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getInput(), ingred)) {
-                this.arecipes.add(new CachedCokeOvenRecipe(recipe));
+                CachedCokeOvenRecipe crecipe = new CachedCokeOvenRecipe(recipe);
+                crecipe.setIngredientPermutation(crecipe.input, ingred);
+                this.arecipes.add(crecipe);
             }
         }
     }

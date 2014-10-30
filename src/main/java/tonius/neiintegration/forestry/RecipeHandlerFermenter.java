@@ -1,5 +1,6 @@
 package tonius.neiintegration.forestry;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,8 +23,6 @@ import forestry.factory.gadgets.MachineFermenter;
 
 public class RecipeHandlerFermenter extends RecipeHandlerBase {
     
-    private static final Rectangle INPUT = new Rectangle(30, 4, 16, 58);
-    private static final Rectangle OUTPUT = new Rectangle(120, 4, 16, 58);
     private static Class<? extends GuiContainer> guiClass;
     private static List<ItemStack> fuels = new ArrayList<ItemStack>();
     
@@ -45,14 +44,14 @@ public class RecipeHandlerFermenter extends RecipeHandlerBase {
         public CachedFermenterRecipe(MachineFermenter.Recipe recipe, ItemStack fermentable, boolean genPerms) {
             FluidStack input = recipe.liquid.copy();
             input.amount = recipe.fermentationValue;
-            this.tanks.add(new PositionedFluidTank(INPUT, 10000, input));
+            this.tanks.add(new PositionedFluidTank(input, 10000, new Rectangle(30, 4, 16, 58), RecipeHandlerFermenter.this.getGuiTexture(), new Point(176, 0)));
             FluidStack output = recipe.output.copy();
             if (fermentable.getItem() instanceof IVariableFermentable) {
                 output.amount = (int) (recipe.fermentationValue * recipe.modifier * ((IVariableFermentable) fermentable.getItem()).getFermentationModifier(fermentable));
             } else {
                 output.amount = (int) (recipe.fermentationValue * recipe.modifier);
             }
-            this.tanks.add(new PositionedFluidTank(OUTPUT, 10000, output));
+            this.tanks.add(new PositionedFluidTank(output, 10000, new Rectangle(120, 4, 16, 58), RecipeHandlerFermenter.this.getGuiTexture(), new Point(176, 0)));
             
             this.inputItems.add(new PositionedStack(fermentable, 80, 8));
             this.inputItems.add(new PositionedStack(RecipeHandlerFermenter.fuels, 70, 42));
@@ -125,11 +124,7 @@ public class RecipeHandlerFermenter extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(30, 4, 176, 0, 16, 58);
-        GuiDraw.drawTexturedModalRect(120, 4, 176, 0, 16, 58);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(69, 17, 176, 60, 4, 18, 40, 11);
         this.drawProgressBar(93, 31, 176, 78, 4, 18, 80, 11);
     }
@@ -146,13 +141,9 @@ public class RecipeHandlerFermenter extends RecipeHandlerBase {
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (MachineFermenter.Recipe recipe : MachineFermenter.RecipeManager.recipes) {
-                this.arecipes.addAll(this.getCachedRecipes(recipe, true));
-            }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
+    public void loadAllRecipes() {
+        for (MachineFermenter.Recipe recipe : MachineFermenter.RecipeManager.recipes) {
+            this.arecipes.addAll(this.getCachedRecipes(recipe, true));
         }
     }
     

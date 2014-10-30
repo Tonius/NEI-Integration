@@ -22,9 +22,6 @@ import codechicken.nei.recipe.GuiRecipe;
 
 public class RecipeHandlerBioReactor extends RecipeHandlerBase {
     
-    private static final Rectangle BIOFUEL = new Rectangle(121, 2, 16, 60);
-    private static final Rectangle EFFICIENCY = new Rectangle(139, 2, 8, 60);
-    private static final Rectangle BUFFER = new Rectangle(149, 2, 8, 60);
     private static Map<Item, IFactoryPlantable> plantables;
     
     @Override
@@ -39,7 +36,7 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
         
         public CachedBioReactorRecipe(ItemStack input) {
             this.input = new PositionedStack(input, 9, 6);
-            this.biofuelOutput = new PositionedFluidTank(BIOFUEL, 4000, FluidRegistry.getFluidStack("biofuel", 4000));
+            this.biofuelOutput = new PositionedFluidTank(FluidRegistry.getFluidStack("biofuel", 4000), 4000, new Rectangle(121, 2, 16, 60), RecipeHandlerBioReactor.this.getGuiTexture(), new Point(176, 0));
             this.biofuelOutput.showAmount = false;
         }
         
@@ -86,10 +83,7 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(121, 2, 176, 0, 16, 60);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(139, 0, 176, 58, 8, 62, 0.3F, 3);
         this.drawProgressBar(149, 0, 185, 58, 8, 62, 120, 11);
     }
@@ -97,7 +91,7 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
     @Override
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
-        if (EFFICIENCY.contains(relMouse)) {
+        if (new Rectangle(139, 2, 8, 60).contains(relMouse)) {
             currenttip.add("Efficiency");
             currenttip.add(EnumChatFormatting.GRAY + "Depends on the amount of");
             currenttip.add(EnumChatFormatting.GRAY + "different items being processed.");
@@ -107,28 +101,19 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (Item i : plantables.keySet()) {
-                ItemStack plantable = new ItemStack(i, 1, OreDictionary.WILDCARD_VALUE);
-                if (plantables.get(i).canBePlanted(plantable, true)) {
-                    this.arecipes.add(new CachedBioReactorRecipe(plantable));
-                }
+    public void loadAllRecipes() {
+        for (Item i : plantables.keySet()) {
+            ItemStack plantable = new ItemStack(i, 1, OreDictionary.WILDCARD_VALUE);
+            if (plantables.get(i).canBePlanted(plantable, true)) {
+                this.arecipes.add(new CachedBioReactorRecipe(plantable));
             }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
         }
     }
     
     @Override
     public void loadCraftingRecipes(FluidStack result) {
         if (result.getFluid().getName().equals("biofuel")) {
-            for (Item i : plantables.keySet()) {
-                ItemStack plantable = new ItemStack(i, 1, OreDictionary.WILDCARD_VALUE);
-                if (plantables.get(i).canBePlanted(plantable, true)) {
-                    this.arecipes.add(new CachedBioReactorRecipe(plantable));
-                }
-            }
+            this.loadAllRecipes();
         }
     }
     

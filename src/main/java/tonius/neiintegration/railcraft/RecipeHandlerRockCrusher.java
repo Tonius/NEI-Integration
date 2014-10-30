@@ -1,8 +1,5 @@
 package tonius.neiintegration.railcraft;
 
-import static codechicken.lib.gui.GuiDraw.changeTexture;
-import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
-
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +15,7 @@ import org.lwjgl.opengl.GL11;
 import tonius.neiintegration.PositionedStackAdv;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
+import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.API;
@@ -100,24 +98,19 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
     @Override
     public void drawBackground(int recipe) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        changeTexture(this.getGuiTexture());
-        drawTexturedModalRect(9, 0, 5, 11, 146, 65);
+        GuiDraw.changeTexture(this.getGuiTexture());
+        GuiDraw.drawTexturedModalRect(9, 0, 5, 11, 146, 65);
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
+    public void drawExtras(int recipe) {
         this.drawProgressBar(68, 9, 176, 0, 29, 53, 48, 0);
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (IRockCrusherRecipe recipe : RailcraftCraftingManager.rockCrusher.getRecipes()) {
-                this.arecipes.add(new CachedRockCrusherRecipe(recipe));
-            }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
+    public void loadAllRecipes() {
+        for (IRockCrusherRecipe recipe : RailcraftCraftingManager.rockCrusher.getRecipes()) {
+            this.arecipes.add(new CachedRockCrusherRecipe(recipe));
         }
     }
     

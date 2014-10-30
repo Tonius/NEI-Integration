@@ -96,20 +96,14 @@ public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
-        this.changeToGuiTexture();
+    public void drawExtras(int recipe) {
         this.drawProgressBar(57, 25, 176, 0, 4, 17, 80, 3);
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (MachineCentrifuge.Recipe recipe : MachineCentrifuge.RecipeManager.recipes) {
-                this.arecipes.add(new CachedCentrifugeRecipe(recipe, true));
-            }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
+    public void loadAllRecipes() {
+        for (MachineCentrifuge.Recipe recipe : MachineCentrifuge.RecipeManager.recipes) {
+            this.arecipes.add(new CachedCentrifugeRecipe(recipe, true));
         }
     }
     

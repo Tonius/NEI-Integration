@@ -6,9 +6,6 @@ import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraftforge.fluids.FluidStack;
-
-import org.lwjgl.opengl.GL11;
-
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
@@ -21,9 +18,6 @@ import codechicken.nei.api.API;
 
 public class RecipeHandlerRefinery extends RecipeHandlerBase {
     
-    private static final Rectangle INPUT1 = new Rectangle(33, 23, 16, 16);
-    private static final Rectangle INPUT2 = new Rectangle(121, 23, 16, 16);
-    private static final Rectangle OUTPUT = new Rectangle(77, 23, 16, 16);
     private static Class<? extends GuiContainer> guiClass;
     
     @Override
@@ -40,12 +34,12 @@ public class RecipeHandlerRefinery extends RecipeHandlerBase {
         
         public CachedRefineryRecipe(IFlexibleRecipeViewable recipe) {
             List<FluidStack> inputs = (List) recipe.getInputs();
-            PositionedFluidTank tank = new PositionedFluidTank(INPUT1, inputs.get(0).amount, inputs.get(0));
+            PositionedFluidTank tank = new PositionedFluidTank(inputs.get(0), inputs.get(0).amount, new Rectangle(33, 23, 16, 16));
             this.tanks.add(tank);
             if (inputs.size() > 1) {
-                this.tanks.add(new PositionedFluidTank(INPUT2, inputs.get(1).amount, inputs.get(1)));
+                this.tanks.add(new PositionedFluidTank(inputs.get(1), inputs.get(1).amount, new Rectangle(121, 23, 16, 16)));
             }
-            this.tanks.add(new PositionedFluidTank(OUTPUT, ((FluidStack) recipe.getOutput()).amount, (FluidStack) recipe.getOutput()));
+            this.tanks.add(new PositionedFluidTank((FluidStack) recipe.getOutput(), ((FluidStack) recipe.getOutput()).amount, new Rectangle(77, 23, 16, 16)));
             
             this.energy = recipe.getEnergyCost();
             this.time = recipe.getCraftingTime();
@@ -91,14 +85,12 @@ public class RecipeHandlerRefinery extends RecipeHandlerBase {
     
     @Override
     public void drawBackground(int recipe) {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GuiDraw.changeTexture(this.getGuiTexture());
+        this.changeToGuiTexture();
         GuiDraw.drawTexturedModalRect(0, 0, 5, 31, 166, 65);
     }
     
     @Override
-    public void drawForeground(int recipe) {
-        super.drawForeground(recipe);
+    public void drawExtras(int recipe) {
         int energy = ((CachedRefineryRecipe) this.arecipes.get(recipe)).energy;
         long time = ((CachedRefineryRecipe) this.arecipes.get(recipe)).time;
         GuiDraw.drawStringC(energy + " RF per " + (time > 1 ? time + " ticks" : "tick"), 82, 45, 0x808080, false);
@@ -107,15 +99,11 @@ public class RecipeHandlerRefinery extends RecipeHandlerBase {
     }
     
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(this.getRecipeID())) {
-            for (IFlexibleRecipe<FluidStack> recipe : BuildcraftRecipeRegistry.refinery.getRecipes()) {
-                if (recipe instanceof IFlexibleRecipeViewable) {
-                    this.arecipes.add(new CachedRefineryRecipe((IFlexibleRecipeViewable) recipe));
-                }
+    public void loadAllRecipes() {
+        for (IFlexibleRecipe<FluidStack> recipe : BuildcraftRecipeRegistry.refinery.getRecipes()) {
+            if (recipe instanceof IFlexibleRecipeViewable) {
+                this.arecipes.add(new CachedRefineryRecipe((IFlexibleRecipeViewable) recipe));
             }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
         }
     }
     
