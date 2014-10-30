@@ -16,7 +16,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = NEIIntegration.MODID)
+@Mod(modid = NEIIntegration.MODID, acceptableRemoteVersions = "*")
 public class NEIIntegration {
     
     public static final String MODID = "neiintegration";

@@ -87,16 +87,12 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     
     @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
-        try {
-            if (outputId.equals("liquid") && results.length == 1 && results[0] instanceof FluidStack) {
-                this.loadCraftingRecipes((FluidStack) results[0]);
-            } else if (outputId.equals(this.getRecipeID())) {
-                this.loadAllRecipes();
-            } else {
-                super.loadCraftingRecipes(outputId, results);
-            }
-        } catch (Throwable ex) {
-            ex.printStackTrace();
+        if (outputId.equals("liquid")) {
+            this.loadCraftingRecipes((FluidStack) results[0]);
+        } else if (outputId.equals(this.getRecipeID())) {
+            this.loadAllRecipes();
+        } else {
+            super.loadCraftingRecipes(outputId, results);
         }
     }
     
@@ -116,14 +112,10 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     
     @Override
     public void loadUsageRecipes(String inputId, Object... ingredients) {
-        try {
-            if (inputId.equals("liquid") && ingredients.length == 1 && ingredients[0] instanceof FluidStack) {
-                this.loadUsageRecipes((FluidStack) ingredients[0]);
-            } else {
-                super.loadUsageRecipes(inputId, ingredients);
-            }
-        } catch (Throwable ex) {
-            ex.printStackTrace();
+        if (inputId.equals("liquid")) {
+            this.loadUsageRecipes((FluidStack) ingredients[0]);
+        } else {
+            super.loadUsageRecipes(inputId, ingredients);
         }
     }
     
