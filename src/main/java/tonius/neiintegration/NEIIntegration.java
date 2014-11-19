@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import tonius.neiintegration.buildcraft.BuildCraftIntegration;
 import tonius.neiintegration.forestry.ForestryIntegration;
+import tonius.neiintegration.forge.ForgeIntegration;
 import tonius.neiintegration.minefactoryreloaded.MFRIntegration;
 import tonius.neiintegration.railcraft.RailcraftIntegration;
 import cpw.mods.fml.common.Mod;
@@ -38,6 +39,7 @@ public class NEIIntegration {
     @EventHandler
     public void init(FMLInitializationEvent evt) {
         if (evt.getSide() == Side.CLIENT) {
+            integrations.add(new ForgeIntegration());
             integrations.add(new BuildCraftIntegration());
             integrations.add(new ForestryIntegration());
             integrations.add(new MFRIntegration());

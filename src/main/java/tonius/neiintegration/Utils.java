@@ -44,7 +44,7 @@ public class Utils {
             if (fluidStack == null && Block.getBlockFromItem(stack.getItem()) instanceof IFluidBlock) {
                 Fluid fluid = ((IFluidBlock) Block.getBlockFromItem(stack.getItem())).getFluid();
                 if (fluid != null) {
-                    return new FluidStack(fluid, 1000);
+                    fluidStack = new FluidStack(fluid, 1000);
                 }
             }
             return fluidStack;
