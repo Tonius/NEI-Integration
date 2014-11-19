@@ -95,6 +95,11 @@ public class RecipeHandlerBottler extends RecipeHandlerBase {
     }
     
     @Override
+    public void drawExtras(int recipe) {
+        this.drawProgressBar(75, 27, 176, 74, 24, 17, 40, 0);
+    }
+    
+    @Override
     public void loadAllRecipes() {
         for (MachineBottler.Recipe recipe : recipes) {
             this.arecipes.add(new CachedBottlerRecipe(recipe));

@@ -121,7 +121,7 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
     
     @Override
     public void drawExtras(int recipe) {
-        this.drawProgressBar(93, 36, 176, 59, 4, 18, 80, 3);
+        this.drawProgressBar(93, 36, 176, 59, 4, 17, 80, 3);
     }
     
     @Override
