@@ -25,7 +25,10 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
     
     @Override
     public void prepare() {
-        fertilizer = GameRegistry.findItem("MineFactoryReloaded", "item.mfr.fertilizer");
+        fertilizer = GameRegistry.findItem("MineFactoryReloaded", "fertilizer");
+        if (fertilizer == null) {
+            fertilizer = GameRegistry.findItem("MineFactoryReloaded", "item.mfr.fertilizer");
+        }
         
         TileEntityComposter dummy = new TileEntityComposter();
         sewagePerOperation = dummy.getWorkMax() * 20;

@@ -49,7 +49,10 @@ public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
         dummyPrecharger = null;
         dummyDrill = null;
         
-        laserFocus = GameRegistry.findItem("MineFactoryReloaded", "item.mfr.laserfocus");
+        laserFocus = GameRegistry.findItem("MineFactoryReloaded", "laserfocus");
+        if (laserFocus == null) {
+            laserFocus = GameRegistry.findItem("MineFactoryReloaded", "item.mfr.laserfocus");
+        }
     }
     
     public class CachedLaserDrillRecipe extends CachedBaseRecipe {

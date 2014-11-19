@@ -26,8 +26,12 @@ public class RecipeHandlerMeatPacker extends RecipeHandlerBase {
     
     @Override
     public void prepare() {
-        meatIngot = GameRegistry.findItem("MineFactoryReloaded", "item.mfr.meat.ingot.raw");
-        meatNugget = GameRegistry.findItem("MineFactoryReloaded", "item.mfr.meat.nugget.raw");
+        meatIngot = GameRegistry.findItem("MineFactoryReloaded", "meat.ingot.raw");
+        meatNugget = GameRegistry.findItem("MineFactoryReloaded", "meat.nugget.raw");
+        if (meatIngot == null || meatNugget == null) {
+            meatIngot = GameRegistry.findItem("MineFactoryReloaded", "item.mfr.meat.ingot.raw");
+            meatNugget = GameRegistry.findItem("MineFactoryReloaded", "item.mfr.meat.nugget.raw");
+        }
         
         TileEntityMeatPacker dummy = new TileEntityMeatPacker();
         fluidPerOperation = dummy.getWorkMax() * 2;
