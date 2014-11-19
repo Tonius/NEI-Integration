@@ -1,6 +1,5 @@
 package tonius.neiintegration.railcraft;
 
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -87,7 +86,7 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(68, 9, 29, 53), this.getRecipeID()));
+        this.addTransferRect(68, 9, 29, 53);
     }
     
     @Override

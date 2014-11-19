@@ -99,7 +99,7 @@ public class RecipeHandlerSqueezer extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(98, 9, 15, 15), this.getRecipeID()));
+        this.addTransferRect(98, 9, 15, 15);
     }
     
     @Override

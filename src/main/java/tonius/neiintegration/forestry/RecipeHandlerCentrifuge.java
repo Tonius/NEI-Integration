@@ -1,6 +1,5 @@
 package tonius.neiintegration.forestry;
 
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -87,7 +86,7 @@ public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(57, 26, 4, 18), this.getRecipeID()));
+        this.addTransferRect(57, 26, 4, 18);
     }
     
     @Override

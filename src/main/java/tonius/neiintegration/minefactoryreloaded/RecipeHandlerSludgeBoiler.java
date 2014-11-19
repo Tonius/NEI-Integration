@@ -82,7 +82,7 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(76, 25, 22, 15), this.getRecipeID()));
+        this.addTransferRect(76, 25, 22, 15);
     }
     
     @Override

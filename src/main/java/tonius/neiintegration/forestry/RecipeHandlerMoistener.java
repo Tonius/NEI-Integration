@@ -82,7 +82,7 @@ public class RecipeHandlerMoistener extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(138, 27, 16, 14), this.getRecipeID()));
+        this.addTransferRect(138, 27, 16, 14);
     }
     
     @Override

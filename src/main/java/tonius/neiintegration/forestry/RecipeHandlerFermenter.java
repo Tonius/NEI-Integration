@@ -109,7 +109,7 @@ public class RecipeHandlerFermenter extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(76, 27, 14, 12), this.getRecipeID()));
+        this.addTransferRect(76, 27, 14, 12);
     }
     
     @Override

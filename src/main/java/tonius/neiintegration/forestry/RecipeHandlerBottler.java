@@ -80,7 +80,7 @@ public class RecipeHandlerBottler extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(75, 27, 24, 17), this.getRecipeID()));
+        this.addTransferRect(75, 27, 24, 17);
     }
     
     @Override

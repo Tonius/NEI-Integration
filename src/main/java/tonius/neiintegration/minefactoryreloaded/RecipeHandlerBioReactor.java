@@ -71,7 +71,7 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(80, 25, 22, 15), this.getRecipeID()));
+        this.addTransferRect(80, 25, 22, 15);
     }
     
     @Override

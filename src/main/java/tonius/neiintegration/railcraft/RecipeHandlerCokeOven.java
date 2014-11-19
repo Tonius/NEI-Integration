@@ -76,7 +76,7 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(39, 32, 22, 16), this.getRecipeID()));
+        this.addTransferRect(39, 32, 22, 16);
     }
     
     @Override

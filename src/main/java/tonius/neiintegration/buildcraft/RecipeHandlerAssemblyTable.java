@@ -1,6 +1,5 @@
 package tonius.neiintegration.buildcraft;
 
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,7 +93,7 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(89, 7, 6, 72), this.getRecipeID()));
+        this.addTransferRect(89, 7, 6, 72);
     }
     
     @Override

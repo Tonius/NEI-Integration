@@ -1,7 +1,5 @@
 package tonius.neiintegration.railcraft;
 
-import java.awt.Rectangle;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
@@ -33,7 +31,7 @@ public abstract class RecipeHandlerRollingMachine extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(84, 39, 24, 8), this.getRecipeID()));
+        this.addTransferRect(84, 39, 24, 8);
     }
     
     @Override

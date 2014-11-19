@@ -1,6 +1,7 @@
 package tonius.neiintegration;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -73,6 +74,10 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     public void changeToOverlayTexture() {
         GuiDraw.changeTexture(NEIIntegration.RESOURCE_PREFIX + "textures/overlays.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+    
+    public void addTransferRect(int x, int y, int width, int height) {
+        this.transferRects.add(new RecipeTransferRect(new Rectangle(x, y, width, height), this.getRecipeID()));
     }
     
     @Override

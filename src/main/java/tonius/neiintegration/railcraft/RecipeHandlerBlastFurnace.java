@@ -1,6 +1,5 @@
 package tonius.neiintegration.railcraft;
 
-import java.awt.Rectangle;
 import java.util.List;
 
 import mods.railcraft.api.crafting.IBlastFurnaceRecipe;
@@ -82,7 +81,7 @@ public class RecipeHandlerBlastFurnace extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(74, 23, 24, 18), this.getRecipeID()));
+        this.addTransferRect(74, 23, 24, 18);
     }
     
     @Override

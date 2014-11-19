@@ -117,7 +117,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(91, 42, 17, 17), this.getRecipeID()));
+        this.addTransferRect(91, 42, 17, 17);
     }
     
     @Override

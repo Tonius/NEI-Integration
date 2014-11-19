@@ -74,8 +74,8 @@ public class RecipeHandlerRefinery extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(52, 24, 23, 15), this.getRecipeID()));
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(96, 24, 23, 15), this.getRecipeID()));
+        this.addTransferRect(52, 24, 23, 15);
+        this.addTransferRect(96, 24, 23, 15);
     }
     
     @Override

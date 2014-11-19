@@ -1,6 +1,5 @@
 package tonius.neiintegration.forestry;
 
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +80,7 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(84, 23, 24, 18), "crafting"));
+        this.addTransferRect(84, 23, 24, 18);
     }
     
     @Override
