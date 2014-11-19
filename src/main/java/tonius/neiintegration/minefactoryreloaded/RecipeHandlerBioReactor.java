@@ -104,7 +104,7 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
     public void loadAllRecipes() {
         for (Item i : plantables.keySet()) {
             ItemStack plantable = new ItemStack(i, 1, OreDictionary.WILDCARD_VALUE);
-            if (plantables.get(i).canBePlanted(plantable, true)) {
+            if (plantable != null && plantables.get(i).canBePlanted(plantable, true)) {
                 this.arecipes.add(new CachedBioReactorRecipe(plantable));
             }
         }
