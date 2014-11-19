@@ -15,6 +15,7 @@ import buildcraft.api.recipes.IFlexibleRecipeViewable;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
+import codechicken.nei.api.API;
 
 public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
     
@@ -24,6 +25,7 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
     @Override
     public void prepare() {
         guiClass = Utils.getClass("buildcraft.silicon.gui.GuiAssemblyTable");
+        API.setGuiOffset(guiClass, 3, 31);
     }
     
     public class CachedAssemblyTableRecipe extends CachedBaseRecipe {
