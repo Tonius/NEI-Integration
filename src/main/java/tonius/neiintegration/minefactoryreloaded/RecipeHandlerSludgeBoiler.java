@@ -14,6 +14,7 @@ import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntitySludgeBoiler;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -66,7 +67,7 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Sludge Boiler";
+        return Utils.translate("tile.mfr.machine.sludgeboiler.name", false);
     }
     
     @Override

@@ -61,7 +61,7 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Coke Oven";
+        return Utils.translate("railcraft.gui.coke.oven", false);
     }
     
     @Override
@@ -94,7 +94,7 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     public void drawExtras(int recipe) {
         this.drawProgressBar(40, 32, 177, 61, 21, 16, 100, 0);
         this.drawProgressBar(21, 15, 176, 47, 14, 14, 100, 11);
-        GuiDraw.drawStringC(((CachedCokeOvenRecipe) this.arecipes.get(recipe)).cookTime + " ticks", 64, 12, 0x808080, false);
+        GuiDraw.drawStringC(((CachedCokeOvenRecipe) this.arecipes.get(recipe)).cookTime + " " + Utils.translate("ticks"), 64, 12, 0x808080, false);
     }
     
     @Override

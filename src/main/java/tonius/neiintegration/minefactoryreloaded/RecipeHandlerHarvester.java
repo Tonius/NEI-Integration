@@ -11,6 +11,7 @@ import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityHarvester;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
@@ -49,7 +50,7 @@ public class RecipeHandlerHarvester extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Harvester";
+        return Utils.translate("tile.mfr.machine.harvester.name", false);
     }
     
     @Override
@@ -83,8 +84,8 @@ public class RecipeHandlerHarvester extends RecipeHandlerBase {
         if (new Rectangle(129, 2, 8, 60).contains(relMouse)) {
             currenttip.add(energyPerOperation + " RF");
         } else if (new Rectangle(48, 24, 16, 16).contains(relMouse)) {
-            currenttip.add("Harvestable blocks");
-            currenttip.add(EnumChatFormatting.GRAY + "Sludge is a byproduct of harvesting.");
+            currenttip.add(Utils.translate("handler.harvester.harvestables"));
+            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.harvester.harvestables.1"));
         }
         return currenttip;
     }

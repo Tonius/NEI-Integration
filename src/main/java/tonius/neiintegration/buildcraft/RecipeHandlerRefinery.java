@@ -59,7 +59,7 @@ public class RecipeHandlerRefinery extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Refinery";
+        return Utils.translate("tile.refineryBlock.name", false);
     }
     
     @Override
@@ -91,9 +91,9 @@ public class RecipeHandlerRefinery extends RecipeHandlerBase {
     
     @Override
     public void drawExtras(int recipe) {
-        int energy = ((CachedRefineryRecipe) this.arecipes.get(recipe)).energy;
+        int energyPerTick = ((CachedRefineryRecipe) this.arecipes.get(recipe)).energy;
         long time = ((CachedRefineryRecipe) this.arecipes.get(recipe)).time;
-        GuiDraw.drawStringC(energy + " RF per " + (time > 1 ? time + " ticks" : "tick"), 82, 45, 0x808080, false);
+        GuiDraw.drawStringC(String.format(Utils.translate("handler.refinery.energyRate"), energyPerTick * time, energyPerTick), 82, 45, 0x808080, false);
         GuiDraw.drawString("->", 58, 28, 0x404040, false);
         GuiDraw.drawString("<-", 102, 28, 0x404040, false);
     }

@@ -25,7 +25,7 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
     @Override
     public void prepare() {
         guiClass = Utils.getClass("buildcraft.silicon.gui.GuiAssemblyTable");
-        API.setGuiOffset(guiClass, 3, 31);
+        API.setGuiOffset(guiClass, 5, 29);
     }
     
     public class CachedAssemblyTableRecipe extends CachedBaseRecipe {
@@ -79,7 +79,7 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Assembly Table";
+        return Utils.translate("tile.assemblyTableBlock.name", false);
     }
     
     @Override

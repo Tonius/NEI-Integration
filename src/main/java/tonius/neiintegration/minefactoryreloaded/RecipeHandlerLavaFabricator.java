@@ -10,6 +10,7 @@ import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityLavaFabricator;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
@@ -48,7 +49,7 @@ public class RecipeHandlerLavaFabricator extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Lava Fabricator";
+        return Utils.translate("tile.mfr.machine.lavafabricator.name", false);
     }
     
     @Override

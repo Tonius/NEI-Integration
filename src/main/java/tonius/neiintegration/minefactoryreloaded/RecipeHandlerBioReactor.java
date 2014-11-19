@@ -16,6 +16,7 @@ import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.api.IFactoryPlantable;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
@@ -55,7 +56,7 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "BioReactor";
+        return Utils.translate("tile.mfr.machine.bioreactor.name", false);
     }
     
     @Override
@@ -92,10 +93,10 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
         if (new Rectangle(139, 2, 8, 60).contains(relMouse)) {
-            currenttip.add("Efficiency");
-            currenttip.add(EnumChatFormatting.GRAY + "Depends on the amount of");
-            currenttip.add(EnumChatFormatting.GRAY + "different items being processed.");
-            currenttip.add(EnumChatFormatting.GRAY + "More efficiency means more BioFuel!");
+            currenttip.add(Utils.translate("handler.bioreactor.effeciency"));
+            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.bioreactor.effeciency.1"));
+            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.bioreactor.effeciency.2"));
+            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.bioreactor.effeciency.3"));
         }
         return currenttip;
     }

@@ -95,7 +95,7 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Carpenter";
+        return Utils.translate("tile.for.factory.1.name", false);
     }
     
     @Override

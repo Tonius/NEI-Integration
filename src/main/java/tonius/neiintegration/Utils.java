@@ -7,6 +7,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -14,6 +15,14 @@ import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
 public class Utils {
+    
+    public static String translate(String unlocalized, boolean prefix) {
+        return StatCollector.translateToLocal((prefix ? "neiintegration." : "") + unlocalized);
+    }
+    
+    public static String translate(String unlocalized) {
+        return translate(unlocalized, true);
+    }
     
     public static List<ItemStack> getItemVariations(ItemStack base) {
         List<ItemStack> variations = new ArrayList<ItemStack>();

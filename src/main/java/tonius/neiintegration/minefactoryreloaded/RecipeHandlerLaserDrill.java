@@ -15,6 +15,7 @@ import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityLaserDrill;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityLaserDrillPrecharger;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -87,7 +88,7 @@ public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Laser Drill";
+        return Utils.translate("tile.mfr.machine.laserdrill.name", false);
     }
     
     @Override
@@ -124,7 +125,7 @@ public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(2);
         GuiDraw.drawStringC(percentFormat.format(crecipe.chance), 83, 44, 0x808080, false);
-        GuiDraw.drawStringC("Focus", 29, 44, 0x808080, false);
+        GuiDraw.drawStringC(Utils.translate("handler.laserdrill.focus"), 29, 44, 0x808080, false);
     }
     
     @Override

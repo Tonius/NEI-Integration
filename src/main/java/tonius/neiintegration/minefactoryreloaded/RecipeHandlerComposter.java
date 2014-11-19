@@ -12,6 +12,7 @@ import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityComposter;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
@@ -60,7 +61,7 @@ public class RecipeHandlerComposter extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Composter";
+        return Utils.translate("tile.mfr.machine.composter.name", false);
     }
     
     @Override

@@ -72,7 +72,7 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Rock Crusher";
+        return Utils.translate("tile.railcraft.machine.alpha.rock.crusher.name", false);
     }
     
     @Override

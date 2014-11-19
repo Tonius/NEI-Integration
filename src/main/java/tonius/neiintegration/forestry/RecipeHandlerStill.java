@@ -51,7 +51,7 @@ public class RecipeHandlerStill extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Still";
+        return Utils.translate("tile.for.factory.6.name", false);
     }
     
     @Override

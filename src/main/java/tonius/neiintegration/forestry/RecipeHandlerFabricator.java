@@ -114,7 +114,7 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Thermionic Fabricator";
+        return Utils.translate("tile.for.factory2.0.name", false);
     }
     
     @Override

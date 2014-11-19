@@ -72,7 +72,7 @@ public class RecipeHandlerMoistener extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Moistener";
+        return Utils.translate("tile.for.factory.4.name", false);
     }
     
     @Override

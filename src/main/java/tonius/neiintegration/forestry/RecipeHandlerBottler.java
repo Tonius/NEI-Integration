@@ -70,7 +70,7 @@ public class RecipeHandlerBottler extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Bottler";
+        return Utils.translate("tile.for.factory.0.name", false);
     }
     
     @Override

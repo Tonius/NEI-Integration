@@ -23,7 +23,7 @@ public abstract class RecipeHandlerRollingMachine extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Rolling Machine";
+        return Utils.translate("tile.railcraft.machine.alpha.rolling.machine.name", false);
     }
     
     @Override

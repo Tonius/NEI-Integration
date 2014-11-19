@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import tonius.neiintegration.Utils;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 
@@ -75,7 +76,7 @@ public class RecipeHandlerRollingMachineShapeless extends RecipeHandlerRollingMa
     
     @Override
     public String getRecipeSubName() {
-        return "Shapeless";
+        return Utils.translate("shapeless");
     }
     
     private CachedRollingMachineShapelessRecipe getCachedRecipe(IRecipe irecipe, boolean genPerms) {

@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import tonius.neiintegration.Utils;
 import codechicken.core.ReflectionManager;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -74,7 +75,7 @@ public class RecipeHandlerRollingMachineShaped extends RecipeHandlerRollingMachi
     
     @Override
     public String getRecipeSubName() {
-        return "Shaped";
+        return Utils.translate("shaped");
     }
     
     private CachedRollingMachineShapedRecipe getCachedRecipe(IRecipe irecipe, boolean genPerms) {

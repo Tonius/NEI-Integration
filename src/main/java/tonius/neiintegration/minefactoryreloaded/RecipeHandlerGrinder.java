@@ -11,6 +11,7 @@ import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntityGrinder;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
@@ -49,7 +50,7 @@ public class RecipeHandlerGrinder extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Grinder";
+        return Utils.translate("tile.mfr.machine.grinder.name", false);
     }
     
     @Override
@@ -81,9 +82,9 @@ public class RecipeHandlerGrinder extends RecipeHandlerBase {
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
         if (new Rectangle(44, 24, 16, 16).contains(relMouse)) {
-            currenttip.add("Mobs");
-            currenttip.add(EnumChatFormatting.GRAY + "Mobs that drop more XP");
-            currenttip.add(EnumChatFormatting.GRAY + "produce more Essence.");
+            currenttip.add(Utils.translate("handler.grinder.mobs"));
+            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.grinder.mobs.1"));
+            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.grinder.mobs.2"));
         } else if (new Rectangle(129, 2, 8, 60).contains(relMouse)) {
             currenttip.add(energyPerOperation + " RF");
         }

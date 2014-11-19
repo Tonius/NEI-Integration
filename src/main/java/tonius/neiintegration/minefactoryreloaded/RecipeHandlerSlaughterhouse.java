@@ -12,6 +12,7 @@ import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import powercrystals.minefactoryreloaded.tile.machine.TileEntitySlaughterhouse;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
@@ -54,7 +55,7 @@ public class RecipeHandlerSlaughterhouse extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Slaughterhouse";
+        return Utils.translate("tile.mfr.machine.slaughterhouse.name", false);
     }
     
     @Override
@@ -86,8 +87,8 @@ public class RecipeHandlerSlaughterhouse extends RecipeHandlerBase {
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
         if (new Rectangle(28, 24, 16, 16).contains(relMouse)) {
-            currenttip.add("Animals");
-            currenttip.add(EnumChatFormatting.GRAY + "Larger animals produce more meat.");
+            currenttip.add(Utils.translate("handler.slaughterhouse.animals"));
+            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.slaughterhouse.animals.1"));
         } else if (new Rectangle(129, 2, 8, 60).contains(relMouse)) {
             currenttip.add(energyPerOperation + " RF");
         }

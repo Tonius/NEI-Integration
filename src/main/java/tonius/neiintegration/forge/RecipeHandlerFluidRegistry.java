@@ -16,6 +16,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -101,7 +102,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Fluid Registry";
+        return Utils.translate("handler.fluidRegistry");
     }
     
     @Override
@@ -131,13 +132,13 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
         Rectangle tank = ((CachedFluidRegistryRecipe) crecipe).fluid.position;
         Fluid fluid = ((CachedFluidRegistryRecipe) crecipe).fluid.tank.getFluid().getFluid();
         if (tank.contains(relMouse)) {
-            currenttip.add(EnumChatFormatting.GOLD + "State: " + EnumChatFormatting.GRAY + (fluid.isGaseous() ? "Gasesous" : "Liquid"));
-            currenttip.add(EnumChatFormatting.GOLD + "Can be placed: " + EnumChatFormatting.GRAY + (fluid.canBePlacedInWorld() ? "Yes" : "No"));
+            currenttip.add(EnumChatFormatting.GOLD + Utils.translate("handler.fluidRegistry.state") + " " + EnumChatFormatting.GRAY + (fluid.isGaseous() ? Utils.translate("handler.fluidRegistry.state.gaseous") : Utils.translate("handler.fluidRegistry.state.liquid")));
+            currenttip.add(EnumChatFormatting.GOLD + Utils.translate("handler.fluidRegistry.placeable") + " " + EnumChatFormatting.GRAY + (fluid.canBePlacedInWorld() ? Utils.translate("yes") : Utils.translate("no")));
             currenttip.add("");
-            currenttip.add(EnumChatFormatting.GOLD + "Temperature: " + EnumChatFormatting.GRAY + fluid.getTemperature());
-            currenttip.add(EnumChatFormatting.GOLD + "Luminosity: " + EnumChatFormatting.GRAY + fluid.getLuminosity());
-            currenttip.add(EnumChatFormatting.GOLD + "Density: " + EnumChatFormatting.GRAY + fluid.getDensity());
-            currenttip.add(EnumChatFormatting.GOLD + "Viscosity: " + EnumChatFormatting.GRAY + fluid.getViscosity());
+            currenttip.add(EnumChatFormatting.GOLD + Utils.translate("handler.fluidRegistry.temperature") + " " + EnumChatFormatting.GRAY + fluid.getTemperature());
+            currenttip.add(EnumChatFormatting.GOLD + Utils.translate("handler.fluidRegistry.luminosity") + " " + EnumChatFormatting.GRAY + fluid.getLuminosity());
+            currenttip.add(EnumChatFormatting.GOLD + Utils.translate("handler.fluidRegistry.density") + " " + EnumChatFormatting.GRAY + fluid.getDensity());
+            currenttip.add(EnumChatFormatting.GOLD + Utils.translate("handler.fluidRegistry.viscosity") + " " + EnumChatFormatting.GRAY + fluid.getViscosity());
         }
         return currenttip;
     }

@@ -10,6 +10,7 @@ import net.minecraftforge.fluids.FluidStack;
 import powercrystals.minefactoryreloaded.MineFactoryReloadedCore;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
@@ -45,7 +46,7 @@ public class RecipeHandlerSewer extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Sewer";
+        return Utils.translate("tile.mfr.machine.sewer.name", false);
     }
     
     @Override
@@ -82,11 +83,11 @@ public class RecipeHandlerSewer extends RecipeHandlerBase {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
         if (new Rectangle(48, 24, 16, 16).contains(relMouse)) {
             if (!((CachedSewerRecipe) crecipe).essenceRecipe) {
-                currenttip.add("Animals or villagers");
-                currenttip.add(EnumChatFormatting.GRAY + "Larger animals produce more sewage.");
+                currenttip.add(Utils.translate("handler.sewer.animals"));
+                currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.sewer.animals.1"));
             } else {
-                currenttip.add("Experience Orbs");
-                currenttip.add(EnumChatFormatting.GRAY + "XP gets converted into Essence.");
+                currenttip.add(Utils.translate("handler.sewer.xp"));
+                currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.sewer.xp.1"));
             }
         }
         return currenttip;

@@ -89,7 +89,7 @@ public class RecipeHandlerSqueezer extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Squeezer";
+        return Utils.translate("tile.for.factory.5.name", false);
     }
     
     @Override

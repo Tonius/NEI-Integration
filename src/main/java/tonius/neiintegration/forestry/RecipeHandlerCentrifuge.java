@@ -77,7 +77,7 @@ public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return "Centrifuge";
+        return Utils.translate("tile.for.factory.2.name", false);
     }
     
     @Override

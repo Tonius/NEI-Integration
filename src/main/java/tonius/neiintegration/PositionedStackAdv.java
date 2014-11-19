@@ -49,13 +49,13 @@ public class PositionedStackAdv extends PositionedStack {
     
     public PositionedStackAdv setChance(float chance) {
         if (chance <= 0.0F) {
-            this.tooltip.add(EnumChatFormatting.GRAY + "Chance: Never");
+            this.tooltip.add(EnumChatFormatting.GRAY + String.format(Utils.translate("chance"), Utils.translate("chance.never")));
         } else if (chance < 0.01F) {
-            this.tooltip.add(EnumChatFormatting.GRAY + "Chance: <1%");
+            this.tooltip.add(EnumChatFormatting.GRAY + String.format(Utils.translate("chance"), Utils.translate("chance.lessThan1")));
         } else if (chance != 1.0F) {
             NumberFormat percentFormat = NumberFormat.getPercentInstance();
             percentFormat.setMaximumFractionDigits(2);
-            this.tooltip.add(EnumChatFormatting.GRAY + "Chance: " + percentFormat.format(chance));
+            this.tooltip.add(EnumChatFormatting.GRAY + String.format(Utils.translate("chance"), String.valueOf(percentFormat.format(chance))));
         }
         return this;
     }

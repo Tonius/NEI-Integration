@@ -1,0 +1,46 @@
+neiintegration.yes=Yes
+neiintegration.no=No
+
+neiintegration.shaped=Shaped
+neiintegration.shapeless=Shapeless
+
+neiintegration.chance=Chance: %s
+neiintegration.chance.never=Never
+neiintegration.chance.lessThan1=<1%
+
+neiintegration.ticks=ticks
+
+# Forge
+neiintegration.handler.fluidRegistry=Fluid Registry
+neiintegration.handler.fluidRegistry.state=State:
+neiintegration.handler.fluidRegistry.state.gaseous=Gaseous
+neiintegration.handler.fluidRegistry.state.liquid=Liquid
+neiintegration.handler.fluidRegistry.placeable=Can be placed:
+neiintegration.handler.fluidRegistry.temperature=Temperature:
+neiintegration.handler.fluidRegistry.luminosity=Luminosity:
+neiintegration.handler.fluidRegistry.density=Density:
+neiintegration.handler.fluidRegistry.viscosity=Viscosity:
+
+# BuildCraft
+neiintegration.handler.refinery.energyRate=%d RF at %d RF/t
+
+# Forestry
+neiintegration.handler.forestryShaped=Forestry Shaped
+
+# MineFactory Reloaded
+neiintegration.handler.bioreactor.effeciency=Effeciency
+neiintegration.handler.bioreactor.effeciency.1=Depends of the amount of
+neiintegration.handler.bioreactor.effeciency.2=different items being processed.
+neiintegration.handler.bioreactor.effeciency.3=More effeciency means more BioFuel.
+neiintegration.handler.grinder.mobs=Mobs
+neiintegration.handler.grinder.mobs.1=Mobs that drop more XP
+neiintegration.handler.grinder.mobs.2=produce more Essence.
+neiintegration.handler.harvester.harvestables=Harvestable blocks
+neiintegration.handler.harvester.harvestables.1=Sludge is a byproduct of harvesting.
+neiintegration.handler.laserdrill.focus=Focus
+neiintegration.handler.sewer.animals=Animals or villagers
+neiintegration.handler.sewer.animals.1=Larger animals produce more sewage.
+neiintegration.handler.sewer.xp=Experience Orbs
+neiintegration.handler.sewer.xp.1=XP gets converted into Essence.
+neiintegration.handler.slaughterhouse.animals=Animals
+neiintegration.handler.slaughterhouse.animals.1=Larger animals produce more meat.
