@@ -22,7 +22,7 @@ import net.minecraft.nbt.NBTTagCompound;
  *
  * Usage example: LocomotiveRenderType.STEAM_SOLID.registerRenderer(new
  * MyRenderer());
- * 
+ *
  * Registration must be done in the Client side initialization.
  *
  * @author CovertJaguar <http://www.railcraft.info/>
@@ -84,6 +84,8 @@ public enum LocomotiveRenderType {
      */
     public ItemStack getItemWithRenderer(String rendererTag) {
         ItemStack stack = GameRegistry.findItemStack("Railcraft", cartTag, 1);
+        if (stack == null)
+            return null;
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setString("model", rendererTag);
         stack.setTagCompound(nbt);

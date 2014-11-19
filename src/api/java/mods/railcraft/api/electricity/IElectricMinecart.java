@@ -65,7 +65,7 @@ public interface IElectricMinecart {
 
         private final EntityMinecart minecart;
         private final Type type;
-        private double capacity, charge = 0;
+        private double capacity, charge, draw, lastTickDraw;
         private final double lossPerTick;
         private int clock = rand.nextInt();
         private int drewFromTrack;
@@ -91,6 +91,10 @@ public interface IElectricMinecart {
 
         public double getLosses() {
             return lossPerTick;
+        }
+
+        public double getDraw() {
+            return draw;
         }
 
         public Type getType() {
@@ -127,11 +131,21 @@ public interface IElectricMinecart {
         public double removeCharge(double request) {
             if (charge >= request) {
                 charge -= request;
+                lastTickDraw += request;
                 return request;
             }
             double ret = charge;
             charge = 0.0;
+            lastTickDraw += ret;
             return ret;
+        }
+
+        private void removeLosses() {
+            if (lossPerTick > 0.0)
+                if (charge >= lossPerTick)
+                    charge -= lossPerTick;
+                else
+                    charge = 0.0;
         }
 
         /**
@@ -157,9 +171,10 @@ public interface IElectricMinecart {
          */
         public void tick() {
             clock++;
+            removeLosses();
 
-            if (lossPerTick > 0.0)
-                removeCharge(lossPerTick);
+            draw = (draw * 49.0 + lastTickDraw) / 50.0;
+            lastTickDraw = 0.0;
 
             if (drewFromTrack > 0)
                 drewFromTrack--;
@@ -193,15 +208,18 @@ public interface IElectricMinecart {
          *  }
          * }
          * </pre></blockquote>
+         * @param trackX
+         * @param trackY
+         * @param trackZ
          */
         public void tickOnTrack(int trackX, int trackY, int trackZ) {
             if (type == Type.USER && charge < capacity && clock % DRAW_INTERVAL == 0) {
                 IElectricGrid track = RailTools.getTrackObjectAt(minecart.worldObj, trackX, trackY, trackZ, IElectricGrid.class);
                 if (track != null) {
-                    double draw = track.getChargeHandler().removeCharge(capacity - charge);
-                    if (draw > 0.0)
+                    double drawnFromTrack = track.getChargeHandler().removeCharge(capacity - charge);
+                    if (drawnFromTrack > 0.0)
                         drewFromTrack = DRAW_INTERVAL * 4;
-                    charge += draw;
+                    charge += drawnFromTrack;
                 }
             }
         }

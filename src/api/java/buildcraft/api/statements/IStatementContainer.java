@@ -6,7 +6,14 @@
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
-@API(apiVersion = "3.0", owner = "BuildCraftAPI|core", provides = "BuildCraftAPI|gates")
-package buildcraft.api.gates;
-import cpw.mods.fml.common.API;
+package buildcraft.api.statements;
 
+import net.minecraft.tileentity.TileEntity;
+
+/**
+ * This is implemented by objects containing Statements, such as
+ * Gates and TileEntities.
+ */
+public interface IStatementContainer {
+	TileEntity getTile();
+}

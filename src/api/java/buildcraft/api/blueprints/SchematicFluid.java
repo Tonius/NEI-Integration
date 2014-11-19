@@ -11,7 +11,6 @@ package buildcraft.api.blueprints;
 import java.util.LinkedList;
 
 import net.minecraft.item.ItemStack;
-
 import net.minecraftforge.fluids.FluidStack;
 
 public class SchematicFluid extends SchematicBlock {
@@ -23,14 +22,14 @@ public class SchematicFluid extends SchematicBlock {
 	}
 
 	@Override
-	public void writeRequirementsToWorld(IBuilderContext context, LinkedList<ItemStack> requirements) {
+	public void getRequirementsForPlacement(IBuilderContext context, LinkedList<ItemStack> requirements) {
 		if (meta == 0) {
 			requirements.add(fluidItem);
 		}
 	}
 
 	@Override
-	public void writeRequirementsToBlueprint(IBuilderContext context, int x, int y, int z) {
+	public void storeRequirements(IBuilderContext context, int x, int y, int z) {
 		// cancel requirements reading
 	}
 
@@ -54,7 +53,7 @@ public class SchematicFluid extends SchematicBlock {
 	}
 
 	@Override
-	public void writeToWorld(IBuilderContext context, int x, int y, int z, LinkedList<ItemStack> stacks) {
+	public void placeInWorld(IBuilderContext context, int x, int y, int z, LinkedList<ItemStack> stacks) {
 		if (meta == 0) {
 			context.world().setBlock(x, y, z, block, 0, 3);
 		}
@@ -77,6 +76,6 @@ public class SchematicFluid extends SchematicBlock {
 
 	@Override
 	public int getEnergyRequirement(LinkedList<ItemStack> stacksUsed) {
-		return 1 * SchematicRegistry.BUILD_ENERGY;
+		return 1 * BuilderAPI.BUILD_ENERGY;
 	}
 }

@@ -72,6 +72,10 @@ public class WorldCoordinate {
         return null;
     }
 
+    public boolean isEqual(int dim, int x, int y, int z) {
+        return this.x == x && this.y == y && this.z == z && this.dimension == dim;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null)

@@ -13,6 +13,11 @@ import java.util.List;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
+import buildcraft.api.statements.IActionInternal;
+import buildcraft.api.statements.IStatement;
+import buildcraft.api.statements.IStatementParameter;
+import buildcraft.api.statements.ITriggerInternal;
+
 public abstract class GateExpansionController {
 
 	public final IGateExpansion type;
@@ -37,18 +42,18 @@ public abstract class GateExpansionController {
 	public void startResolution() {
 	}
 
-	public boolean resolveAction(IAction action) {
+	public boolean resolveAction(IStatement action) {
 		return false;
 	}
 
-	public boolean isTriggerActive(ITrigger trigger, ITriggerParameter parameter) {
+	public boolean isTriggerActive(IStatement trigger, IStatementParameter[] parameters) {
 		return false;
 	}
 
-	public void addTriggers(List<ITrigger> list) {
+	public void addTriggers(List<ITriggerInternal> list) {
 	}
 
-	public void addActions(List<IAction> list) {
+	public void addActions(List<IActionInternal> list) {
 	}
 
 	public void writeToNBT(NBTTagCompound nbt) {

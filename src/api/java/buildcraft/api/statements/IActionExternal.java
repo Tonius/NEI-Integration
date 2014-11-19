@@ -6,17 +6,13 @@
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
-package buildcraft.api.gates;
+package buildcraft.api.statements;
 
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraft.api.transport.IPipe;
+public interface IActionExternal extends IStatement {
 
-public interface IGate {
-	@Deprecated
-	void setPulsing(boolean pulse);
+	void actionActivate(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters);
 	
-	ForgeDirection getSide();
-
-	IPipe getPipe();
 }
