@@ -2,7 +2,6 @@ package tonius.neiintegration.buildcraft;
 
 import tonius.neiintegration.IntegrationBase;
 import tonius.neiintegration.Utils;
-import codechicken.nei.api.API;
 import cpw.mods.fml.common.Loader;
 
 public class BuildCraftIntegration extends IntegrationBase {

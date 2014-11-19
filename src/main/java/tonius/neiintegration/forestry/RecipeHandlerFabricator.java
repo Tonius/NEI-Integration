@@ -2,7 +2,6 @@ package tonius.neiintegration.forestry;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +37,7 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
     
     public class CachedFabricatorRecipe extends CachedBaseRecipe {
         
-        public List<PositionedStack> smeltingInput;
+        public List<PositionedStack> smeltingInput = new ArrayList<PositionedStack>();
         public PositionedFluidTank tank;
         public List<PositionedStack> inputs = new ArrayList<PositionedStack>();
         public PositionedStack output;
@@ -51,7 +50,10 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
             if (recipe.getPlan() != null) {
                 this.inputs.add(new PositionedStack(recipe.getPlan(), 134, 6));
             }
-            this.smeltingInput = Collections.singletonList(new PositionedStack(smeltingInputs.get(recipe.getLiquid().getFluid()), 21, 10));
+            List<ItemStack> smeltingInput = smeltingInputs.get(recipe.getLiquid().getFluid());
+            if (smeltingInput != null && !smeltingInput.isEmpty()) {
+                this.smeltingInput.add(new PositionedStack(smeltingInput, 21, 10));
+            }
             
             this.output = new PositionedStack(recipe.asIRecipe().getRecipeOutput(), 134, 42);
             
