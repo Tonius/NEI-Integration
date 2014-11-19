@@ -33,7 +33,7 @@ public abstract class RecipeHandlerRollingMachine extends RecipeHandlerBase {
     
     @Override
     public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(84, 39, 24, 10), this.getRecipeID()));
+        this.transferRects.add(new RecipeTransferRect(new Rectangle(84, 39, 24, 8), this.getRecipeID()));
     }
     
     @Override
