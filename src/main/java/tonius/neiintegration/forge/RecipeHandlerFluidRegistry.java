@@ -3,6 +3,8 @@ package tonius.neiintegration.forge;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -23,6 +25,23 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
 
 public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
+    
+    private static List<Fluid> fluids = new ArrayList<Fluid>();
+    
+    @Override
+    public void prepare() {
+        for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
+            fluids.add(fluid);
+        }
+        Collections.sort(fluids, new Comparator<Fluid>() {
+            
+            @Override
+            public int compare(Fluid f1, Fluid f2) {
+                return Integer.compare(f1.getID(), f2.getID());
+            }
+            
+        });
+    }
     
     public class CachedFluidRegistryRecipe extends CachedBaseRecipe {
         
@@ -132,6 +151,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
         Rectangle tank = ((CachedFluidRegistryRecipe) crecipe).fluid.position;
         Fluid fluid = ((CachedFluidRegistryRecipe) crecipe).fluid.tank.getFluid().getFluid();
         if (tank.contains(relMouse)) {
+            currenttip.add(EnumChatFormatting.GOLD + Utils.translate("handler.fluidRegistry.id") + " " + EnumChatFormatting.GRAY + fluid.getName() + " (" + fluid.getID() + ")");
             currenttip.add(EnumChatFormatting.GOLD + Utils.translate("handler.fluidRegistry.state") + " " + EnumChatFormatting.GRAY + (fluid.isGaseous() ? Utils.translate("handler.fluidRegistry.state.gaseous") : Utils.translate("handler.fluidRegistry.state.liquid")));
             currenttip.add(EnumChatFormatting.GOLD + Utils.translate("handler.fluidRegistry.placeable") + " " + EnumChatFormatting.GRAY + (fluid.canBePlacedInWorld() ? Utils.translate("yes") : Utils.translate("no")));
             currenttip.add("");
@@ -145,7 +165,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
     
     @Override
     public void loadAllRecipes() {
-        for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
+        for (Fluid fluid : fluids) {
             this.arecipes.add(new CachedFluidRegistryRecipe(fluid));
         }
     }
@@ -155,7 +175,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
         if (Block.getBlockFromItem(result.getItem()) instanceof IFluidBlock) {
             super.loadCraftingRecipes(result);
         }
-        for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
+        for (Fluid fluid : fluids) {
             CachedFluidRegistryRecipe crecipe = new CachedFluidRegistryRecipe(fluid);
             if (crecipe.filledContainer != null && crecipe.filledContainer.contains(result)) {
                 crecipe.setPermutation(crecipe.filledContainer, result);
@@ -181,7 +201,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         super.loadUsageRecipes(ingredient);
-        for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
+        for (Fluid fluid : fluids) {
             CachedFluidRegistryRecipe crecipe = new CachedFluidRegistryRecipe(fluid);
             if (crecipe.emptyContainer != null && crecipe.emptyContainer.contains(ingredient)) {
                 crecipe.setPermutation(crecipe.emptyContainer, ingredient);
@@ -197,7 +217,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
     
     @Override
     public void loadUsageRecipes(FluidStack ingredient) {
-        for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
+        for (Fluid fluid : fluids) {
             if (fluid == ingredient.getFluid()) {
                 this.arecipes.add(new CachedFluidRegistryRecipe(fluid));
             }

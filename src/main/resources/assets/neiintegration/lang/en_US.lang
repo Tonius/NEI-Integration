@@ -12,6 +12,7 @@ neiintegration.ticks=ticks
 
 # Forge
 neiintegration.handler.fluidRegistry=Fluid Registry
+neiintegration.handler.fluidRegistry.id=ID:
 neiintegration.handler.fluidRegistry.state=State:
 neiintegration.handler.fluidRegistry.state.gaseous=Gaseous
 neiintegration.handler.fluidRegistry.state.liquid=Liquid
