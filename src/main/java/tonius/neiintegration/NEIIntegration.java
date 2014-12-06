@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.Logger;
 
 import tonius.neiintegration.buildcraft.BuildCraftIntegration;
+import tonius.neiintegration.electricalage.ElectricalAgeIntegration;
 import tonius.neiintegration.forestry.ForestryIntegration;
 import tonius.neiintegration.forge.ForgeIntegration;
 import tonius.neiintegration.minefactoryreloaded.MFRIntegration;
@@ -41,6 +42,7 @@ public class NEIIntegration {
         if (evt.getSide() == Side.CLIENT) {
             integrations.add(new ForgeIntegration());
             integrations.add(new BuildCraftIntegration());
+            integrations.add(new ElectricalAgeIntegration());
             integrations.add(new ForestryIntegration());
             integrations.add(new MFRIntegration());
             integrations.add(new RailcraftIntegration());

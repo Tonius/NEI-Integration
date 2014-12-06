@@ -25,6 +25,12 @@ neiintegration.handler.fluidRegistry.viscosity=Viscosity:
 # BuildCraft
 neiintegration.handler.refinery.energyRate=%d RF at %d RF/t
 
+# Electrical Age
+neiintegration.handler.electricalage.compressor=Compressor (ELN)
+neiintegration.handler.electricalage.macerator=Macerator (ELN)
+neiintegration.handler.electricalage.magnetizer=Magnetizer
+neiintegration.handler.electricalage.plateMachine=Plate Machine
+
 # Forestry
 neiintegration.handler.forestryShaped=Forestry Shaped
 
