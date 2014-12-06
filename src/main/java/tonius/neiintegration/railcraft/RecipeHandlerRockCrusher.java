@@ -36,8 +36,12 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
         public List<PositionedStack> outputs = new ArrayList<PositionedStack>();
         
         public CachedRockCrusherRecipe(IRockCrusherRecipe recipe) {
-            this.input = new PositionedStack(recipe.getInput(), 12, 10);
-            this.setResults(recipe.getOutputs());
+            if (recipe.getInput() != null) {
+                this.input = new PositionedStack(recipe.getInput(), 12, 10);
+            }
+            if (recipe.getOutputs() != null) {
+                this.setResults(recipe.getOutputs());
+            }
         }
         
         private void setResults(List<Entry<ItemStack, Float>> outputs) {
@@ -116,10 +120,12 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (IRockCrusherRecipe recipe : RailcraftCraftingManager.rockCrusher.getRecipes()) {
-            for (Entry<ItemStack, Float> output : recipe.getOutputs()) {
-                if (NEIServerUtils.areStacksSameTypeCrafting(output.getKey(), result)) {
-                    this.arecipes.add(new CachedRockCrusherRecipe(recipe));
-                    break;
+            if (recipe.getOutputs() != null) {
+                for (Entry<ItemStack, Float> output : recipe.getOutputs()) {
+                    if (NEIServerUtils.areStacksSameTypeCrafting(output.getKey(), result)) {
+                        this.arecipes.add(new CachedRockCrusherRecipe(recipe));
+                        break;
+                    }
                 }
             }
         }

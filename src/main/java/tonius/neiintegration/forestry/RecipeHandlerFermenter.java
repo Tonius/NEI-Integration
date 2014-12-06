@@ -42,16 +42,20 @@ public class RecipeHandlerFermenter extends RecipeHandlerBase {
         public List<PositionedStack> inputItems = new ArrayList<PositionedStack>();
         
         public CachedFermenterRecipe(MachineFermenter.Recipe recipe, ItemStack fermentable, boolean genPerms) {
-            FluidStack input = recipe.liquid.copy();
-            input.amount = recipe.fermentationValue;
-            this.tanks.add(new PositionedFluidTank(input, 10000, new Rectangle(30, 4, 16, 58), RecipeHandlerFermenter.this.getGuiTexture(), new Point(176, 0)));
-            FluidStack output = recipe.output.copy();
-            if (fermentable.getItem() instanceof IVariableFermentable) {
-                output.amount = (int) (recipe.fermentationValue * recipe.modifier * ((IVariableFermentable) fermentable.getItem()).getFermentationModifier(fermentable));
-            } else {
-                output.amount = (int) (recipe.fermentationValue * recipe.modifier);
+            if (recipe.liquid != null) {
+                FluidStack input = recipe.liquid.copy();
+                input.amount = recipe.fermentationValue;
+                this.tanks.add(new PositionedFluidTank(input, 10000, new Rectangle(30, 4, 16, 58), RecipeHandlerFermenter.this.getGuiTexture(), new Point(176, 0)));
             }
-            this.tanks.add(new PositionedFluidTank(output, 10000, new Rectangle(120, 4, 16, 58), RecipeHandlerFermenter.this.getGuiTexture(), new Point(176, 0)));
+            if (recipe.output != null) {
+                FluidStack output = recipe.output.copy();
+                if (fermentable.getItem() instanceof IVariableFermentable) {
+                    output.amount = (int) (recipe.fermentationValue * recipe.modifier * ((IVariableFermentable) fermentable.getItem()).getFermentationModifier(fermentable));
+                } else {
+                    output.amount = (int) (recipe.fermentationValue * recipe.modifier);
+                }
+                this.tanks.add(new PositionedFluidTank(output, 10000, new Rectangle(120, 4, 16, 58), RecipeHandlerFermenter.this.getGuiTexture(), new Point(176, 0)));
+            }
             
             this.inputItems.add(new PositionedStack(fermentable, 80, 8));
             this.inputItems.add(new PositionedStack(RecipeHandlerFermenter.fuels, 70, 42));
@@ -130,7 +134,7 @@ public class RecipeHandlerFermenter extends RecipeHandlerBase {
     }
     
     private List<CachedFermenterRecipe> getCachedRecipes(MachineFermenter.Recipe recipe, boolean generatePermutations) {
-        if (recipe.resource.getItem() instanceof IVariableFermentable) {
+        if (recipe.resource != null && recipe.resource.getItem() instanceof IVariableFermentable) {
             List<CachedFermenterRecipe> crecipes = new ArrayList<CachedFermenterRecipe>();
             for (ItemStack stack : Utils.getItemVariations(recipe.resource)) {
                 crecipes.add(new CachedFermenterRecipe(recipe, stack, generatePermutations));
@@ -160,11 +164,13 @@ public class RecipeHandlerFermenter extends RecipeHandlerBase {
     public void loadUsageRecipes(ItemStack ingred) {
         super.loadUsageRecipes(ingred);
         for (MachineFermenter.Recipe recipe : MachineFermenter.RecipeManager.recipes) {
-            for (ItemStack stack : Utils.getItemVariations(recipe.resource)) {
-                if (stack.hasTagCompound() && NEIServerUtils.areStacksSameType(stack, ingred) || !stack.hasTagCompound() && NEIServerUtils.areStacksSameTypeCrafting(stack, ingred)) {
-                    CachedFermenterRecipe crecipe = new CachedFermenterRecipe(recipe, stack, true);
-                    crecipe.setIngredientPermutationNBT(crecipe.inputItems, ingred);
-                    this.arecipes.add(crecipe);
+            if (recipe.resource != null) {
+                for (ItemStack stack : Utils.getItemVariations(recipe.resource)) {
+                    if (stack.hasTagCompound() && NEIServerUtils.areStacksSameType(stack, ingred) || !stack.hasTagCompound() && NEIServerUtils.areStacksSameTypeCrafting(stack, ingred)) {
+                        CachedFermenterRecipe crecipe = new CachedFermenterRecipe(recipe, stack, true);
+                        crecipe.setIngredientPermutationNBT(crecipe.inputItems, ingred);
+                        this.arecipes.add(crecipe);
+                    }
                 }
             }
             for (ItemStack stack : fuels) {

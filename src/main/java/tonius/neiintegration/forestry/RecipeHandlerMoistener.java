@@ -37,10 +37,18 @@ public class RecipeHandlerMoistener extends RecipeHandlerBase {
         public CachedMoistenerRecipe(MachineMoistener.Recipe recipe, MoistenerFuel fuel) {
             this.tank = new PositionedFluidTank(FluidRegistry.getFluidStack("water", 10000), 10000, new Rectangle(11, 5, 16, 58), RecipeHandlerMoistener.this.getGuiTexture(), new Point(176, 0));
             this.tank.showAmount = false;
-            this.fuels.add(new PositionedStack(fuel.item, 34, 47));
-            this.fuels.add(new PositionedStack(fuel.product, 100, 26));
-            this.input = new PositionedStack(recipe.resource, 138, 8);
-            this.output = new PositionedStack(recipe.product, 138, 44);
+            if (fuel.item != null) {
+                this.fuels.add(new PositionedStack(fuel.item, 34, 47));
+            }
+            if (fuel.product != null) {
+                this.fuels.add(new PositionedStack(fuel.product, 100, 26));
+            }
+            if (recipe.resource != null) {
+                this.input = new PositionedStack(recipe.resource, 138, 8);
+            }
+            if (recipe.product != null) {
+                this.output = new PositionedStack(recipe.product, 138, 44);
+            }
         }
         
         @Override

@@ -36,12 +36,20 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
         
         public CachedCarpenterRecipe(MachineCarpenter.Recipe recipe, boolean genPerms) {
             IDescriptiveRecipe irecipe = (IDescriptiveRecipe) recipe.asIRecipe();
-            this.setIngredients(irecipe.getWidth(), irecipe.getHeight(), irecipe.getIngredients());
-            if (recipe.getBox() != null) {
-                this.inputs.add(new PositionedStack(recipe.getBox(), 78, 6));
+            if (irecipe != null) {
+                if (irecipe.getIngredients() != null) {
+                    this.setIngredients(irecipe.getWidth(), irecipe.getHeight(), irecipe.getIngredients());
+                }
+                if (recipe.getBox() != null) {
+                    this.inputs.add(new PositionedStack(recipe.getBox(), 78, 6));
+                }
+                if (recipe.getLiquid() != null) {
+                    this.tank = new PositionedFluidTank(recipe.getLiquid(), 10000, new Rectangle(145, 3, 16, 58), RecipeHandlerCarpenter.this.getGuiTexture(), new Point(176, 0));
+                }
+                if (recipe.getCraftingResult() != null) {
+                    this.output = new PositionedStack(recipe.getCraftingResult(), 75, 37);
+                }
             }
-            this.tank = new PositionedFluidTank(recipe.getLiquid(), 10000, new Rectangle(145, 3, 16, 58), RecipeHandlerCarpenter.this.getGuiTexture(), new Point(176, 0));
-            this.output = new PositionedStack(recipe.getCraftingResult(), 75, 37);
             
             if (genPerms) {
                 this.generatePermutations();
@@ -145,7 +153,7 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
         super.loadUsageRecipes(ingred);
         for (MachineCarpenter.Recipe recipe : MachineCarpenter.RecipeManager.recipes) {
             CachedCarpenterRecipe crecipe = new CachedCarpenterRecipe(recipe);
-            if (crecipe.contains(crecipe.inputs, ingred)) {
+            if (crecipe.inputs != null && crecipe.contains(crecipe.inputs, ingred)) {
                 crecipe.generatePermutations();
                 crecipe.setIngredientPermutation(crecipe.inputs, ingred);
                 this.arecipes.add(crecipe);
@@ -156,7 +164,7 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(FluidStack ingredient) {
         for (MachineCarpenter.Recipe recipe : MachineCarpenter.RecipeManager.recipes) {
-            if (recipe.getLiquid() != null && Utils.areFluidsSameType(recipe.getLiquid(), ingredient)) {
+            if (Utils.areFluidsSameType(recipe.getLiquid(), ingredient)) {
                 this.arecipes.add(new CachedCarpenterRecipe(recipe, true));
             }
         }

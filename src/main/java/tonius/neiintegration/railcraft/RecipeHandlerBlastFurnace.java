@@ -31,8 +31,12 @@ public class RecipeHandlerBlastFurnace extends RecipeHandlerBase {
         public int cookTime;
         
         public CachedBlastFurnaceRecipe(IBlastFurnaceRecipe recipe) {
-            this.input = new PositionedStack(recipe.getInput(), 51, 6);
-            this.output = new PositionedStack(recipe.getOutput(), 111, 24);
+            if (recipe.getInput() != null) {
+                this.input = new PositionedStack(recipe.getInput(), 51, 6);
+            }
+            if (recipe.getOutput() != null) {
+                this.output = new PositionedStack(recipe.getOutput(), 111, 24);
+            }
             this.cookTime = recipe.getCookTime();
         }
         

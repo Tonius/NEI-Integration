@@ -33,13 +33,17 @@ public class RecipeHandlerRefinery extends RecipeHandlerBase {
         public long time;
         
         public CachedRefineryRecipe(IFlexibleRecipeViewable recipe) {
-            List<FluidStack> inputs = (List) recipe.getInputs();
-            PositionedFluidTank tank = new PositionedFluidTank(inputs.get(0), inputs.get(0).amount, new Rectangle(33, 23, 16, 16));
-            this.tanks.add(tank);
-            if (inputs.size() > 1) {
-                this.tanks.add(new PositionedFluidTank(inputs.get(1), inputs.get(1).amount, new Rectangle(121, 23, 16, 16)));
+            if (recipe.getInputs() instanceof List) {
+                List<FluidStack> inputs = (List) recipe.getInputs();
+                PositionedFluidTank tank = new PositionedFluidTank(inputs.get(0), inputs.get(0).amount, new Rectangle(33, 23, 16, 16));
+                this.tanks.add(tank);
+                if (inputs.size() > 1) {
+                    this.tanks.add(new PositionedFluidTank(inputs.get(1), inputs.get(1).amount, new Rectangle(121, 23, 16, 16)));
+                }
             }
-            this.tanks.add(new PositionedFluidTank((FluidStack) recipe.getOutput(), ((FluidStack) recipe.getOutput()).amount, new Rectangle(77, 23, 16, 16)));
+            if (recipe.getOutput() instanceof FluidStack) {
+                this.tanks.add(new PositionedFluidTank((FluidStack) recipe.getOutput(), ((FluidStack) recipe.getOutput()).amount, new Rectangle(77, 23, 16, 16)));
+            }
             
             this.energy = recipe.getEnergyCost();
             this.time = recipe.getCraftingTime();
@@ -110,8 +114,11 @@ public class RecipeHandlerRefinery extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(FluidStack result) {
         for (IFlexibleRecipe<FluidStack> recipe : BuildcraftRecipeRegistry.refinery.getRecipes()) {
-            if (recipe instanceof IFlexibleRecipeViewable && ((FluidStack) ((IFlexibleRecipeViewable) recipe).getOutput()).getFluid() == result.getFluid()) {
-                this.arecipes.add(new CachedRefineryRecipe((IFlexibleRecipeViewable) recipe));
+            if (recipe instanceof IFlexibleRecipeViewable && ((IFlexibleRecipeViewable) recipe).getOutput() instanceof FluidStack) {
+                FluidStack output = (FluidStack) ((IFlexibleRecipeViewable) recipe).getOutput();
+                if (Utils.areFluidsSameType(output, result)) {
+                    this.arecipes.add(new CachedRefineryRecipe((IFlexibleRecipeViewable) recipe));
+                }
             }
         }
     }
@@ -120,13 +127,16 @@ public class RecipeHandlerRefinery extends RecipeHandlerBase {
     public void loadUsageRecipes(FluidStack ingredient) {
         for (IFlexibleRecipe<FluidStack> recipe : BuildcraftRecipeRegistry.refinery.getRecipes()) {
             if (recipe instanceof IFlexibleRecipeViewable) {
-                for (Object o : ((IFlexibleRecipeViewable) recipe).getInputs()) {
-                    if (Utils.areFluidsSameType((FluidStack) o, ingredient)) {
-                        this.arecipes.add(new CachedRefineryRecipe((IFlexibleRecipeViewable) recipe));
+                if (((IFlexibleRecipeViewable) recipe).getInputs() instanceof List) {
+                    for (Object o : ((IFlexibleRecipeViewable) recipe).getInputs()) {
+                        if (o instanceof FluidStack) {
+                            if (Utils.areFluidsSameType((FluidStack) o, ingredient)) {
+                                this.arecipes.add(new CachedRefineryRecipe((IFlexibleRecipeViewable) recipe));
+                            }
+                        }
                     }
                 }
             }
         }
     }
-    
 }

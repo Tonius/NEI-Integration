@@ -30,8 +30,12 @@ public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
         public List<PositionedStack> outputs = new ArrayList<PositionedStack>();
         
         public CachedCentrifugeRecipe(MachineCentrifuge.Recipe recipe, boolean genPerms) {
-            this.inputs = new PositionedStack(recipe.resource, 29, 26);
-            this.setResults(recipe.products);
+            if (recipe.resource != null) {
+                this.inputs = new PositionedStack(recipe.resource, 29, 26);
+            }
+            if (recipe.products != null) {
+                this.setResults(recipe.products);
+            }
         }
         
         public CachedCentrifugeRecipe(MachineCentrifuge.Recipe recipe) {
@@ -110,7 +114,7 @@ public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
     public void loadCraftingRecipes(ItemStack result) {
         for (MachineCentrifuge.Recipe recipe : MachineCentrifuge.RecipeManager.recipes) {
             CachedCentrifugeRecipe crecipe = new CachedCentrifugeRecipe(recipe);
-            if (crecipe.contains(crecipe.outputs, result)) {
+            if (crecipe.outputs != null && crecipe.contains(crecipe.outputs, result)) {
                 crecipe.setIngredientPermutation(crecipe.outputs, result);
                 this.arecipes.add(crecipe);
             }

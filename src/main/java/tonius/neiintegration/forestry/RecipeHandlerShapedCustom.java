@@ -21,8 +21,12 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
         public PositionedStack output;
         
         public CachedShapedCustomRecipe(ShapedRecipeCustom recipe, boolean genPerms) {
-            this.setIngredients(recipe.getWidth(), recipe.getHeight(), recipe.getIngredients());
-            this.output = new PositionedStack(recipe.getRecipeOutput(), 119, 24);
+            if (recipe.getIngredients() != null) {
+                this.setIngredients(recipe.getWidth(), recipe.getHeight(), recipe.getIngredients());
+            }
+            if (recipe.getRecipeOutput() != null) {
+                this.output = new PositionedStack(recipe.getRecipeOutput(), 119, 24);
+            }
             if (genPerms) {
                 this.generatePermutations();
             }
@@ -116,7 +120,7 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
         for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
             if (recipe instanceof ShapedRecipeCustom) {
                 CachedShapedCustomRecipe crecipe = new CachedShapedCustomRecipe((ShapedRecipeCustom) recipe);
-                if (crecipe.contains(crecipe.inputs, ingredient)) {
+                if (crecipe.inputs != null && crecipe.contains(crecipe.inputs, ingredient)) {
                     crecipe.generatePermutations();
                     crecipe.setIngredientPermutationNBT(crecipe.inputs, ingredient);
                     this.arecipes.add(crecipe);

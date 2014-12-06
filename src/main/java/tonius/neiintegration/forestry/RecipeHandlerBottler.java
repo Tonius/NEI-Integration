@@ -41,9 +41,15 @@ public class RecipeHandlerBottler extends RecipeHandlerBase {
         public PositionedStack output;
         
         public CachedBottlerRecipe(MachineBottler.Recipe recipe) {
-            this.fluid = new PositionedFluidTank(recipe.input, 10000, new Rectangle(48, 6, 16, 58), RecipeHandlerBottler.this.getGuiTexture(), new Point(176, 0));
-            this.input = new PositionedStack(recipe.can, 111, 8);
-            this.output = new PositionedStack(recipe.bottled, 111, 44);
+            if (recipe.input != null) {
+                this.fluid = new PositionedFluidTank(recipe.input, 10000, new Rectangle(48, 6, 16, 58), RecipeHandlerBottler.this.getGuiTexture(), new Point(176, 0));
+            }
+            if (recipe.can != null) {
+                this.input = new PositionedStack(recipe.can, 111, 8);
+            }
+            if (recipe.bottled != null) {
+                this.output = new PositionedStack(recipe.bottled, 111, 44);
+            }
         }
         
         @Override

@@ -167,7 +167,7 @@ public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
                         if (preferredStacks != null) {
                             for (ItemStack preferredStack : preferredStacks) {
                                 if (NEIServerUtils.areStacksSameTypeCrafting(preferredStack, dropStack)) {
-                                    this.arecipes.add(new CachedLaserDrillRecipe(result, drop.itemWeight, i));
+                                    this.arecipes.add(new CachedLaserDrillRecipe(dropStack, drop.itemWeight, i));
                                 }
                             }
                         }

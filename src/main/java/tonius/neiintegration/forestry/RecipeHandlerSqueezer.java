@@ -33,8 +33,12 @@ public class RecipeHandlerSqueezer extends RecipeHandlerBase {
         public PositionedStackAdv remnants = null;
         
         public CachedSqueezerRecipe(MachineSqueezer.Recipe recipe, boolean genPerms) {
-            this.setIngredients(recipe.resources);
-            this.tank = new PositionedFluidTank(recipe.liquid, 10000, new Rectangle(80, 4, 16, 58), RecipeHandlerSqueezer.this.getGuiTexture(), new Point(176, 0));
+            if (recipe.resources != null) {
+                this.setIngredients(recipe.resources);
+            }
+            if (recipe.liquid != null) {
+                this.tank = new PositionedFluidTank(recipe.liquid, 10000, new Rectangle(80, 4, 16, 58), RecipeHandlerSqueezer.this.getGuiTexture(), new Point(176, 0));
+            }
             if (recipe.remnants != null) {
                 this.remnants = new PositionedStackAdv(recipe.remnants, 118, 8).setChance(recipe.chance / 100F);
             }
@@ -142,7 +146,7 @@ public class RecipeHandlerSqueezer extends RecipeHandlerBase {
     public void loadUsageRecipes(ItemStack ingred) {
         for (MachineSqueezer.Recipe recipe : MachineSqueezer.RecipeManager.recipes) {
             CachedSqueezerRecipe crecipe = new CachedSqueezerRecipe(recipe);
-            if (crecipe.contains(crecipe.inputs, ingred)) {
+            if (crecipe.inputs != null && crecipe.contains(crecipe.inputs, ingred)) {
                 crecipe.generatePermutations();
                 crecipe.setIngredientPermutation(crecipe.inputs, ingred);
                 this.arecipes.add(crecipe);

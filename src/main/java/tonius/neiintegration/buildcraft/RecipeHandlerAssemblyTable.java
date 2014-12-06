@@ -34,8 +34,12 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
         public int energy;
         
         public CachedAssemblyTableRecipe(IFlexibleRecipeViewable recipe, boolean generatePermutations) {
-            this.setIngredients((List<Object>) recipe.getInputs());
-            this.output = new PositionedStack(recipe.getOutput(), 129, 8);
+            if (recipe.getInputs() instanceof List) {
+                this.setIngredients((List<Object>) recipe.getInputs());
+            }
+            if (recipe.getOutput() != null) {
+                this.output = new PositionedStack(recipe.getOutput(), 129, 8);
+            }
             this.energy = recipe.getEnergyCost();
             
             if (generatePermutations) {
@@ -122,9 +126,11 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
     public void loadAllRecipes() {
         for (IFlexibleRecipe<ItemStack> recipe : BuildcraftRecipeRegistry.assemblyTable.getRecipes()) {
             if (recipe instanceof IFlexibleRecipeViewable) {
-                ItemStack output = (ItemStack) ((IFlexibleRecipeViewable) recipe).getOutput();
-                if (!(output.getItem() instanceof IFacadeItem)) {
-                    this.arecipes.add(new CachedAssemblyTableRecipe((IFlexibleRecipeViewable) recipe, true));
+                if (((IFlexibleRecipeViewable) recipe).getOutput() instanceof ItemStack) {
+                    ItemStack output = (ItemStack) ((IFlexibleRecipeViewable) recipe).getOutput();
+                    if (!(output.getItem() instanceof IFacadeItem)) {
+                        this.arecipes.add(new CachedAssemblyTableRecipe((IFlexibleRecipeViewable) recipe, true));
+                    }
                 }
             }
         }
@@ -135,9 +141,11 @@ public class RecipeHandlerAssemblyTable extends RecipeHandlerBase {
         for (IFlexibleRecipe<ItemStack> recipe : BuildcraftRecipeRegistry.assemblyTable.getRecipes()) {
             if (recipe instanceof IFlexibleRecipeViewable) {
                 IFlexibleRecipeViewable recipeViewable = (IFlexibleRecipeViewable) recipe;
-                ItemStack output = (ItemStack) recipeViewable.getOutput();
-                if (output.stackTagCompound != null && NEIServerUtils.areStacksSameType(output, result) || output.stackTagCompound == null && NEIServerUtils.areStacksSameTypeCrafting(output, result)) {
-                    this.arecipes.add(new CachedAssemblyTableRecipe((IFlexibleRecipeViewable) recipe, true));
+                if (recipeViewable.getOutput() instanceof ItemStack) {
+                    ItemStack output = (ItemStack) recipeViewable.getOutput();
+                    if (output.stackTagCompound != null && NEIServerUtils.areStacksSameType(output, result) || output.stackTagCompound == null && NEIServerUtils.areStacksSameTypeCrafting(output, result)) {
+                        this.arecipes.add(new CachedAssemblyTableRecipe((IFlexibleRecipeViewable) recipe, true));
+                    }
                 }
             }
         }

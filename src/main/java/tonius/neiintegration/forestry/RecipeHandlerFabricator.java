@@ -43,19 +43,27 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
         public PositionedStack output;
         
         public CachedFabricatorRecipe(MachineFabricator.Recipe recipe, boolean genPerms) {
-            this.tank = new PositionedFluidTank(recipe.getLiquid(), 2000, new Rectangle(21, 37, 16, 16));
+            if (recipe.getLiquid() != null) {
+                this.tank = new PositionedFluidTank(recipe.getLiquid(), 2000, new Rectangle(21, 37, 16, 16));
+                List<ItemStack> smeltingInput = smeltingInputs.get(recipe.getLiquid().getFluid());
+                if (smeltingInput != null && !smeltingInput.isEmpty()) {
+                    this.smeltingInput.add(new PositionedStack(smeltingInput, 21, 10));
+                }
+            }
             
             ShapedRecipeCustom irecipe = (ShapedRecipeCustom) recipe.asIRecipe();
-            this.setIngredients(irecipe.getWidth(), irecipe.getHeight(), irecipe.getIngredients());
-            if (recipe.getPlan() != null) {
-                this.inputs.add(new PositionedStack(recipe.getPlan(), 134, 6));
+            if (irecipe != null) {
+                if (irecipe.getIngredients() != null) {
+                    this.setIngredients(irecipe.getWidth(), irecipe.getHeight(), irecipe.getIngredients());
+                }
+                if (recipe.getPlan() != null) {
+                    this.inputs.add(new PositionedStack(recipe.getPlan(), 134, 6));
+                }
+                
+                if (irecipe.getRecipeOutput() != null) {
+                    this.output = new PositionedStack(irecipe.getRecipeOutput(), 134, 42);
+                }
             }
-            List<ItemStack> smeltingInput = smeltingInputs.get(recipe.getLiquid().getFluid());
-            if (smeltingInput != null && !smeltingInput.isEmpty()) {
-                this.smeltingInput.add(new PositionedStack(smeltingInput, 21, 10));
-            }
-            
-            this.output = new PositionedStack(recipe.asIRecipe().getRecipeOutput(), 134, 42);
             
             if (genPerms) {
                 this.generatePermutations();
@@ -142,7 +150,7 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (MachineFabricator.Recipe recipe : MachineFabricator.RecipeManager.recipes) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.asIRecipe().getRecipeOutput(), result)) {
+            if (recipe.asIRecipe() != null && NEIServerUtils.areStacksSameTypeCrafting(recipe.asIRecipe().getRecipeOutput(), result)) {
                 this.arecipes.add(new CachedFabricatorRecipe(recipe, true));
             }
         }
@@ -153,7 +161,7 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
         super.loadUsageRecipes(ingred);
         for (MachineFabricator.Recipe recipe : MachineFabricator.RecipeManager.recipes) {
             CachedFabricatorRecipe crecipe = new CachedFabricatorRecipe(recipe);
-            if (crecipe.contains(crecipe.inputs, ingred) || crecipe.contains(crecipe.smeltingInput, ingred)) {
+            if (crecipe.inputs != null && crecipe.contains(crecipe.inputs, ingred) || crecipe.smeltingInput != null && crecipe.contains(crecipe.smeltingInput, ingred)) {
                 crecipe.generatePermutations();
                 crecipe.setIngredientPermutation(crecipe.inputs, ingred);
                 crecipe.setIngredientPermutation(crecipe.smeltingInput, ingred);

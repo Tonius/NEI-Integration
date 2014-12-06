@@ -28,8 +28,12 @@ public class RecipeHandlerStill extends RecipeHandlerBase {
         public List<PositionedFluidTank> tanks = new ArrayList<PositionedFluidTank>();
         
         public CachedStillRecipe(MachineStill.Recipe recipe) {
-            this.tanks.add(new PositionedFluidTank(recipe.input, 10000, new Rectangle(30, 4, 16, 58), RecipeHandlerStill.this.getGuiTexture(), new Point(176, 0)));
-            this.tanks.add(new PositionedFluidTank(recipe.output, 10000, new Rectangle(120, 4, 16, 58), RecipeHandlerStill.this.getGuiTexture(), new Point(176, 0)));
+            if (recipe.input != null) {
+                this.tanks.add(new PositionedFluidTank(recipe.input, 10000, new Rectangle(30, 4, 16, 58), RecipeHandlerStill.this.getGuiTexture(), new Point(176, 0)));
+            }
+            if (recipe.output != null) {
+                this.tanks.add(new PositionedFluidTank(recipe.output, 10000, new Rectangle(120, 4, 16, 58), RecipeHandlerStill.this.getGuiTexture(), new Point(176, 0)));
+            }
         }
         
         @Override

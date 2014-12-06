@@ -36,9 +36,15 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
         public int cookTime;
         
         public CachedCokeOvenRecipe(ICokeOvenRecipe recipe) {
-            this.input = Collections.singletonList(new PositionedStack(recipe.getInput(), 21, 32));
-            this.output = new PositionedStack(recipe.getOutput(), 67, 32);
-            this.fluidOutput = new PositionedFluidTank(recipe.getFluidOutput(), 64000, new Rectangle(95, 13, 48, 47), RecipeHandlerCokeOven.this.getGuiTexture(), new Point(176, 0));
+            if (recipe.getInput() != null) {
+                this.input = Collections.singletonList(new PositionedStack(recipe.getInput(), 21, 32));
+            }
+            if (recipe.getOutput() != null) {
+                this.output = new PositionedStack(recipe.getOutput(), 67, 32);
+            }
+            if (recipe.getFluidOutput() != null) {
+                this.fluidOutput = new PositionedFluidTank(recipe.getFluidOutput(), 64000, new Rectangle(95, 13, 48, 47), RecipeHandlerCokeOven.this.getGuiTexture(), new Point(176, 0));
+            }
             this.cookTime = recipe.getCookTime();
         }
         
