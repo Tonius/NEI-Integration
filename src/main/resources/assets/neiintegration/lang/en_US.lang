@@ -14,6 +14,10 @@ neiintegration.tooltip.burntime=Burn time:
 neiintegration.tooltip.oredict=Ore Dictionary names:
 neiintegration.tooltip.fluidreg=Fluid Registry info:
 
+neiintegration.config.title=NEI Integration Configuration
+neiintegration.config.tooltips=Item Tooltip Settings
+neiintegration.config.tooltips.tooltip=No tooltip defined. How ironic.
+
 # Forge
 neiintegration.handler.fluidRegistry=Fluid Registry
 neiintegration.handler.fluidRegistry.id=ID:

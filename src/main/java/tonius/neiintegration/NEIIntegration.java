@@ -8,6 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Logger;
 
 import tonius.neiintegration.buildcraft.BuildCraftIntegration;
+import tonius.neiintegration.config.Config;
 import tonius.neiintegration.electricalage.ElectricalAgeIntegration;
 import tonius.neiintegration.forestry.ForestryIntegration;
 import tonius.neiintegration.forge.ForgeIntegration;
@@ -20,7 +21,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = NEIIntegration.MODID, acceptableRemoteVersions = "*")
+@Mod(modid = NEIIntegration.MODID, acceptableRemoteVersions = "*", guiFactory = "tonius.neiintegration.config.ConfigGuiFactory")
 public class NEIIntegration {
     
     public static final String MODID = "neiintegration";
@@ -37,6 +38,8 @@ public class NEIIntegration {
     public void preInit(FMLPreInitializationEvent evt) {
         log = evt.getModLog();
         log.info("Starting NEI Integration");
+        
+        Config.preInit(evt);
     }
     
     @EventHandler

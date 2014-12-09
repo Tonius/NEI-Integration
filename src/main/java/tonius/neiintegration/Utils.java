@@ -14,6 +14,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
+import org.lwjgl.input.Keyboard;
+
 public class Utils {
     
     public static String translate(String unlocalized, boolean prefix) {
@@ -66,6 +68,10 @@ public class Utils {
             return false;
         }
         return fluidStack1.getFluid() == fluidStack2.getFluid();
+    }
+    
+    public static boolean isShiftKeyDown() {
+        return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
     }
     
     public static Class getClass(String name) {
