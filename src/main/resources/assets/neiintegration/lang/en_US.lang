@@ -10,6 +10,10 @@ neiintegration.chance.lessThan1=<1%
 
 neiintegration.ticks=ticks
 
+neiintegration.tooltip.burntime=Burn time:
+neiintegration.tooltip.oredict=Ore Dictionary names:
+neiintegration.tooltip.fluidreg=Fluid Registry info:
+
 # Forge
 neiintegration.handler.fluidRegistry=Fluid Registry
 neiintegration.handler.fluidRegistry.id=ID:

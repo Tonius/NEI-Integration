@@ -3,6 +3,8 @@ package tonius.neiintegration;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraftforge.common.MinecraftForge;
+
 import org.apache.logging.log4j.Logger;
 
 import tonius.neiintegration.buildcraft.BuildCraftIntegration;
@@ -40,6 +42,8 @@ public class NEIIntegration {
     @EventHandler
     public void init(FMLInitializationEvent evt) {
         if (evt.getSide() == Side.CLIENT) {
+            MinecraftForge.EVENT_BUS.register(new ItemTooltipHandler());
+            
             integrations.add(new ForgeIntegration());
             integrations.add(new BuildCraftIntegration());
             integrations.add(new ElectricalAgeIntegration());
