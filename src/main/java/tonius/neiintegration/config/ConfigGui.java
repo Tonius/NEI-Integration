@@ -19,7 +19,7 @@ public class ConfigGui extends GuiConfig {
     
     private static List<IConfigElement> getConfigElements(GuiScreen parent) {
         List<IConfigElement> list = new ArrayList<IConfigElement>();
-        String prefix = NEIIntegration.PREFIX + "config.";
+        String prefix = "neiintegration.config.";
         
         for (Section configSection : Config.configSections) {
             list.add(new ConfigElement<ConfigCategory>(Config.config.getCategory(configSection.toLowerCase()).setLanguageKey(prefix + configSection.id)));

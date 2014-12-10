@@ -72,7 +72,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     }
     
     public void changeToOverlayTexture() {
-        GuiDraw.changeTexture(NEIIntegration.RESOURCE_PREFIX + "textures/overlays.png");
+        GuiDraw.changeTexture("neiintegration:textures/overlays.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
     

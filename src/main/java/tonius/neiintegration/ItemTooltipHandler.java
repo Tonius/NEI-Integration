@@ -49,7 +49,7 @@ public class ItemTooltipHandler {
         if (Config.fluidRegInfo && (!Config.fluidRegInfoShift || Utils.isShiftKeyDown()) && (!Config.fluidRegInfoAdvanced || evt.showAdvancedItemTooltips)) {
             List<String> names = new ArrayList<String>();
             if (FluidContainerRegistry.isEmptyContainer(evt.itemStack)) {
-                names.add(" Empty Container");
+                names.add("  " + Utils.translate("tooltip.fluidreg.empty"));
             } else {
                 FluidStack fluid = Utils.getFluidStack(evt.itemStack);
                 if (fluid != null) {

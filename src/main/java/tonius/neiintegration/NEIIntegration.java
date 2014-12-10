@@ -25,8 +25,6 @@ import cpw.mods.fml.relauncher.Side;
 public class NEIIntegration {
     
     public static final String MODID = "neiintegration";
-    public static final String PREFIX = MODID + ".";
-    public static final String RESOURCE_PREFIX = MODID + ":";
     
     @Instance(MODID)
     public static NEIIntegration instance;

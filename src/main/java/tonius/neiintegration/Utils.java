@@ -1,5 +1,6 @@
 package tonius.neiintegration;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -82,6 +83,25 @@ public class Utils {
             NEIIntegration.log.error("Failed to find class " + name);
         }
         return null;
+    }
+    
+    public static Object getField(Class clazz, String name, String nameObf, Object instance) {
+        Field field = null;
+        Object ret = null;
+        try {
+            field = clazz.getField(nameObf);
+            field.setAccessible(true);
+            ret = field.get(instance);
+        } catch (Exception e1) {
+            try {
+                field = clazz.getField(name);
+                field.setAccessible(true);
+                ret = field.get(instance);
+            } catch (Exception e2) {
+                NEIIntegration.log.error("Failed to find field " + name + " in class " + clazz.getName());
+            }
+        }
+        return ret;
     }
     
 }
