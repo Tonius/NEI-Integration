@@ -19,7 +19,7 @@ public class OreDictionaryDumper extends DataDumper {
     
     @Override
     public String[] header() {
-        return new String[] { "Ore Name", "ItemStack", "Item ID", "Mod" };
+        return new String[] { "Ore Name", "ItemStack", "Item ID", "Wildcard", "Mod" };
     }
     
     @Override
@@ -32,7 +32,7 @@ public class OreDictionaryDumper extends DataDumper {
         for (String oreName : oreNames) {
             List<ItemStack> ores = OreDictionary.getOres(oreName);
             for (ItemStack ore : ores) {
-                list.add(new String[] { oreName, ore.toString(), Item.itemRegistry.getNameForObject(ore.getItem()), ItemInfo.itemOwners.get(ore.getItem()) });
+                list.add(new String[] { oreName, ore.toString(), Item.itemRegistry.getNameForObject(ore.getItem()), String.valueOf(ore.getItemDamage() == OreDictionary.WILDCARD_VALUE), ItemInfo.itemOwners.get(ore.getItem()) });
             }
         }
         

@@ -23,6 +23,8 @@ nei.options.tools.dump.neiintegration_tileentity=Tile Entity
 nei.options.tools.dump.neiintegration_tileentitys=[NEII] Tile Entities
 nei.options.tools.dump.neiintegration_oredict=Ore Dictionary
 nei.options.tools.dump.neiintegration_oredicts=[NEII] Ore Dictionary
+nei.options.tools.dump.neiintegration_fluidreg=Fluid
+nei.options.tools.dump.neiintegration_fluidregs=[NEII] Fluids
 nei.options.tools.dump.neiintegration_recipehandler=Recipe Handler
 nei.options.tools.dump.neiintegration_recipehandlers=[NEII] Recipe Handlers
 

@@ -19,6 +19,7 @@ public class ForgeIntegration extends IntegrationBase {
     public void loadConfig() {
         API.addOption(new TileEntityDumper());
         API.addOption(new OreDictionaryDumper());
+        API.addOption(new FluidRegistryDumper());
         API.addOption(new RecipeHandlerDumper());
         
         registerHandler(new RecipeHandlerFluidRegistry());
