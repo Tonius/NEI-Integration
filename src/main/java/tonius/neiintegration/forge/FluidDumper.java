@@ -11,10 +11,10 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import codechicken.nei.config.DataDumper;
 
-public class FluidRegistryDumper extends DataDumper {
+public class FluidDumper extends DataDumper {
     
-    public FluidRegistryDumper() {
-        super("tools.dump.neiintegration_fluidreg");
+    public FluidDumper() {
+        super("tools.dump.neiintegration_fluid");
     }
     
     @Override

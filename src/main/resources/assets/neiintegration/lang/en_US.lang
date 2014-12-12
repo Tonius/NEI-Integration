@@ -19,12 +19,16 @@ neiintegration.config.title=NEI Integration Configuration
 neiintegration.config.tooltips=Item Tooltip Settings
 neiintegration.config.tooltips.tooltip=No tooltip defined. How ironic.
 
+nei.options.tools.dump.neiintegration_loadedmod=Loaded Mod
+nei.options.tools.dump.neiintegration_loadedmods=[NEII] Loaded Mods
 nei.options.tools.dump.neiintegration_tileentity=Tile Entity
 nei.options.tools.dump.neiintegration_tileentitys=[NEII] Tile Entities
 nei.options.tools.dump.neiintegration_oredict=Ore Dictionary
 nei.options.tools.dump.neiintegration_oredicts=[NEII] Ore Dictionary
-nei.options.tools.dump.neiintegration_fluidreg=Fluid
-nei.options.tools.dump.neiintegration_fluidregs=[NEII] Fluids
+nei.options.tools.dump.neiintegration_fluid=Fluid
+nei.options.tools.dump.neiintegration_fluids=[NEII] Fluids
+nei.options.tools.dump.neiintegration_fluidcontainer=Fluid Container
+nei.options.tools.dump.neiintegration_fluidcontainers=[NEII] Fluid Containers
 nei.options.tools.dump.neiintegration_recipehandler=Recipe Handler
 nei.options.tools.dump.neiintegration_recipehandlers=[NEII] Recipe Handlers
 
