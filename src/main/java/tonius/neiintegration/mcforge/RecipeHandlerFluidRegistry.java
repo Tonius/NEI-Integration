@@ -1,4 +1,4 @@
-package tonius.neiintegration.forge;
+package tonius.neiintegration.mcforge;
 
 import java.awt.Point;
 import java.awt.Rectangle;

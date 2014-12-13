@@ -1,4 +1,4 @@
-package tonius.neiintegration.forge;
+package tonius.neiintegration.mcforge;
 
 import tonius.neiintegration.IntegrationBase;
 import codechicken.nei.api.API;

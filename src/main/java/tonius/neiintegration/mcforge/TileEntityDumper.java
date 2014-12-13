@@ -1,4 +1,4 @@
-package tonius.neiintegration.forge;
+package tonius.neiintegration.mcforge;
 
 import java.util.ArrayList;
 import java.util.Collections;

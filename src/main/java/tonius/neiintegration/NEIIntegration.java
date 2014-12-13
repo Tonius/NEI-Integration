@@ -11,7 +11,7 @@ import tonius.neiintegration.buildcraft.BuildCraftIntegration;
 import tonius.neiintegration.config.Config;
 import tonius.neiintegration.electricalage.ElectricalAgeIntegration;
 import tonius.neiintegration.forestry.ForestryIntegration;
-import tonius.neiintegration.forge.ForgeIntegration;
+import tonius.neiintegration.mcforge.ForgeIntegration;
 import tonius.neiintegration.minefactoryreloaded.MFRIntegration;
 import tonius.neiintegration.railcraft.RailcraftIntegration;
 import cpw.mods.fml.common.Mod;
