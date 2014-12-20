@@ -24,6 +24,8 @@ neiintegration.config.tooltips.tooltip=No tooltip defined. How ironic.
 
 nei.options.tools.dump.neiintegration_loadedmod=Loaded Mod
 nei.options.tools.dump.neiintegration_loadedmods=[NEII] Loaded Mods
+nei.options.tools.dump.neiintegration_entity=Entity
+nei.options.tools.dump.neiintegration_entitys=[NEII] Entities
 nei.options.tools.dump.neiintegration_tileentity=Tile Entity
 nei.options.tools.dump.neiintegration_tileentitys=[NEII] Tile Entities
 nei.options.tools.dump.neiintegration_oredict=Ore Dictionary
