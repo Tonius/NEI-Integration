@@ -10,6 +10,9 @@ neiintegration.chance.lessThan1=<1%
 
 neiintegration.ticks=ticks
 
+neiintegration.tooltip.internalName=Item ID:
+neiintegration.tooltip.unlocalizedName=Unloc. name:
+neiintegration.tooltip.maxstack=Maximum stack size:
 neiintegration.tooltip.burntime=Burn time:
 neiintegration.tooltip.oredict=Ore Dictionary names:
 neiintegration.tooltip.fluidreg=Fluid Registry info:
