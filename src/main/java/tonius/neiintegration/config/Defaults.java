@@ -2,6 +2,8 @@ package tonius.neiintegration.config;
 
 public abstract class Defaults {
     
+    public static final boolean handler_fluidRegistry = true;
+    
     public static final boolean tooltip_unlocalizedName = false;
     public static final boolean tooltip_unlocalizedNameShift = false;
     public static final boolean tooltip_unlocalizedNameAdvanced = false;

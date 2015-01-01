@@ -16,7 +16,11 @@ public class Config {
     public static Configuration config;
     public static List<Section> configSections = new ArrayList<Section>();
     
+    public static final Section sectionHandlers = new Section("Handlers", "handlers");
     public static final Section sectionTooltips = new Section("Tooltips", "tooltips");
+    
+    // handlers
+    public static boolean handler_fluidRegistry = true;
     
     // tooltips
     public static boolean tooltip_unlocalizedName = Defaults.tooltip_unlocalizedName;
@@ -63,6 +67,8 @@ public class Config {
     }
     
     public static void processConfig() {
+        handler_fluidRegistry = config.get(sectionHandlers.name, "Fluid Registry", Defaults.handler_fluidRegistry, "Shows information about registered fluids when looking them or related items up.").getBoolean(Defaults.handler_fluidRegistry);
+        
         tooltip_unlocalizedName = config.get(sectionTooltips.name, "Unlocalized Name", Defaults.tooltip_unlocalizedName, "Show the unlocalized name of items.").getBoolean(Defaults.tooltip_unlocalizedName);
         tooltip_unlocalizedNameShift = config.get(sectionTooltips.name, "Unlocalized Name Shift", Defaults.tooltip_unlocalizedNameShift, "If unlocalized names are enabled, they will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltip_unlocalizedNameShift);
         tooltip_unlocalizedNameAdvanced = config.get(sectionTooltips.name, "Unlocalized Name Advanced", Defaults.tooltip_unlocalizedNameAdvanced, "If unlocalized names are enabled, they will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltip_unlocalizedNameAdvanced);

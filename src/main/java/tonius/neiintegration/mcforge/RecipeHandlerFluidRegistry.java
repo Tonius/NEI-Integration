@@ -19,6 +19,7 @@ import net.minecraftforge.fluids.IFluidBlock;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
+import tonius.neiintegration.config.Config;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -165,8 +166,10 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
     
     @Override
     public void loadAllRecipes() {
-        for (Fluid fluid : fluids) {
-            this.arecipes.add(new CachedFluidRegistryRecipe(fluid));
+        if (Config.handler_fluidRegistry) {
+            for (Fluid fluid : fluids) {
+                this.arecipes.add(new CachedFluidRegistryRecipe(fluid));
+            }
         }
     }
     
@@ -175,25 +178,29 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
         if (Block.getBlockFromItem(result.getItem()) instanceof IFluidBlock) {
             super.loadCraftingRecipes(result);
         }
-        for (Fluid fluid : fluids) {
-            CachedFluidRegistryRecipe crecipe = new CachedFluidRegistryRecipe(fluid);
-            if (crecipe.filledContainer != null && crecipe.filledContainer.contains(result)) {
-                crecipe.setPermutation(crecipe.filledContainer, result);
-                for (FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData()) {
-                    if (NEIServerUtils.areStacksSameTypeCrafting(data.filledContainer, result)) {
-                        crecipe.setPermutation(crecipe.emptyContainer, data.emptyContainer);
+        if (Config.handler_fluidRegistry) {
+            for (Fluid fluid : fluids) {
+                CachedFluidRegistryRecipe crecipe = new CachedFluidRegistryRecipe(fluid);
+                if (crecipe.filledContainer != null && crecipe.filledContainer.contains(result)) {
+                    crecipe.setPermutation(crecipe.filledContainer, result);
+                    for (FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData()) {
+                        if (NEIServerUtils.areStacksSameTypeCrafting(data.filledContainer, result)) {
+                            crecipe.setPermutation(crecipe.emptyContainer, data.emptyContainer);
+                        }
                     }
+                    this.arecipes.add(crecipe);
                 }
-                this.arecipes.add(crecipe);
             }
         }
     }
     
     @Override
     public void loadCraftingRecipes(FluidStack result) {
-        for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
-            if (fluid == result.getFluid()) {
-                this.arecipes.add(new CachedFluidRegistryRecipe(fluid));
+        if (Config.handler_fluidRegistry) {
+            for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
+                if (fluid == result.getFluid()) {
+                    this.arecipes.add(new CachedFluidRegistryRecipe(fluid));
+                }
             }
         }
     }
@@ -201,25 +208,29 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         super.loadUsageRecipes(ingredient);
-        for (Fluid fluid : fluids) {
-            CachedFluidRegistryRecipe crecipe = new CachedFluidRegistryRecipe(fluid);
-            if (crecipe.emptyContainer != null && crecipe.emptyContainer.contains(ingredient)) {
-                crecipe.setPermutation(crecipe.emptyContainer, ingredient);
-                for (FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData()) {
-                    if (NEIServerUtils.areStacksSameTypeCrafting(data.emptyContainer, ingredient)) {
-                        crecipe.setPermutation(crecipe.filledContainer, data.filledContainer);
+        if (Config.handler_fluidRegistry) {
+            for (Fluid fluid : fluids) {
+                CachedFluidRegistryRecipe crecipe = new CachedFluidRegistryRecipe(fluid);
+                if (crecipe.emptyContainer != null && crecipe.emptyContainer.contains(ingredient)) {
+                    crecipe.setPermutation(crecipe.emptyContainer, ingredient);
+                    for (FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData()) {
+                        if (NEIServerUtils.areStacksSameTypeCrafting(data.emptyContainer, ingredient)) {
+                            crecipe.setPermutation(crecipe.filledContainer, data.filledContainer);
+                        }
                     }
+                    this.arecipes.add(crecipe);
                 }
-                this.arecipes.add(crecipe);
             }
         }
     }
     
     @Override
     public void loadUsageRecipes(FluidStack ingredient) {
-        for (Fluid fluid : fluids) {
-            if (fluid == ingredient.getFluid()) {
-                this.arecipes.add(new CachedFluidRegistryRecipe(fluid));
+        if (Config.handler_fluidRegistry) {
+            for (Fluid fluid : fluids) {
+                if (fluid == ingredient.getFluid()) {
+                    this.arecipes.add(new CachedFluidRegistryRecipe(fluid));
+                }
             }
         }
     }
