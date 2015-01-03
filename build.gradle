@@ -29,17 +29,17 @@ group = "tonius.neiintegration"
 archivesBaseName = "NEIIntegration-MC1.7.10"
 
 minecraft {
-    version = "1.7.10-10.13.1.1217"
+    version = "1.7.10-10.13.2.1230"
     runDir = "run"
 }
 
 dependencies {
     // http://files.minecraftforge.net/CodeChickenLib/
-    compile "codechicken:CodeChickenLib:1.7.10-1.1.1.104:dev"
+    compile "codechicken:CodeChickenLib:1.7.10-1.1.1.110:dev"
     
     // http://chickenbones.net/maven
-    compile "codechicken:CodeChickenCore:1.7.10-1.0.3.26:dev"
-    compile "codechicken:NotEnoughItems:1.7.10-1.0.3.67:dev"
+    compile "codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev"
+    compile "codechicken:NotEnoughItems:1.7.10-1.0.4.83:dev"
 }
 
 processResources
