@@ -93,10 +93,10 @@ public class RecipeHandlerBioReactor extends RecipeHandlerBase {
     public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
         super.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
         if (new Rectangle(139, 2, 8, 60).contains(relMouse)) {
-            currenttip.add(Utils.translate("handler.bioreactor.effeciency"));
-            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.bioreactor.effeciency.1"));
-            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.bioreactor.effeciency.2"));
-            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.bioreactor.effeciency.3"));
+            currenttip.add(Utils.translate("handler.bioreactor.efficiency"));
+            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.bioreactor.efficiency.1"));
+            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.bioreactor.efficiency.2"));
+            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.bioreactor.efficiency.3"));
         }
         return currenttip;
     }

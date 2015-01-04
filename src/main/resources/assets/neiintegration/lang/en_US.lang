@@ -66,10 +66,10 @@ neiintegration.handler.electricalage.plateMachine=Plate Machine
 neiintegration.handler.forestryShaped=Forestry Shaped
 
 # MineFactory Reloaded
-neiintegration.handler.bioreactor.effeciency=Effeciency
-neiintegration.handler.bioreactor.effeciency.1=Depends of the amount of
-neiintegration.handler.bioreactor.effeciency.2=different items being processed.
-neiintegration.handler.bioreactor.effeciency.3=More effeciency means more BioFuel.
+neiintegration.handler.bioreactor.efficiency=Efficiency
+neiintegration.handler.bioreactor.efficiency.1=Depends of the amount of
+neiintegration.handler.bioreactor.efficiency.2=different items being processed.
+neiintegration.handler.bioreactor.efficiency.3=More efficiency means more BioFuel.
 neiintegration.handler.grinder.mobs=Mobs
 neiintegration.handler.grinder.mobs.1=Mobs that drop more XP
 neiintegration.handler.grinder.mobs.2=produce more Essence.
