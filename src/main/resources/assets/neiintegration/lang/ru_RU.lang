@@ -1,0 +1,84 @@
+neiintegration.yes=Да
+neiintegration.no=Нет
+
+neiintegration.shaped=Форменное
+neiintegration.shapeless=Бесформенное
+
+neiintegration.chance=Шанс: %s
+neiintegration.chance.never=Нулевой
+neiintegration.chance.lessThan1=<1%
+
+neiintegration.ticks=тактов
+
+neiintegration.tooltip.internalName=ID:
+neiintegration.tooltip.unlocalizedName=Unloc. name:
+neiintegration.tooltip.maxstack=Макс. размер стака:
+neiintegration.tooltip.burntime=Время горения:
+neiintegration.tooltip.oredict=Имена словаря руд:
+neiintegration.tooltip.fluidreg=Информация о реестре жидкостей:
+neiintegration.tooltip.fluidreg.empty=Пустой контейнер
+
+neiintegration.config.title=Конфигурация NEI Integration
+neiintegration.config.handlers=Настройки обработчика рецептов
+neiintegration.config.handlers.tooltip=Включает или отключает обработчики рецептов этого мода.
+neiintegration.config.tooltips=Настройки подсказок предметов
+neiintegration.config.tooltips.tooltip=Подсказка не указана. Какая ирония.
+
+nei.options.tools.dump.neiintegration_loadedmod=Загруженный мод
+nei.options.tools.dump.neiintegration_loadedmods=[NEII] Загруженные моды
+nei.options.tools.dump.neiintegration_entity=Сущность
+nei.options.tools.dump.neiintegration_entitys=[NEII] Сущности
+nei.options.tools.dump.neiintegration_tileentity=Tile Entity
+nei.options.tools.dump.neiintegration_tileentitys=[NEII] Tile Entities
+nei.options.tools.dump.neiintegration_dimension=Измерение
+nei.options.tools.dump.neiintegration_dimensions=[NEII] Измерения
+nei.options.tools.dump.neiintegration_oredict=Словарь руд
+nei.options.tools.dump.neiintegration_oredicts=[NEII] Словарь руд
+nei.options.tools.dump.neiintegration_fluid=Жидкость
+nei.options.tools.dump.neiintegration_fluids=[NEII] Жидкости
+nei.options.tools.dump.neiintegration_fluidcontainer=Жидкостный контейнер
+nei.options.tools.dump.neiintegration_fluidcontainers=[NEII] Жидкостные контейнеры
+nei.options.tools.dump.neiintegration_recipehandler=Обработчик рецептов
+nei.options.tools.dump.neiintegration_recipehandlers=[NEII] Обработчики рецептов
+
+# Forge
+neiintegration.handler.fluidRegistry=Реестр жидкостей
+neiintegration.handler.fluidRegistry.id=ID:
+neiintegration.handler.fluidRegistry.state=Состояние:
+neiintegration.handler.fluidRegistry.state.gaseous=Газообразное
+neiintegration.handler.fluidRegistry.state.liquid=Жидкое
+neiintegration.handler.fluidRegistry.placeable=Можно поставить:
+neiintegration.handler.fluidRegistry.temperature=Температура:
+neiintegration.handler.fluidRegistry.luminosity=Светимость:
+neiintegration.handler.fluidRegistry.density=Плотность:
+neiintegration.handler.fluidRegistry.viscosity=Вязкость:
+
+# BuildCraft
+neiintegration.handler.refinery.energyRate=%d RF на скорости %d RF/т
+
+# Electrical Age
+neiintegration.handler.electricalage.compressor=Компрессор (ELN)
+neiintegration.handler.electricalage.macerator=Дробитель (ELN)
+neiintegration.handler.electricalage.magnetizer=Намагничиватель
+neiintegration.handler.electricalage.plateMachine=Производитель пластин
+
+# Forestry
+neiintegration.handler.forestryShaped=Forestry: Форменное
+
+# MineFactory Reloaded
+neiintegration.handler.bioreactor.effeciency=Эффективность
+neiintegration.handler.bioreactor.effeciency.1=Зависит от количества
+neiintegration.handler.bioreactor.effeciency.2=разных обрабатываемых предметов.
+neiintegration.handler.bioreactor.effeciency.3=Для большой эффективности требуется больше биотоплива.
+neiintegration.handler.grinder.mobs=Мобы
+neiintegration.handler.grinder.mobs.1=Мобы, которые дают больше опыта,
+neiintegration.handler.grinder.mobs.2=производят больше эссенции.
+neiintegration.handler.harvester.harvestables=Собираемые блоки
+neiintegration.handler.harvester.harvestables.1=Шлам - это побочной продукт сбора.
+neiintegration.handler.laserdrill.focus=Фокусирующая линза
+neiintegration.handler.sewer.animals=Животные или жители
+neiintegration.handler.sewer.animals.1=Большие животные производят больше навоза.
+neiintegration.handler.sewer.xp=Сферы опыта
+neiintegration.handler.sewer.xp.1=Опыт преобразовывается в эссенцию.
+neiintegration.handler.slaughterhouse.animals=Животные
+neiintegration.handler.slaughterhouse.animals.1=Большие животные дают больше мяса.
