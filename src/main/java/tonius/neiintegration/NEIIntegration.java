@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
-import tonius.neiintegration.buildcraft.BuildCraftIntegration;
 import tonius.neiintegration.config.Config;
 import tonius.neiintegration.electricalage.ElectricalAgeIntegration;
 import tonius.neiintegration.forestry.ForestryIntegration;
@@ -42,7 +41,6 @@ public class NEIIntegration {
     public void init(FMLInitializationEvent evt) {
         if (evt.getSide() == Side.CLIENT) {
             integrations.add(new MCForgeIntegration());
-            integrations.add(new BuildCraftIntegration());
             integrations.add(new ElectricalAgeIntegration());
             integrations.add(new ForestryIntegration());
             integrations.add(new MFRIntegration());
