@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import tonius.neiintegration.PositionedStackAdv;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import forestry.factory.gadgets.MachineCentrifuge;
 
@@ -125,7 +124,7 @@ public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
     public void loadUsageRecipes(ItemStack ingred) {
         super.loadCraftingRecipes(ingred);
         for (MachineCentrifuge.Recipe recipe : MachineCentrifuge.RecipeManager.recipes) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.resource, ingred)) {
+            if (Utils.areStacksSameTypeCraftingSafe(recipe.resource, ingred)) {
                 this.arecipes.add(new CachedCentrifugeRecipe(recipe, true));
             }
         }

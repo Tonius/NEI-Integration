@@ -124,7 +124,7 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     public void loadUsageRecipes(ItemStack ingred) {
         super.loadUsageRecipes(ingred);
         for (ICokeOvenRecipe recipe : RailcraftCraftingManager.cokeOven.getRecipes()) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getInput(), ingred)) {
+            if (Utils.areStacksSameTypeCraftingSafe(recipe.getInput(), ingred)) {
                 CachedCokeOvenRecipe crecipe = new CachedCokeOvenRecipe(recipe);
                 crecipe.setIngredientPermutation(crecipe.input, ingred);
                 this.arecipes.add(crecipe);

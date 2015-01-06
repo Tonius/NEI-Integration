@@ -16,6 +16,8 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 
 import org.lwjgl.input.Keyboard;
 
+import codechicken.nei.NEIServerUtils;
+
 public class Utils {
     
     public static String translate(String unlocalized, boolean prefix) {
@@ -24,6 +26,13 @@ public class Utils {
     
     public static String translate(String unlocalized) {
         return translate(unlocalized, true);
+    }
+    
+    public static boolean areStacksSameTypeCraftingSafe(ItemStack stack1, ItemStack stack2) {
+        if (stack1 != null && stack2 != null) {
+            return NEIServerUtils.areStacksSameTypeCrafting(stack1, stack2);
+        }
+        return false;
     }
     
     public static List<ItemStack> getItemVariations(ItemStack base) {

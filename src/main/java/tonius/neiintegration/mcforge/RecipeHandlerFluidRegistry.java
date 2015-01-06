@@ -21,7 +21,6 @@ import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import tonius.neiintegration.config.Config;
 import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
 
@@ -107,7 +106,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
         public void setPermutation(PositionedStack pStack, ItemStack stack) {
             if (pStack != null) {
                 for (int i = 0; i < pStack.items.length; i++) {
-                    if (NEIServerUtils.areStacksSameTypeCrafting(stack, pStack.items[i])) {
+                    if (Utils.areStacksSameTypeCraftingSafe(stack, pStack.items[i])) {
                         pStack.item = pStack.items[i];
                         pStack.item.setItemDamage(stack.getItemDamage());
                         pStack.items = new ItemStack[] { pStack.item };
@@ -184,7 +183,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
                 if (crecipe.filledContainer != null && crecipe.filledContainer.contains(result)) {
                     crecipe.setPermutation(crecipe.filledContainer, result);
                     for (FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData()) {
-                        if (NEIServerUtils.areStacksSameTypeCrafting(data.filledContainer, result)) {
+                        if (Utils.areStacksSameTypeCraftingSafe(data.filledContainer, result)) {
                             crecipe.setPermutation(crecipe.emptyContainer, data.emptyContainer);
                         }
                     }
@@ -214,7 +213,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
                 if (crecipe.emptyContainer != null && crecipe.emptyContainer.contains(ingredient)) {
                     crecipe.setPermutation(crecipe.emptyContainer, ingredient);
                     for (FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData()) {
-                        if (NEIServerUtils.areStacksSameTypeCrafting(data.emptyContainer, ingredient)) {
+                        if (Utils.areStacksSameTypeCraftingSafe(data.emptyContainer, ingredient)) {
                             crecipe.setPermutation(crecipe.filledContainer, data.filledContainer);
                         }
                     }

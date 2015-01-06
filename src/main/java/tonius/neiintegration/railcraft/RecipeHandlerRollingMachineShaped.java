@@ -10,7 +10,6 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import tonius.neiintegration.Utils;
 import codechicken.core.ReflectionManager;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 
 public class RecipeHandlerRollingMachineShaped extends RecipeHandlerRollingMachine {
@@ -121,7 +120,7 @@ public class RecipeHandlerRollingMachineShaped extends RecipeHandlerRollingMachi
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (IRecipe irecipe : RailcraftCraftingManager.rollingMachine.getRecipeList()) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(irecipe.getRecipeOutput(), result)) {
+            if (Utils.areStacksSameTypeCraftingSafe(irecipe.getRecipeOutput(), result)) {
                 CachedRollingMachineShapedRecipe recipe = this.getCachedRecipe(irecipe, true);
                 if (recipe != null) {
                     this.arecipes.add(recipe);

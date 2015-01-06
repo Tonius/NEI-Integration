@@ -14,7 +14,6 @@ import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import forestry.factory.gadgets.MachineBottler;
 
@@ -115,7 +114,7 @@ public class RecipeHandlerBottler extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (MachineBottler.Recipe recipe : recipes) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.bottled, result)) {
+            if (Utils.areStacksSameTypeCraftingSafe(recipe.bottled, result)) {
                 this.arecipes.add(new CachedBottlerRecipe(recipe));
             }
         }
@@ -125,7 +124,7 @@ public class RecipeHandlerBottler extends RecipeHandlerBase {
     public void loadUsageRecipes(ItemStack ingred) {
         super.loadUsageRecipes(ingred);
         for (MachineBottler.Recipe recipe : recipes) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.can, ingred)) {
+            if (Utils.areStacksSameTypeCraftingSafe(recipe.can, ingred)) {
                 this.arecipes.add(new CachedBottlerRecipe(recipe));
             }
         }

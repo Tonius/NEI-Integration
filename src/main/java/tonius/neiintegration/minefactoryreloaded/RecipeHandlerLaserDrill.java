@@ -17,7 +17,6 @@ import powercrystals.minefactoryreloaded.tile.machine.TileEntityLaserDrillPrecha
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
 import cofh.lib.util.WeightedRandomItemStack;
@@ -146,7 +145,7 @@ public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
                     List<ItemStack> preferredStacks = laserPreferredOres.get(i);
                     if (preferredStacks != null) {
                         for (ItemStack preferredStack : preferredStacks) {
-                            if (NEIServerUtils.areStacksSameTypeCrafting(preferredStack, dropStack)) {
+                            if (Utils.areStacksSameTypeCraftingSafe(preferredStack, dropStack)) {
                                 this.arecipes.add(new CachedLaserDrillRecipe(dropStack, drop.itemWeight, i));
                             }
                         }
@@ -160,13 +159,13 @@ public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
     public void loadCraftingRecipes(ItemStack result) {
         for (WeightedRandom.Item drop : laserOres) {
             if (drop instanceof WeightedRandomItemStack) {
-                if (NEIServerUtils.areStacksSameTypeCrafting(((WeightedRandomItemStack) drop).getStack(), result)) {
+                if (Utils.areStacksSameTypeCraftingSafe(((WeightedRandomItemStack) drop).getStack(), result)) {
                     ItemStack dropStack = ((WeightedRandomItemStack) drop).getStack();
                     for (int i : laserPreferredOres.keySet()) {
                         List<ItemStack> preferredStacks = laserPreferredOres.get(i);
                         if (preferredStacks != null) {
                             for (ItemStack preferredStack : preferredStacks) {
-                                if (NEIServerUtils.areStacksSameTypeCrafting(preferredStack, dropStack)) {
+                                if (Utils.areStacksSameTypeCraftingSafe(preferredStack, dropStack)) {
                                     this.arecipes.add(new CachedLaserDrillRecipe(dropStack, drop.itemWeight, i));
                                 }
                             }
@@ -187,7 +186,7 @@ public class RecipeHandlerLaserDrill extends RecipeHandlerBase {
                     List<ItemStack> preferredStacks = laserPreferredOres.get(dmg);
                     if (preferredStacks != null) {
                         for (ItemStack preferredStack : preferredStacks) {
-                            if (NEIServerUtils.areStacksSameTypeCrafting(preferredStack, dropStack)) {
+                            if (Utils.areStacksSameTypeCraftingSafe(preferredStack, dropStack)) {
                                 this.arecipes.add(new CachedLaserDrillRecipe(dropStack, drop.itemWeight, dmg));
                             }
                         }

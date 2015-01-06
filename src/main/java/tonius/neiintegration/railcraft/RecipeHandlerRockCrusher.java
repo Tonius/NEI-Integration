@@ -15,7 +15,6 @@ import tonius.neiintegration.PositionedStackAdv;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.API;
 
@@ -122,7 +121,7 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
         for (IRockCrusherRecipe recipe : RailcraftCraftingManager.rockCrusher.getRecipes()) {
             if (recipe.getOutputs() != null) {
                 for (Entry<ItemStack, Float> output : recipe.getOutputs()) {
-                    if (NEIServerUtils.areStacksSameTypeCrafting(output.getKey(), result)) {
+                    if (Utils.areStacksSameTypeCraftingSafe(output.getKey(), result)) {
                         this.arecipes.add(new CachedRockCrusherRecipe(recipe));
                         break;
                     }
@@ -134,7 +133,7 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         for (IRockCrusherRecipe irecipe : RailcraftCraftingManager.rockCrusher.getRecipes()) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(irecipe.getInput(), ingredient)) {
+            if (Utils.areStacksSameTypeCraftingSafe(irecipe.getInput(), ingredient)) {
                 this.arecipes.add(new CachedRockCrusherRecipe(irecipe));
             }
         }

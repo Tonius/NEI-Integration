@@ -4,8 +4,8 @@ import mods.eln.misc.Recipe;
 import mods.eln.misc.RecipesList;
 import net.minecraft.item.ItemStack;
 import tonius.neiintegration.RecipeHandlerBase;
+import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 
 public abstract class RecipeHandlerElnBase extends RecipeHandlerBase {
@@ -69,7 +69,7 @@ public abstract class RecipeHandlerElnBase extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (Recipe recipe : this.getRecipes().getRecipes()) {
-            if (recipe.output != null && recipe.output.length > 0 && NEIServerUtils.areStacksSameTypeCrafting(recipe.output[0], result)) {
+            if (recipe.output != null && recipe.output.length > 0 && Utils.areStacksSameTypeCraftingSafe(recipe.output[0], result)) {
                 this.arecipes.add(new CachedElnRecipe(recipe));
             }
         }
@@ -78,7 +78,7 @@ public abstract class RecipeHandlerElnBase extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(ItemStack ingred) {
         for (Recipe recipe : this.getRecipes().getRecipes()) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.input, ingred)) {
+            if (Utils.areStacksSameTypeCraftingSafe(recipe.input, ingred)) {
                 this.arecipes.add(new CachedElnRecipe(recipe));
             }
         }

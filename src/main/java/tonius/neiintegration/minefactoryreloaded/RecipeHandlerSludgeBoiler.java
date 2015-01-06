@@ -16,7 +16,6 @@ import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
 import cofh.lib.util.WeightedRandomItemStack;
@@ -126,7 +125,7 @@ public class RecipeHandlerSludgeBoiler extends RecipeHandlerBase {
     public void loadCraftingRecipes(ItemStack result) {
         for (Item drop : drops) {
             if (drop instanceof WeightedRandomItemStack) {
-                if (NEIServerUtils.areStacksSameTypeCrafting(((WeightedRandomItemStack) drop).getStack(), result)) {
+                if (Utils.areStacksSameTypeCraftingSafe(((WeightedRandomItemStack) drop).getStack(), result)) {
                     this.arecipes.add(new CachedSludgeBoilerRecipe(result, drop.itemWeight));
                 }
             }

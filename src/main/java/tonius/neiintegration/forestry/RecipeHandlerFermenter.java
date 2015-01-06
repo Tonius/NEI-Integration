@@ -166,7 +166,7 @@ public class RecipeHandlerFermenter extends RecipeHandlerBase {
         for (MachineFermenter.Recipe recipe : MachineFermenter.RecipeManager.recipes) {
             if (recipe.resource != null) {
                 for (ItemStack stack : Utils.getItemVariations(recipe.resource)) {
-                    if (stack.hasTagCompound() && NEIServerUtils.areStacksSameType(stack, ingred) || !stack.hasTagCompound() && NEIServerUtils.areStacksSameTypeCrafting(stack, ingred)) {
+                    if (stack.hasTagCompound() && NEIServerUtils.areStacksSameType(stack, ingred) || !stack.hasTagCompound() && Utils.areStacksSameTypeCraftingSafe(stack, ingred)) {
                         CachedFermenterRecipe crecipe = new CachedFermenterRecipe(recipe, stack, true);
                         crecipe.setIngredientPermutationNBT(crecipe.inputItems, ingred);
                         this.arecipes.add(crecipe);
@@ -174,7 +174,7 @@ public class RecipeHandlerFermenter extends RecipeHandlerBase {
                 }
             }
             for (ItemStack stack : fuels) {
-                if (NEIServerUtils.areStacksSameTypeCrafting(stack, ingred)) {
+                if (Utils.areStacksSameTypeCraftingSafe(stack, ingred)) {
                     for (CachedFermenterRecipe crecipe : this.getCachedRecipes(recipe, true)) {
                         crecipe.setIngredientPermutation(crecipe.inputItems, ingred);
                         this.arecipes.add(crecipe);

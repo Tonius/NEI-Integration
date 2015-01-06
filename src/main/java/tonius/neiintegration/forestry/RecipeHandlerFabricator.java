@@ -13,7 +13,6 @@ import net.minecraftforge.fluids.FluidStack;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import forestry.core.utils.ShapedRecipeCustom;
 import forestry.factory.gadgets.MachineFabricator;
@@ -150,7 +149,7 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (MachineFabricator.Recipe recipe : MachineFabricator.RecipeManager.recipes) {
-            if (recipe.asIRecipe() != null && NEIServerUtils.areStacksSameTypeCrafting(recipe.asIRecipe().getRecipeOutput(), result)) {
+            if (recipe.asIRecipe() != null && Utils.areStacksSameTypeCraftingSafe(recipe.asIRecipe().getRecipeOutput(), result)) {
                 this.arecipes.add(new CachedFabricatorRecipe(recipe, true));
             }
         }

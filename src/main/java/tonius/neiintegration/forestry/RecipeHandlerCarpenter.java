@@ -12,7 +12,6 @@ import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.API;
 import forestry.core.interfaces.IDescriptiveRecipe;
@@ -142,7 +141,7 @@ public class RecipeHandlerCarpenter extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (MachineCarpenter.Recipe recipe : MachineCarpenter.RecipeManager.recipes) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getCraftingResult(), result)) {
+            if (Utils.areStacksSameTypeCraftingSafe(recipe.getCraftingResult(), result)) {
                 this.arecipes.add(new CachedCarpenterRecipe(recipe, true));
             }
         }

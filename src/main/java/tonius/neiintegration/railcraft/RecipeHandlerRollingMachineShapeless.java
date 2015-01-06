@@ -10,7 +10,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import tonius.neiintegration.Utils;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 
 public class RecipeHandlerRollingMachineShapeless extends RecipeHandlerRollingMachine {
@@ -112,7 +111,7 @@ public class RecipeHandlerRollingMachineShapeless extends RecipeHandlerRollingMa
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (IRecipe irecipe : RailcraftCraftingManager.rollingMachine.getRecipeList()) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(irecipe.getRecipeOutput(), result)) {
+            if (Utils.areStacksSameTypeCraftingSafe(irecipe.getRecipeOutput(), result)) {
                 CachedRollingMachineShapelessRecipe recipe = this.getCachedRecipe(irecipe, true);
                 if (recipe != null) {
                     this.arecipes.add(recipe);

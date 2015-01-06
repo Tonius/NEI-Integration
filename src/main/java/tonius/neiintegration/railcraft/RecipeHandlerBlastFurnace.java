@@ -120,12 +120,12 @@ public class RecipeHandlerBlastFurnace extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         for (IBlastFurnaceRecipe recipe : RailcraftCraftingManager.blastFurnace.getRecipes()) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getInput(), ingredient)) {
+            if (Utils.areStacksSameTypeCraftingSafe(recipe.getInput(), ingredient)) {
                 this.arecipes.add(new CachedBlastFurnaceRecipe(recipe));
             }
         }
         for (ItemStack fuel : fuels) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(fuel, ingredient)) {
+            if (Utils.areStacksSameTypeCraftingSafe(fuel, ingredient)) {
                 for (IBlastFurnaceRecipe recipe : RailcraftCraftingManager.blastFurnace.getRecipes()) {
                     this.arecipes.add(new CachedBlastFurnaceRecipe(recipe, ingredient));
                 }

@@ -12,7 +12,6 @@ import net.minecraftforge.fluids.FluidStack;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import forestry.api.fuels.FuelManager;
 import forestry.api.fuels.MoistenerFuel;
@@ -122,7 +121,7 @@ public class RecipeHandlerMoistener extends RecipeHandlerBase {
     public void loadCraftingRecipes(ItemStack result) {
         for (MachineMoistener.Recipe recipe : MachineMoistener.RecipeManager.recipes) {
             for (MoistenerFuel fuel : FuelManager.moistenerResource.values()) {
-                if (NEIServerUtils.areStacksSameTypeCrafting(recipe.product, result) || NEIServerUtils.areStacksSameTypeCrafting(fuel.product, result)) {
+                if (Utils.areStacksSameTypeCraftingSafe(recipe.product, result) || Utils.areStacksSameTypeCraftingSafe(fuel.product, result)) {
                     this.arecipes.add(new CachedMoistenerRecipe(recipe, fuel));
                 }
             }
@@ -134,7 +133,7 @@ public class RecipeHandlerMoistener extends RecipeHandlerBase {
         super.loadUsageRecipes(ingred);
         for (MachineMoistener.Recipe recipe : MachineMoistener.RecipeManager.recipes) {
             for (MoistenerFuel fuel : FuelManager.moistenerResource.values()) {
-                if (NEIServerUtils.areStacksSameTypeCrafting(recipe.resource, ingred) || NEIServerUtils.areStacksSameTypeCrafting(fuel.item, ingred)) {
+                if (Utils.areStacksSameTypeCraftingSafe(recipe.resource, ingred) || Utils.areStacksSameTypeCraftingSafe(fuel.item, ingred)) {
                     this.arecipes.add(new CachedMoistenerRecipe(recipe, fuel));
                 }
             }

@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import forestry.core.utils.ShapedRecipeCustom;
 
@@ -109,7 +108,7 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
-            if (recipe instanceof ShapedRecipeCustom && NEIServerUtils.areStacksSameTypeCrafting(((ShapedRecipeCustom) recipe).getRecipeOutput(), result)) {
+            if (recipe instanceof ShapedRecipeCustom && Utils.areStacksSameTypeCraftingSafe(((ShapedRecipeCustom) recipe).getRecipeOutput(), result)) {
                 this.arecipes.add(new CachedShapedCustomRecipe((ShapedRecipeCustom) recipe, true));
             }
         }

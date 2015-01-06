@@ -12,7 +12,6 @@ import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.PositionedStackAdv;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import forestry.factory.gadgets.MachineSqueezer;
 
@@ -127,7 +126,7 @@ public class RecipeHandlerSqueezer extends RecipeHandlerBase {
     public void loadCraftingRecipes(ItemStack result) {
         super.loadCraftingRecipes(result);
         for (MachineSqueezer.Recipe recipe : MachineSqueezer.RecipeManager.recipes) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.remnants, result)) {
+            if (Utils.areStacksSameTypeCraftingSafe(recipe.remnants, result)) {
                 this.arecipes.add(new CachedSqueezerRecipe(recipe, true));
             }
         }
