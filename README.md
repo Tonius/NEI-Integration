@@ -14,6 +14,7 @@ If you are a mod author and want to migrate some of these handlers to your mod, 
 Alternatively, if your mod is open source, you could just ask me to do a pull request.
 
 ### Credits
+* **ChickenBones** for Not Enough Items itself
 * **mistaqur** for the original NEI Plugins, which inspired this mod
 * **iTitus** for providing helpful pieces of code
 * Anyone who helped making the mod better via GitHub
