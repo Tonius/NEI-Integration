@@ -12,3 +12,8 @@ If you are a mod author and want to migrate some of these handlers to your mod, 
 - Credit me somewhere. Maybe even link to this mod, but it's not required.
 
 Alternatively, if your mod is open source, you could just ask me to do a pull request.
+
+### Credits
+* **mistaqur** for the original NEI Plugins, which inspired this mod
+* **iTitus** for providing helpful pieces of code
+* Anyone who helped making the mod better via GitHub
