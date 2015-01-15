@@ -24,10 +24,9 @@ public class EntityDumper extends DataDumper {
         LinkedList<String[]> list = new LinkedList<String[]>();
         
         List<Integer> ids = new ArrayList<Integer>();
-        for (Object obj : EntityList.IDtoClassMapping.keySet()) {
-            ids.add((Integer) obj);
-        }
+        ids.addAll(EntityList.IDtoClassMapping.keySet());
         Collections.sort(ids);
+        
         for (int id : ids) {
             list.add(new String[] { String.valueOf(id), EntityList.getStringFromID(id), EntityList.getClassFromID(id).getName() });
         }

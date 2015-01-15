@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraftforge.common.DimensionManager;
+import scala.actors.threadpool.Arrays;
 import codechicken.nei.config.DataDumper;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
@@ -26,10 +27,9 @@ public class DimensionDumper extends DataDumper {
         LinkedList<String[]> list = new LinkedList<String[]>();
         
         List<Integer> ids = new ArrayList<Integer>();
-        for (int id : DimensionManager.getStaticDimensionIDs()) {
-            ids.add(id);
-        }
+        ids.addAll(Arrays.asList(DimensionManager.getStaticDimensionIDs()));
         Collections.sort(ids);
+        
         for (int id : ids) {
             int providerId = DimensionManager.getProviderType(id);
             Hashtable<Integer, Class> providers = ReflectionHelper.getPrivateValue(DimensionManager.class, null, "providers");

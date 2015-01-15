@@ -1,6 +1,7 @@
 package tonius.neiintegration.mcforge.dumpers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -27,15 +28,14 @@ public class FluidContainerDumper extends DataDumper {
         LinkedList<String[]> list = new LinkedList<String[]>();
         
         List<FluidContainerData> datas = new ArrayList<FluidContainerData>();
-        for (FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData()) {
-            datas.add(data);
-        }
+        datas.addAll(Arrays.asList(FluidContainerRegistry.getRegisteredFluidContainerData()));
         Collections.sort(datas, new Comparator<FluidContainerData>() {
             @Override
             public int compare(FluidContainerData d1, FluidContainerData d2) {
                 return d1.fluid.getFluid().getName().compareTo(d2.fluid.getFluid().getName());
             }
         });
+        
         for (FluidContainerData data : datas) {
             String emptyDisplayName;
             try {

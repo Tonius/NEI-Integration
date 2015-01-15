@@ -24,22 +24,24 @@ neiintegration.config.handlers.tooltip=Enable or disable some of the recipe hand
 neiintegration.config.tooltips=Item Tooltip Settings
 neiintegration.config.tooltips.tooltip=No tooltip defined. How ironic.
 
-nei.options.tools.dump.neiintegration_loadedmod=Loaded Mod
-nei.options.tools.dump.neiintegration_loadedmods=[NEII] Loaded Mods
-nei.options.tools.dump.neiintegration_entity=Entity
-nei.options.tools.dump.neiintegration_entitys=[NEII] Entities
-nei.options.tools.dump.neiintegration_tileentity=Tile Entity
-nei.options.tools.dump.neiintegration_tileentitys=[NEII] Tile Entities
+nei.options.tools.dump.neiintegration_chestloots=[NEII] Chest Loot
+nei.options.tools.dump.neiintegration_chestloot=Chest Loot
 nei.options.tools.dump.neiintegration_dimension=Dimension
 nei.options.tools.dump.neiintegration_dimensions=[NEII] Dimensions
-nei.options.tools.dump.neiintegration_oredict=Ore Dictionary
-nei.options.tools.dump.neiintegration_oredicts=[NEII] Ore Dictionary
+nei.options.tools.dump.neiintegration_entity=Entity
+nei.options.tools.dump.neiintegration_entitys=[NEII] Entities
 nei.options.tools.dump.neiintegration_fluid=Fluid
 nei.options.tools.dump.neiintegration_fluids=[NEII] Fluids
 nei.options.tools.dump.neiintegration_fluidcontainer=Fluid Container
 nei.options.tools.dump.neiintegration_fluidcontainers=[NEII] Fluid Containers
+nei.options.tools.dump.neiintegration_loadedmod=Loaded Mod
+nei.options.tools.dump.neiintegration_loadedmods=[NEII] Loaded Mods
+nei.options.tools.dump.neiintegration_oredict=Ore Dictionary
+nei.options.tools.dump.neiintegration_oredicts=[NEII] Ore Dictionary
 nei.options.tools.dump.neiintegration_recipehandler=Recipe Handler
 nei.options.tools.dump.neiintegration_recipehandlers=[NEII] Recipe Handlers
+nei.options.tools.dump.neiintegration_tileentity=Tile Entity
+nei.options.tools.dump.neiintegration_tileentitys=[NEII] Tile Entities
 
 # Forge
 neiintegration.handler.fluidRegistry=Fluid Registry
