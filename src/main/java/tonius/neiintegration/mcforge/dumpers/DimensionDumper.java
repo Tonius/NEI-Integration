@@ -1,13 +1,13 @@
 package tonius.neiintegration.mcforge.dumpers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraftforge.common.DimensionManager;
-import scala.actors.threadpool.Arrays;
 import codechicken.nei.config.DataDumper;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
