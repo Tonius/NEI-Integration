@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import tonius.neiintegration.config.Config;
 import tonius.neiintegration.electricalage.ElectricalAgeIntegration;
 import tonius.neiintegration.forestry.ForestryIntegration;
+import tonius.neiintegration.harvestcraft.HarvestCraftIntegration;
 import tonius.neiintegration.mcforge.MCForgeIntegration;
 import tonius.neiintegration.minefactoryreloaded.MFRIntegration;
 import tonius.neiintegration.railcraft.RailcraftIntegration;
@@ -43,6 +44,7 @@ public class NEIIntegration {
             integrations.add(new MCForgeIntegration());
             integrations.add(new ElectricalAgeIntegration());
             integrations.add(new ForestryIntegration());
+            integrations.add(new HarvestCraftIntegration());
             integrations.add(new MFRIntegration());
             integrations.add(new RailcraftIntegration());
         }
