@@ -8,7 +8,6 @@ import java.util.List;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import codechicken.nei.api.ItemInfo;
 import codechicken.nei.config.DataDumper;
 
 public class OreDictionaryDumper extends DataDumper {
@@ -19,7 +18,7 @@ public class OreDictionaryDumper extends DataDumper {
     
     @Override
     public String[] header() {
-        return new String[] { "Ore Name", "ItemStack", "Item ID", "Wildcard", "Mod" };
+        return new String[] { "Ore Name", "ItemStack", "Item ID", "Display Name", "Wildcard" };
     }
     
     @Override
@@ -31,8 +30,18 @@ public class OreDictionaryDumper extends DataDumper {
         
         for (String oreName : oreNames) {
             List<ItemStack> ores = OreDictionary.getOres(oreName);
+            String displayName;
             for (ItemStack ore : ores) {
-                list.add(new String[] { oreName, ore.toString(), Item.itemRegistry.getNameForObject(ore.getItem()), String.valueOf(ore.getItemDamage() == OreDictionary.WILDCARD_VALUE), ItemInfo.itemOwners.get(ore.getItem()) });
+                if (ore.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
+                    displayName = "(wildcard)";
+                } else {
+                    try {
+                        displayName = ore.getDisplayName();
+                    } catch (Exception e) {
+                        displayName = "-";
+                    }
+                }
+                list.add(new String[] { oreName, ore.toString(), Item.itemRegistry.getNameForObject(ore.getItem()), displayName, String.valueOf(ore.getItemDamage() == OreDictionary.WILDCARD_VALUE) });
             }
         }
         

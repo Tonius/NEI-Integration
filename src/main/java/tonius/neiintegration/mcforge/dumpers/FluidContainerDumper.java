@@ -19,7 +19,7 @@ public class FluidContainerDumper extends DataDumper {
     
     @Override
     public String[] header() {
-        return new String[] { "Fluid", "Amount", "Empty Container", "Empty Container Item", "Filled Container", "Filled Container Item" };
+        return new String[] { "Fluid", "Amount", "Empty Container", "Empty Container Display Name", "Empty Container Item", "Filled Container", "Filled Container Display Name", "Filled Container Item" };
     }
     
     @Override
@@ -37,7 +37,19 @@ public class FluidContainerDumper extends DataDumper {
             }
         });
         for (FluidContainerData data : datas) {
-            list.add(new String[] { data.fluid.getFluid().getName(), String.valueOf(data.fluid.amount), data.emptyContainer.toString(), Item.itemRegistry.getNameForObject(data.emptyContainer.getItem()), data.filledContainer.toString(), Item.itemRegistry.getNameForObject(data.filledContainer.getItem()) });
+            String emptyDisplayName;
+            try {
+                emptyDisplayName = data.emptyContainer.getDisplayName();
+            } catch (Exception e) {
+                emptyDisplayName = "-";
+            }
+            String filledDisplayName;
+            try {
+                filledDisplayName = data.filledContainer.getDisplayName();
+            } catch (Exception e) {
+                filledDisplayName = "-";
+            }
+            list.add(new String[] { data.fluid.getFluid().getName(), String.valueOf(data.fluid.amount), data.emptyContainer.toString(), emptyDisplayName, Item.itemRegistry.getNameForObject(data.emptyContainer.getItem()), data.filledContainer.toString(), filledDisplayName, Item.itemRegistry.getNameForObject(data.filledContainer.getItem()) });
         }
         
         return list;
