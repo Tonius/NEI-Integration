@@ -20,7 +20,8 @@ public class Config {
     public static final Section sectionTooltips = new Section("Tooltips", "tooltips");
     
     // handlers
-    public static boolean handler_fluidRegistry = true;
+    public static boolean handler_fluidRegistry = Defaults.handler_fluidRegistry;
+    public static boolean handler_oreDictionary = Defaults.handler_oreDictionary;
     
     // tooltips
     public static boolean tooltip_unlocalizedName = Defaults.tooltip_unlocalizedName;
@@ -68,6 +69,7 @@ public class Config {
     
     public static void processConfig() {
         handler_fluidRegistry = config.get(sectionHandlers.name, "Fluid Registry", Defaults.handler_fluidRegistry, "Shows information about registered fluids when looking them or related items up.").getBoolean(Defaults.handler_fluidRegistry);
+        handler_oreDictionary = config.get(sectionHandlers.name, "Ore Dictionary", Defaults.handler_oreDictionary, "Shows information about items registered in the Ore Dictionary when looking up item usage.").getBoolean(Defaults.handler_oreDictionary);
         
         tooltip_unlocalizedName = config.get(sectionTooltips.name, "Unlocalized Name", Defaults.tooltip_unlocalizedName, "Show the unlocalized name of items.").getBoolean(Defaults.tooltip_unlocalizedName);
         tooltip_unlocalizedNameShift = config.get(sectionTooltips.name, "Unlocalized Name Shift", Defaults.tooltip_unlocalizedNameShift, "If unlocalized names are enabled, they will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltip_unlocalizedNameShift);

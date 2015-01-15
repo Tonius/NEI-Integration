@@ -126,7 +126,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
     
     @Override
     public String getRecipeID() {
-        return "forge.fluids";
+        return "forge.fluidRegistry";
     }
     
     @Override

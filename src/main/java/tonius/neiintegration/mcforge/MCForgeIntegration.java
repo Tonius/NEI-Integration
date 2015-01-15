@@ -23,6 +23,7 @@ public class MCForgeIntegration extends IntegrationBase {
     @Override
     public void loadConfig() {
         registerHandler(new RecipeHandlerFluidRegistry());
+        registerHandler(new RecipeHandlerOreDictionary());
         
         MCForgeDumpers.loadConfig();
     }
