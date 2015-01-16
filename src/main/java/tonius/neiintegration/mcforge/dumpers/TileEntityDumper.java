@@ -32,12 +32,17 @@ public class TileEntityDumper extends DataDumper {
         Collections.sort(classes, new Comparator<Class>() {
             @Override
             public int compare(Class o1, Class o2) {
+                if (o1 == null || o2 == null) {
+                    return 0;
+                }
                 return o1.getName().compareTo(o2.getName());
             }
         });
         
         for (Class clazz : classes) {
-            list.add(new String[] { clazz.getName(), classToNameMap.get(clazz) });
+            if (clazz != null) {
+                list.add(new String[] { clazz.getName(), classToNameMap.get(clazz) });
+            }
         }
         
         return list;
