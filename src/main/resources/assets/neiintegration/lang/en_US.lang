@@ -56,6 +56,7 @@ neiintegration.handler.fluidRegistry.density=Density:
 neiintegration.handler.fluidRegistry.viscosity=Viscosity:
 
 neiintegration.handler.oreDictionary=Ore Dictionary
+neiintegration.handler.oreDictionary.warning=Can take a while to load!
 
 # BuildCraft
 neiintegration.handler.refinery.energyRate=%d RF at %d RF/t

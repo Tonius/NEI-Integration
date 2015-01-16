@@ -1,17 +1,21 @@
 package tonius.neiintegration.mcforge;
 
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import tonius.neiintegration.config.Config;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.GuiRecipe;
 
 public class RecipeHandlerOreDictionary extends RecipeHandlerBase {
     
@@ -78,6 +82,14 @@ public class RecipeHandlerOreDictionary extends RecipeHandlerBase {
     @Override
     public void drawExtras(int recipe) {
         GuiDraw.drawStringC(((CachedOreDictionaryRecipe) this.arecipes.get(recipe)).oreName, 83, 5, 0x808080, false);
+    }
+    
+    @Override
+    public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
+        if (new Rectangle(68, 21, 24, 17).contains(relMouse)) {
+            currenttip.add(EnumChatFormatting.GRAY + Utils.translate("handler.oreDictionary.warning"));
+        }
+        return currenttip;
     }
     
     @Override
