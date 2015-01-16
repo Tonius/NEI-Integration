@@ -36,7 +36,6 @@ public class FluidDumper extends DataDumper {
             }
         });
         
-        String localizedName;
         for (Fluid f : fluids) {
             list.add(new String[] { String.valueOf(f.getID()), f.getName(), f.getLocalizedName(new FluidStack(f, 1000)), String.valueOf(f.getTemperature()), String.valueOf(f.getLuminosity()), String.valueOf(f.getDensity()), String.valueOf(f.getViscosity()), String.valueOf(f.canBePlacedInWorld()), f.getBlock() != null ? Block.blockRegistry.getNameForObject(f.getBlock()) : null, f.getBlock() != null ? f.getBlock().getClass().getName() : null });
         }
