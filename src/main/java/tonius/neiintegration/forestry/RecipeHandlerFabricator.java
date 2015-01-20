@@ -20,18 +20,10 @@ import forestry.factory.gadgets.MachineFabricator;
 public class RecipeHandlerFabricator extends RecipeHandlerBase {
     
     private static Class<? extends GuiContainer> guiClass;
-    private static Map<Fluid, List<ItemStack>> smeltingInputs = new HashMap<Fluid, List<ItemStack>>();
     
     @Override
     public void prepare() {
         guiClass = Utils.getClass("forestry.factory.gui.GuiFabricator");
-        for (MachineFabricator.Smelting smelting : MachineFabricator.RecipeManager.smeltings) {
-            Fluid fluid = smelting.getProduct().getFluid();
-            if (!smeltingInputs.containsKey(fluid)) {
-                smeltingInputs.put(fluid, new ArrayList<ItemStack>());
-            }
-            smeltingInputs.get(fluid).add(smelting.getResource());
-        }
     }
     
     public class CachedFabricatorRecipe extends CachedBaseRecipe {
@@ -44,7 +36,7 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
         public CachedFabricatorRecipe(MachineFabricator.Recipe recipe, boolean genPerms) {
             if (recipe.getLiquid() != null) {
                 this.tank = new PositionedFluidTank(recipe.getLiquid(), 2000, new Rectangle(21, 37, 16, 16));
-                List<ItemStack> smeltingInput = smeltingInputs.get(recipe.getLiquid().getFluid());
+                List<ItemStack> smeltingInput = getSmeltingInputs().get(recipe.getLiquid().getFluid());
                 if (smeltingInput != null && !smeltingInput.isEmpty()) {
                     this.smeltingInput.add(new PositionedStack(smeltingInput, 21, 10));
                 }
@@ -176,6 +168,18 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
                 this.arecipes.add(new CachedFabricatorRecipe(recipe, true));
             }
         }
+    }
+    
+    private static Map<Fluid, List<ItemStack>> getSmeltingInputs() {
+        Map<Fluid, List<ItemStack>> smeltingInputs = new HashMap<Fluid, List<ItemStack>>();
+        for (MachineFabricator.Smelting smelting : MachineFabricator.RecipeManager.smeltings) {
+            Fluid fluid = smelting.getProduct().getFluid();
+            if (!smeltingInputs.containsKey(fluid)) {
+                smeltingInputs.put(fluid, new ArrayList<ItemStack>());
+            }
+            smeltingInputs.get(fluid).add(smelting.getResource());
+        }
+        return smeltingInputs;
     }
     
 }

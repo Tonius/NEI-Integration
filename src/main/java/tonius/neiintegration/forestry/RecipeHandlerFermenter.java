@@ -24,15 +24,11 @@ import forestry.factory.gadgets.MachineFermenter;
 public class RecipeHandlerFermenter extends RecipeHandlerBase {
     
     private static Class<? extends GuiContainer> guiClass;
-    private static List<ItemStack> fuels = new ArrayList<ItemStack>();
     
     @Override
     public void prepare() {
         guiClass = Utils.getClass("forestry.factory.gui.GuiFermenter");
         API.setGuiOffset(guiClass, 5, 15);
-        for (FermenterFuel fuel : FuelManager.fermenterFuel.values()) {
-            fuels.add(fuel.item);
-        }
     }
     
     public class CachedFermenterRecipe extends CachedBaseRecipe {
@@ -58,7 +54,11 @@ public class RecipeHandlerFermenter extends RecipeHandlerBase {
             }
             
             this.inputItems.add(new PositionedStack(fermentable, 80, 8));
-            this.inputItems.add(new PositionedStack(RecipeHandlerFermenter.fuels, 70, 42));
+            List<ItemStack> fuels = new ArrayList<ItemStack>();
+            for (FermenterFuel fuel : FuelManager.fermenterFuel.values()) {
+                fuels.add(fuel.item);
+            }
+            this.inputItems.add(new PositionedStack(fuels, 70, 42));
             
             if (genPerms) {
                 this.generatePermutations();
@@ -173,8 +173,8 @@ public class RecipeHandlerFermenter extends RecipeHandlerBase {
                     }
                 }
             }
-            for (ItemStack stack : fuels) {
-                if (Utils.areStacksSameTypeCraftingSafe(stack, ingred)) {
+            for (FermenterFuel fuel : FuelManager.fermenterFuel.values()) {
+                if (Utils.areStacksSameTypeCraftingSafe(fuel.item, ingred)) {
                     for (CachedFermenterRecipe crecipe : this.getCachedRecipes(recipe, true)) {
                         crecipe.setIngredientPermutation(crecipe.inputItems, ingred);
                         this.arecipes.add(crecipe);
