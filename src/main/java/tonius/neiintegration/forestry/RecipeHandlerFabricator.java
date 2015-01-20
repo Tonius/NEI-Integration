@@ -1,5 +1,6 @@
 package tonius.neiintegration.forestry;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,12 +9,14 @@ import java.util.Map;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.GuiRecipe;
 import forestry.core.utils.ShapedRecipeCustom;
 import forestry.factory.gadgets.MachineFabricator;
 
@@ -36,8 +39,11 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
         public CachedFabricatorRecipe(MachineFabricator.Recipe recipe, boolean genPerms) {
             if (recipe.getLiquid() != null) {
                 this.tank = new PositionedFluidTank(recipe.getLiquid(), 2000, new Rectangle(21, 37, 16, 16));
-                List<ItemStack> smeltingInput = getSmeltingInputs().get(recipe.getLiquid().getFluid());
-                if (smeltingInput != null && !smeltingInput.isEmpty()) {
+                List<ItemStack> smeltingInput = new ArrayList<ItemStack>();
+                for (MachineFabricator.Smelting s : getSmeltingInputs().get(recipe.getLiquid().getFluid())) {
+                    smeltingInput.add(s.getResource());
+                }
+                if (!smeltingInput.isEmpty()) {
                     this.smeltingInput.add(new PositionedStack(smeltingInput, 21, 10));
                 }
             }
@@ -170,14 +176,29 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
         }
     }
     
-    private static Map<Fluid, List<ItemStack>> getSmeltingInputs() {
-        Map<Fluid, List<ItemStack>> smeltingInputs = new HashMap<Fluid, List<ItemStack>>();
+    @Override
+    public List<String> provideItemTooltip(GuiRecipe guiRecipe, ItemStack itemStack, List<String> currenttip, CachedBaseRecipe crecipe, Point relMouse) {
+        super.provideItemTooltip(guiRecipe, itemStack, currenttip, crecipe, relMouse);
+        
+        if (new Rectangle(20, 9, 18, 18).contains(relMouse)) {
+            for (MachineFabricator.Smelting smelting : MachineFabricator.RecipeManager.smeltings) {
+                if (smelting.matches(itemStack) && smelting.getProduct() != null) {
+                    currenttip.add(EnumChatFormatting.GRAY.toString() + Utils.translate("handler.forestry.fabricator.worth") + " " + smelting.getProduct().amount + " mB");
+                }
+            }
+        }
+        
+        return currenttip;
+    }
+    
+    private static Map<Fluid, List<MachineFabricator.Smelting>> getSmeltingInputs() {
+        Map<Fluid, List<MachineFabricator.Smelting>> smeltingInputs = new HashMap<Fluid, List<MachineFabricator.Smelting>>();
         for (MachineFabricator.Smelting smelting : MachineFabricator.RecipeManager.smeltings) {
             Fluid fluid = smelting.getProduct().getFluid();
             if (!smeltingInputs.containsKey(fluid)) {
-                smeltingInputs.put(fluid, new ArrayList<ItemStack>());
+                smeltingInputs.put(fluid, new ArrayList<MachineFabricator.Smelting>());
             }
-            smeltingInputs.get(fluid).add(smelting.getResource());
+            smeltingInputs.get(fluid).add(smelting);
         }
         return smeltingInputs;
     }

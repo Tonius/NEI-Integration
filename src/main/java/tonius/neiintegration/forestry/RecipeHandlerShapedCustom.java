@@ -73,7 +73,7 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
     
     @Override
     public String getRecipeName() {
-        return Utils.translate("handler.forestryShaped");
+        return Utils.translate("handler.forestry.shaped");
     }
     
     @Override

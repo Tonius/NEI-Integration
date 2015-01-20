@@ -68,7 +68,8 @@ neiintegration.handler.electricalage.magnetizer=Magnetizer
 neiintegration.handler.electricalage.plateMachine=Plate Machine
 
 # Forestry
-neiintegration.handler.forestryShaped=Forestry Shaped
+neiintegration.handler.forestry.shaped=Forestry Shaped
+neiintegration.handler.forestry.fabricator.worth=Worth:
 
 # MineFactory Reloaded
 neiintegration.handler.bioreactor.efficiency=Efficiency

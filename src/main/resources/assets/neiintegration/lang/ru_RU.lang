@@ -63,7 +63,7 @@ neiintegration.handler.electricalage.magnetizer=Намагничиватель
 neiintegration.handler.electricalage.plateMachine=Производитель пластин
 
 # Forestry
-neiintegration.handler.forestryShaped=Forestry: Форменное
+neiintegration.handler.forestry.shaped=Forestry: Форменное
 
 # MineFactory Reloaded
 neiintegration.handler.bioreactor.effeciency=Эффективность
