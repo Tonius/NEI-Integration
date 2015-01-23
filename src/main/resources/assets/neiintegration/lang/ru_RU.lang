@@ -24,22 +24,24 @@ neiintegration.config.handlers.tooltip=Включает или отключае�
 neiintegration.config.tooltips=Настройки подсказок предметов
 neiintegration.config.tooltips.tooltip=Подсказка не указана. Какая ирония.
 
-nei.options.tools.dump.neiintegration_loadedmod=Загруженный мод
-nei.options.tools.dump.neiintegration_loadedmods=[NEII] Загруженные моды
-nei.options.tools.dump.neiintegration_entity=Сущность
-nei.options.tools.dump.neiintegration_entitys=[NEII] Сущности
-nei.options.tools.dump.neiintegration_tileentity=Tile Entity
-nei.options.tools.dump.neiintegration_tileentitys=[NEII] Tile Entities
+nei.options.tools.dump.neiintegration_chestloots=[NEII] Сундук с предметами
+nei.options.tools.dump.neiintegration_chestloot=Сундук с предметами
 nei.options.tools.dump.neiintegration_dimension=Измерение
 nei.options.tools.dump.neiintegration_dimensions=[NEII] Измерения
-nei.options.tools.dump.neiintegration_oredict=Словарь руд
-nei.options.tools.dump.neiintegration_oredicts=[NEII] Словарь руд
+nei.options.tools.dump.neiintegration_entity=Сущность
+nei.options.tools.dump.neiintegration_entitys=[NEII] Сущности
 nei.options.tools.dump.neiintegration_fluid=Жидкость
 nei.options.tools.dump.neiintegration_fluids=[NEII] Жидкости
 nei.options.tools.dump.neiintegration_fluidcontainer=Жидкостный контейнер
 nei.options.tools.dump.neiintegration_fluidcontainers=[NEII] Жидкостные контейнеры
+nei.options.tools.dump.neiintegration_loadedmod=Загруженный мод
+nei.options.tools.dump.neiintegration_loadedmods=[NEII] Загруженные моды
+nei.options.tools.dump.neiintegration_oredict=Словарь руд
+nei.options.tools.dump.neiintegration_oredicts=[NEII] Словарь руд
 nei.options.tools.dump.neiintegration_recipehandler=Обработчик рецептов
 nei.options.tools.dump.neiintegration_recipehandlers=[NEII] Обработчики рецептов
+nei.options.tools.dump.neiintegration_tileentity=Tile Entity
+nei.options.tools.dump.neiintegration_tileentitys=[NEII] Tile Entities
 
 # Forge
 neiintegration.handler.fluidRegistry=Реестр жидкостей
@@ -53,6 +55,9 @@ neiintegration.handler.fluidRegistry.luminosity=Светимость:
 neiintegration.handler.fluidRegistry.density=Плотность:
 neiintegration.handler.fluidRegistry.viscosity=Вязкость:
 
+neiintegration.handler.oreDictionary=Словарь руд
+neiintegration.handler.oreDictionary.warning=Загрузка может занять некоторое время!
+
 # BuildCraft
 neiintegration.handler.refinery.energyRate=%d RF на скорости %d RF/т
 
@@ -64,12 +69,13 @@ neiintegration.handler.electricalage.plateMachine=Производитель п�
 
 # Forestry
 neiintegration.handler.forestry.shaped=Forestry: Форменное
+neiintegration.handler.forestry.fabricator.worth=Стоимость:
 
 # MineFactory Reloaded
-neiintegration.handler.bioreactor.effeciency=Эффективность
-neiintegration.handler.bioreactor.effeciency.1=Зависит от количества
-neiintegration.handler.bioreactor.effeciency.2=разных обрабатываемых предметов.
-neiintegration.handler.bioreactor.effeciency.3=Для большой эффективности требуется больше биотоплива.
+neiintegration.handler.bioreactor.efficiency=Эффективность
+neiintegration.handler.bioreactor.efficiency.1=Зависит от количества
+neiintegration.handler.bioreactor.efficiency.2=разных обрабатываемых предметов.
+neiintegration.handler.bioreactor.efficiency.3=Для большой эффективности требуется больше биотоплива.
 neiintegration.handler.grinder.mobs=Мобы
 neiintegration.handler.grinder.mobs.1=Мобы, которые дают больше опыта,
 neiintegration.handler.grinder.mobs.2=производят больше эссенции.
