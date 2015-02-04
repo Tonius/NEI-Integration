@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 
 import com.pam.harvestcraft.GuiPamPresser;
@@ -91,7 +90,7 @@ public class RecipeHandlerPresser extends RecipeHandlerBase {
     public void loadCraftingRecipes(ItemStack result) {
         Map<ItemStack, ItemStack> recipes = PresserRecipes.smelting().getSmeltingList();
         for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet()) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getValue(), result)) {
+            if (Utils.areStacksSameTypeCraftingSafe(recipe.getValue(), result)) {
                 this.arecipes.add(new CachedPresserRecipe(recipe.getKey(), recipe.getValue()));
             }
         }
@@ -101,7 +100,7 @@ public class RecipeHandlerPresser extends RecipeHandlerBase {
     public void loadUsageRecipes(ItemStack ingredient) {
         Map<ItemStack, ItemStack> recipes = PresserRecipes.smelting().getSmeltingList();
         for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet()) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getKey(), ingredient)) {
+            if (Utils.areStacksSameTypeCraftingSafe(recipe.getKey(), ingredient)) {
                 this.arecipes.add(new CachedPresserRecipe(recipe.getKey(), recipe.getValue()));
             }
         }

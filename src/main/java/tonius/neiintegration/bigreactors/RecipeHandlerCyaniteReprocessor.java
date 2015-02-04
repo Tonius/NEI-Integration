@@ -13,7 +13,6 @@ import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.API;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -116,7 +115,7 @@ public class RecipeHandlerCyaniteReprocessor extends RecipeHandlerBase {
     
     @Override
     public void loadCraftingRecipes(ItemStack result) {
-        if (NEIServerUtils.areStacksSameTypeCrafting(OreDictionary.getOres("ingotBlutonium").get(0), result)) {
+        if (Utils.areStacksSameTypeCraftingSafe(OreDictionary.getOres("ingotBlutonium").get(0), result)) {
             this.loadAllRecipes();
         }
     }
@@ -128,7 +127,7 @@ public class RecipeHandlerCyaniteReprocessor extends RecipeHandlerBase {
             ReactantData data = Reactants.getReactant(o.getProduct());
             if (data.isWaste()) {
                 for (ItemStack ore : OreDictionary.getOres(o.getSource())) {
-                    if (NEIServerUtils.areStacksSameTypeCrafting(ore, ingred)) {
+                    if (Utils.areStacksSameTypeCraftingSafe(ore, ingred)) {
                         this.arecipes.add(new CachedCyaniteReprocessorRecipe(ore, OreDictionary.getOres("ingotBlutonium").get(0)));
                     }
                 }

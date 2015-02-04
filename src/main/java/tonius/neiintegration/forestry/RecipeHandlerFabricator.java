@@ -182,7 +182,7 @@ public class RecipeHandlerFabricator extends RecipeHandlerBase {
         
         if (new Rectangle(20, 9, 18, 18).contains(relMouse)) {
             for (MachineFabricator.Smelting smelting : MachineFabricator.RecipeManager.smeltings) {
-                if (smelting.matches(itemStack) && smelting.getProduct() != null) {
+                if (Utils.areStacksSameTypeCraftingSafe(smelting.getResource(), itemStack) && smelting.getProduct() != null) {
                     currenttip.add(EnumChatFormatting.GRAY.toString() + Utils.translate("handler.forestry.fabricator.worth") + " " + smelting.getProduct().amount + " mB");
                 }
             }
