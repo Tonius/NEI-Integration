@@ -110,6 +110,9 @@ public class RecipeHandlerRollingMachineShaped extends RecipeHandlerRollingMachi
     @Override
     public void loadAllRecipes() {
         for (IRecipe irecipe : RailcraftCraftingManager.rollingMachine.getRecipeList()) {
+            if (irecipe == null) {
+                continue;
+            }
             CachedRollingMachineShapedRecipe recipe = this.getCachedRecipe(irecipe, true);
             if (recipe != null) {
                 this.arecipes.add(recipe);
@@ -120,6 +123,9 @@ public class RecipeHandlerRollingMachineShaped extends RecipeHandlerRollingMachi
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (IRecipe irecipe : RailcraftCraftingManager.rollingMachine.getRecipeList()) {
+            if (irecipe == null) {
+                continue;
+            }
             if (Utils.areStacksSameTypeCraftingSafe(irecipe.getRecipeOutput(), result)) {
                 CachedRollingMachineShapedRecipe recipe = this.getCachedRecipe(irecipe, true);
                 if (recipe != null) {
@@ -132,6 +138,9 @@ public class RecipeHandlerRollingMachineShaped extends RecipeHandlerRollingMachi
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         for (IRecipe irecipe : RailcraftCraftingManager.rollingMachine.getRecipeList()) {
+            if (irecipe == null) {
+                continue;
+            }
             CachedRollingMachineShapedRecipe recipe = this.getCachedRecipe(irecipe, false);
             if (recipe != null) {
                 if (recipe.contains(recipe.inputs, ingredient)) {

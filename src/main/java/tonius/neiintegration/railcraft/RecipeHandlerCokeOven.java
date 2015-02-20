@@ -106,6 +106,9 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     @Override
     public void loadAllRecipes() {
         for (ICokeOvenRecipe recipe : RailcraftCraftingManager.cokeOven.getRecipes()) {
+            if (recipe == null) {
+                continue;
+            }
             this.arecipes.add(new CachedCokeOvenRecipe(recipe));
         }
     }
@@ -114,6 +117,9 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     public void loadCraftingRecipes(ItemStack result) {
         super.loadCraftingRecipes(result);
         for (ICokeOvenRecipe recipe : RailcraftCraftingManager.cokeOven.getRecipes()) {
+            if (recipe == null) {
+                continue;
+            }
             if (NEIServerUtils.areStacksSameType(result, recipe.getOutput())) {
                 this.arecipes.add(new CachedCokeOvenRecipe(recipe));
             }
@@ -124,6 +130,9 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     public void loadUsageRecipes(ItemStack ingred) {
         super.loadUsageRecipes(ingred);
         for (ICokeOvenRecipe recipe : RailcraftCraftingManager.cokeOven.getRecipes()) {
+            if (recipe == null) {
+                continue;
+            }
             if (Utils.areStacksSameTypeCraftingSafe(recipe.getInput(), ingred)) {
                 CachedCokeOvenRecipe crecipe = new CachedCokeOvenRecipe(recipe);
                 crecipe.setIngredientPermutation(crecipe.input, ingred);
@@ -135,6 +144,9 @@ public class RecipeHandlerCokeOven extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(FluidStack result) {
         for (ICokeOvenRecipe recipe : RailcraftCraftingManager.cokeOven.getRecipes()) {
+            if (recipe == null) {
+                continue;
+            }
             if (Utils.areFluidsSameType(recipe.getFluidOutput(), result)) {
                 this.arecipes.add(new CachedCokeOvenRecipe(recipe));
             }

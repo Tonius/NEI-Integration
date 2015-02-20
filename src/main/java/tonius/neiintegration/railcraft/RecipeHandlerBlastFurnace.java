@@ -104,6 +104,9 @@ public class RecipeHandlerBlastFurnace extends RecipeHandlerBase {
     @Override
     public void loadAllRecipes() {
         for (IBlastFurnaceRecipe recipe : RailcraftCraftingManager.blastFurnace.getRecipes()) {
+            if (recipe == null) {
+                continue;
+            }
             this.arecipes.add(new CachedBlastFurnaceRecipe(recipe));
         }
     }
@@ -111,6 +114,9 @@ public class RecipeHandlerBlastFurnace extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (IBlastFurnaceRecipe recipe : RailcraftCraftingManager.blastFurnace.getRecipes()) {
+            if (recipe == null) {
+                continue;
+            }
             if (NEIServerUtils.areStacksSameType(result, recipe.getOutput())) {
                 this.arecipes.add(new CachedBlastFurnaceRecipe(recipe));
             }
@@ -120,6 +126,9 @@ public class RecipeHandlerBlastFurnace extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         for (IBlastFurnaceRecipe recipe : RailcraftCraftingManager.blastFurnace.getRecipes()) {
+            if (recipe == null) {
+                continue;
+            }
             if (Utils.areStacksSameTypeCraftingSafe(recipe.getInput(), ingredient)) {
                 this.arecipes.add(new CachedBlastFurnaceRecipe(recipe));
             }
@@ -127,6 +136,9 @@ public class RecipeHandlerBlastFurnace extends RecipeHandlerBase {
         for (ItemStack fuel : fuels) {
             if (Utils.areStacksSameTypeCraftingSafe(fuel, ingredient)) {
                 for (IBlastFurnaceRecipe recipe : RailcraftCraftingManager.blastFurnace.getRecipes()) {
+                    if (recipe == null) {
+                        continue;
+                    }
                     this.arecipes.add(new CachedBlastFurnaceRecipe(recipe, ingredient));
                 }
             }

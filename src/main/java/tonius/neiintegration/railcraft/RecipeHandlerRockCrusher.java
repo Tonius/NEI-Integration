@@ -112,6 +112,9 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
     @Override
     public void loadAllRecipes() {
         for (IRockCrusherRecipe recipe : RailcraftCraftingManager.rockCrusher.getRecipes()) {
+            if (recipe == null) {
+                continue;
+            }
             this.arecipes.add(new CachedRockCrusherRecipe(recipe));
         }
     }
@@ -119,6 +122,9 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (IRockCrusherRecipe recipe : RailcraftCraftingManager.rockCrusher.getRecipes()) {
+            if (recipe == null) {
+                continue;
+            }
             if (recipe.getOutputs() != null) {
                 for (Entry<ItemStack, Float> output : recipe.getOutputs()) {
                     if (Utils.areStacksSameTypeCraftingSafe(output.getKey(), result)) {
@@ -132,9 +138,12 @@ public class RecipeHandlerRockCrusher extends RecipeHandlerBase {
     
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
-        for (IRockCrusherRecipe irecipe : RailcraftCraftingManager.rockCrusher.getRecipes()) {
-            if (Utils.areStacksSameTypeCraftingSafe(irecipe.getInput(), ingredient)) {
-                this.arecipes.add(new CachedRockCrusherRecipe(irecipe));
+        for (IRockCrusherRecipe recipe : RailcraftCraftingManager.rockCrusher.getRecipes()) {
+            if (recipe == null) {
+                continue;
+            }
+            if (Utils.areStacksSameTypeCraftingSafe(recipe.getInput(), ingredient)) {
+                this.arecipes.add(new CachedRockCrusherRecipe(recipe));
             }
         }
     }
