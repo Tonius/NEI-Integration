@@ -5,14 +5,8 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
-import tonius.neiintegration.bigreactors.BigReactorsIntegration;
 import tonius.neiintegration.config.Config;
-import tonius.neiintegration.electricalage.ElectricalAgeIntegration;
-import tonius.neiintegration.forestry.ForestryIntegration;
-import tonius.neiintegration.harvestcraft.HarvestCraftIntegration;
-import tonius.neiintegration.mcforge.MCForgeIntegration;
-import tonius.neiintegration.minefactoryreloaded.MFRIntegration;
-import tonius.neiintegration.railcraft.RailcraftIntegration;
+import tonius.neiintegration.mods.ModIntegration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -44,13 +38,7 @@ public class NEIIntegration {
     @EventHandler
     public void init(FMLInitializationEvent evt) {
         if (evt.getSide() == Side.CLIENT) {
-            integrations.add(new MCForgeIntegration());
-            integrations.add(new BigReactorsIntegration());
-            integrations.add(new ElectricalAgeIntegration());
-            integrations.add(new ForestryIntegration());
-            integrations.add(new HarvestCraftIntegration());
-            integrations.add(new MFRIntegration());
-            integrations.add(new RailcraftIntegration());
+            ModIntegration.init(integrations);
         }
     }
     
