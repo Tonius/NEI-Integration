@@ -1,6 +1,8 @@
 package tonius.neiintegration.mcforge.dumpers;
 
 import codechicken.nei.api.API;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 
 public abstract class MCForgeDumpers {
     
@@ -14,6 +16,10 @@ public abstract class MCForgeDumpers {
         API.addOption(new OreDictionaryDumper());
         API.addOption(new RecipeHandlerDumper());
         API.addOption(new TileEntityDumper());
+        
+        if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
+            API.addOption(new InventoryDumper());
+        }
     }
     
 }

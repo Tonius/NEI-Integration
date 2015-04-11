@@ -20,10 +20,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = NEIIntegration.MODID, acceptableRemoteVersions = "*", guiFactory = "tonius.neiintegration.config.ConfigGuiFactory")
+@Mod(modid = NEIIntegration.MODID, acceptableRemoteVersions = NEIIntegration.ACCEPTABLE_REMOTE_VERSIONS, guiFactory = NEIIntegration.GUI_FACTORY)
 public class NEIIntegration {
     
     public static final String MODID = "neiintegration";
+    public static final String ACCEPTABLE_REMOTE_VERSIONS = "*";
+    public static final String GUI_FACTORY = "tonius.neiintegration.config.ConfigGuiFactory";
     
     @Instance(MODID)
     public static NEIIntegration instance;
