@@ -90,7 +90,7 @@ public class RecipeHandlerLavaFabricator extends RecipeHandlerBase {
     
     @Override
     public void loadCraftingRecipes(FluidStack result) {
-        if (result.getFluid().getName().equals("lava")) {
+        if (result.getFluid().getName() != null && result.getFluid().getName().equals("lava")) {
             this.loadAllRecipes();
         }
     }

@@ -92,7 +92,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     
     @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals("liquid")) {
+        if (outputId.equals("liquid") && results[0] instanceof FluidStack && ((FluidStack) results[0]).getFluid() != null) {
             this.loadCraftingRecipes((FluidStack) results[0]);
         } else if (outputId.equals(this.getRecipeID())) {
             this.loadAllRecipes();
@@ -107,7 +107,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         FluidStack fluid = Utils.getFluidStack(result);
-        if (fluid != null) {
+        if (fluid != null && fluid.getFluid() != null) {
             this.loadCraftingRecipes(fluid);
         }
     }
@@ -117,7 +117,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     
     @Override
     public void loadUsageRecipes(String inputId, Object... ingredients) {
-        if (inputId.equals("liquid")) {
+        if (inputId.equals("liquid") && ingredients[0] instanceof FluidStack && ((FluidStack) ingredients[0]).getFluid() != null) {
             this.loadUsageRecipes((FluidStack) ingredients[0]);
         } else {
             super.loadUsageRecipes(inputId, ingredients);
@@ -127,7 +127,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     @Override
     public void loadUsageRecipes(ItemStack ingred) {
         FluidStack fluid = Utils.getFluidStack(ingred);
-        if (fluid != null) {
+        if (fluid != null && fluid.getFluid() != null) {
             this.loadUsageRecipes(fluid);
         }
     }

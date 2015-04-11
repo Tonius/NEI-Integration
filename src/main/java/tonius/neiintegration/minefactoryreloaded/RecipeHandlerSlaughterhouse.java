@@ -102,6 +102,9 @@ public class RecipeHandlerSlaughterhouse extends RecipeHandlerBase {
     
     @Override
     public void loadCraftingRecipes(FluidStack result) {
+        if (result.getFluid().getName() == null) {
+            return;
+        }
         if (result.getFluid().getName().equals("meat") || result.getFluid().getName().equals("pinkslime")) {
             this.loadAllRecipes();
         }

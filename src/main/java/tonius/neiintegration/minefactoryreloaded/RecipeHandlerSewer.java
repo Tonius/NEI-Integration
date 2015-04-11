@@ -101,6 +101,9 @@ public class RecipeHandlerSewer extends RecipeHandlerBase {
     
     @Override
     public void loadCraftingRecipes(FluidStack result) {
+        if (result.getFluid().getName() == null) {
+            return;
+        }
         if (result.getFluid().getName().equals("sewage")) {
             this.arecipes.add(new CachedSewerRecipe(false));
         } else if (result.getFluid().getName().equals("mobessence")) {

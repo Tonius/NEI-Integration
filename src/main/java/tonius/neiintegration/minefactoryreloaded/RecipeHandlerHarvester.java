@@ -97,7 +97,7 @@ public class RecipeHandlerHarvester extends RecipeHandlerBase {
     
     @Override
     public void loadCraftingRecipes(FluidStack result) {
-        if (result.getFluid().getName().equals("sludge")) {
+        if (result.getFluid().getName() != null && result.getFluid().getName().equals("sludge")) {
             this.loadAllRecipes();
         }
     }

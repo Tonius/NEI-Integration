@@ -98,7 +98,7 @@ public class RecipeHandlerGrinder extends RecipeHandlerBase {
     
     @Override
     public void loadCraftingRecipes(FluidStack result) {
-        if (result.getFluid().getName().equals("mobessence")) {
+        if (result.getFluid().getName() != null && result.getFluid().getName().equals("mobessence")) {
             this.loadAllRecipes();
         }
     }
