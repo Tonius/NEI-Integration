@@ -19,29 +19,22 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
         public List<PositionedStack> inputs = new ArrayList<PositionedStack>();
         public PositionedStack output;
         
-        public CachedShapedCustomRecipe(ShapedRecipeCustom recipe, boolean genPerms) {
-            if (recipe.getIngredients() != null) {
+        public CachedShapedCustomRecipe(ShapedRecipeCustom recipe) {
+            if (recipe.getIngredients() != null && recipe.getIngredients().length > 0) {
                 this.setIngredients(recipe.getWidth(), recipe.getHeight(), recipe.getIngredients());
             }
             if (recipe.getRecipeOutput() != null) {
                 this.output = new PositionedStack(recipe.getRecipeOutput(), 119, 24);
             }
-            if (genPerms) {
-                this.generatePermutations();
-            }
-        }
-        
-        public CachedShapedCustomRecipe(ShapedRecipeCustom recipe) {
-            this(recipe, false);
         }
         
         public void setIngredients(int width, int height, Object[] items) {
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    if (items[y * width + x] == null) {
+                    if (items.length <= y * width + x || items[y * width + x] == null) {
                         continue;
                     }
-                    PositionedStack stack = new PositionedStack(items[y * width + x], 25 + x * 18, 6 + y * 18, false);
+                    PositionedStack stack = new PositionedStack(items[y * width + x], 25 + x * 18, 6 + y * 18);
                     stack.setMaxSize(1);
                     this.inputs.add(stack);
                 }
@@ -56,12 +49,6 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
         @Override
         public PositionedStack getResult() {
             return this.output;
-        }
-        
-        public void generatePermutations() {
-            for (PositionedStack p : this.inputs) {
-                p.generatePermutations();
-            }
         }
         
     }
@@ -100,7 +87,7 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
     public void loadAllRecipes() {
         for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
             if (recipe instanceof ShapedRecipeCustom) {
-                this.arecipes.add(new CachedShapedCustomRecipe((ShapedRecipeCustom) recipe, true));
+                this.arecipes.add(new CachedShapedCustomRecipe((ShapedRecipeCustom) recipe));
             }
         }
     }
@@ -109,7 +96,7 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
     public void loadCraftingRecipes(ItemStack result) {
         for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
             if (recipe instanceof ShapedRecipeCustom && Utils.areStacksSameTypeCraftingSafe(((ShapedRecipeCustom) recipe).getRecipeOutput(), result)) {
-                this.arecipes.add(new CachedShapedCustomRecipe((ShapedRecipeCustom) recipe, true));
+                this.arecipes.add(new CachedShapedCustomRecipe((ShapedRecipeCustom) recipe));
             }
         }
     }
@@ -120,7 +107,6 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
             if (recipe instanceof ShapedRecipeCustom) {
                 CachedShapedCustomRecipe crecipe = new CachedShapedCustomRecipe((ShapedRecipeCustom) recipe);
                 if (crecipe.inputs != null && crecipe.contains(crecipe.inputs, ingredient)) {
-                    crecipe.generatePermutations();
                     crecipe.setIngredientPermutationNBT(crecipe.inputs, ingredient);
                     this.arecipes.add(crecipe);
                 }
