@@ -34,14 +34,16 @@ nei.options.tools.dump.neiintegration_fluid=Жидкость
 nei.options.tools.dump.neiintegration_fluids=[NEII] Жидкости
 nei.options.tools.dump.neiintegration_fluidcontainer=Жидкостный контейнер
 nei.options.tools.dump.neiintegration_fluidcontainers=[NEII] Жидкостные контейнеры
+nei.options.tools.dump.neiintegration_inventory=Инвентарь игрока
+nei.options.tools.dump.neiintegration_inventorys=[NEII] Инвентарь игрока
 nei.options.tools.dump.neiintegration_loadedmod=Загруженный мод
 nei.options.tools.dump.neiintegration_loadedmods=[NEII] Загруженные моды
 nei.options.tools.dump.neiintegration_oredict=Словарь руд
 nei.options.tools.dump.neiintegration_oredicts=[NEII] Словарь руд
 nei.options.tools.dump.neiintegration_recipehandler=Обработчик рецептов
 nei.options.tools.dump.neiintegration_recipehandlers=[NEII] Обработчики рецептов
-nei.options.tools.dump.neiintegration_tileentity=Tile Entity
-nei.options.tools.dump.neiintegration_tileentitys=[NEII] Tile Entities
+nei.options.tools.dump.neiintegration_tileentity=Блок
+nei.options.tools.dump.neiintegration_tileentitys=[NEII] Блоки
 
 # Forge
 neiintegration.handler.fluidRegistry=Реестр жидкостей
