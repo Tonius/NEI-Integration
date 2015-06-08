@@ -11,6 +11,7 @@ import tonius.neiintegration.PositionedStackAdv;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import codechicken.nei.PositionedStack;
+import forestry.api.recipes.ICentrifugeRecipe;
 import forestry.factory.gadgets.MachineCentrifuge;
 
 public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
@@ -28,27 +29,27 @@ public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
         public PositionedStack inputs;
         public List<PositionedStack> outputs = new ArrayList<PositionedStack>();
         
-        public CachedCentrifugeRecipe(MachineCentrifuge.Recipe recipe, boolean genPerms) {
-            if (recipe.resource != null) {
-                this.inputs = new PositionedStack(recipe.resource, 29, 26);
+        public CachedCentrifugeRecipe(ICentrifugeRecipe recipe, boolean genPerms) {
+            if (recipe.getInput() != null) {
+                this.inputs = new PositionedStack(recipe.getInput(), 29, 26);
             }
-            if (recipe.products != null) {
-                this.setResults(recipe.products);
+            if (recipe.getAllProducts() != null) {
+                this.setResults(recipe.getAllProducts());
             }
         }
         
-        public CachedCentrifugeRecipe(MachineCentrifuge.Recipe recipe) {
+        public CachedCentrifugeRecipe(ICentrifugeRecipe recipe) {
             this(recipe, false);
         }
         
-        public void setResults(Map<ItemStack, Integer> outputs) {
+        public void setResults(Map<ItemStack, Float> outputs) {
             int i = 0;
-            for (Entry<ItemStack, Integer> stack : outputs.entrySet()) {
+            for (Entry<ItemStack, Float> stack : outputs.entrySet()) {
                 if (i >= OUTPUTS.length) {
                     return;
                 }
                 PositionedStackAdv output = new PositionedStackAdv(stack.getKey(), 93 + OUTPUTS[i][0] * 18, 8 + OUTPUTS[i][1] * 18);
-                output.setChance(stack.getValue() / 100F);
+                output.setChance(stack.getValue());
                 this.outputs.add(output);
                 i++;
             }
@@ -104,14 +105,14 @@ public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
     
     @Override
     public void loadAllRecipes() {
-        for (MachineCentrifuge.Recipe recipe : MachineCentrifuge.RecipeManager.recipes) {
+        for (ICentrifugeRecipe recipe : MachineCentrifuge.RecipeManager.recipes) {
             this.arecipes.add(new CachedCentrifugeRecipe(recipe, true));
         }
     }
     
     @Override
     public void loadCraftingRecipes(ItemStack result) {
-        for (MachineCentrifuge.Recipe recipe : MachineCentrifuge.RecipeManager.recipes) {
+        for (ICentrifugeRecipe recipe : MachineCentrifuge.RecipeManager.recipes) {
             CachedCentrifugeRecipe crecipe = new CachedCentrifugeRecipe(recipe);
             if (crecipe.outputs != null && crecipe.contains(crecipe.outputs, result)) {
                 crecipe.setIngredientPermutation(crecipe.outputs, result);
@@ -123,8 +124,8 @@ public class RecipeHandlerCentrifuge extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(ItemStack ingred) {
         super.loadCraftingRecipes(ingred);
-        for (MachineCentrifuge.Recipe recipe : MachineCentrifuge.RecipeManager.recipes) {
-            if (Utils.areStacksSameTypeCraftingSafe(recipe.resource, ingred)) {
+        for (ICentrifugeRecipe recipe : MachineCentrifuge.RecipeManager.recipes) {
+            if (Utils.areStacksSameTypeCraftingSafe(recipe.getInput(), ingred)) {
                 this.arecipes.add(new CachedCentrifugeRecipe(recipe, true));
             }
         }
