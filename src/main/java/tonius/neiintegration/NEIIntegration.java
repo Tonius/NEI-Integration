@@ -18,7 +18,7 @@ import cpw.mods.fml.relauncher.Side;
 public class NEIIntegration {
     
     public static final String MODID = "neiintegration";
-    public static final String DEPENDENCIES = "after:Forestry@[3.6.0.17,)";
+    public static final String DEPENDENCIES = "after:Forestry@[3.6.0,)";
     public static final String ACCEPTABLE_REMOTE_VERSIONS = "*";
     public static final String GUI_FACTORY = "tonius.neiintegration.config.ConfigGuiFactory";
     
