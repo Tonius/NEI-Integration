@@ -1,0 +1,92 @@
+neiintegration.yes=Ano
+neiintegration.no=Ne
+
+neiintegration.shaped=Výhodné
+neiintegration.shapeless=Nevýhodné
+
+neiintegration.chance=Šance: %s
+neiintegration.chance.never=Nikdy
+neiintegration.chance.lessThan1=<1%
+
+neiintegration.ticks=tiků
+
+neiintegration.tooltip.internalName=ID:
+neiintegration.tooltip.unlocalizedName=Nepřeložené jméno:
+neiintegration.tooltip.maxstack=Maximální velikost stacku:
+neiintegration.tooltip.burntime=Doba hoření:
+neiintegration.tooltip.oredict=Jména ze slovníku rud:
+neiintegration.tooltip.fluidreg=Informace z registru tekutin:
+neiintegration.tooltip.fluidreg.empty=Prázdný kontejner
+
+neiintegration.config.title=Nastavení NEI integrace
+neiintegration.config.handlers=Nastavení správce receptů
+neiintegration.config.handlers.tooltip=Povolí nebo zakáže některé správce receptů, které tento mód přidává.
+neiintegration.config.tooltips=Nastavení informace o předmětech
+neiintegration.config.tooltips.tooltip=Žádná informace nedefinována. Jak ironické.
+
+nei.options.tools.dump.neiintegration_chestloots=[NEII] Obsah truhel
+nei.options.tools.dump.neiintegration_chestloot=Obsah truhly
+nei.options.tools.dump.neiintegration_dimension=Dimenze
+nei.options.tools.dump.neiintegration_dimensions=[NEII] Dimenze
+nei.options.tools.dump.neiintegration_entity=Entita
+nei.options.tools.dump.neiintegration_entitys=[NEII] Entity
+nei.options.tools.dump.neiintegration_fluid=Tekutina
+nei.options.tools.dump.neiintegration_fluids=[NEII] Tekutiny
+nei.options.tools.dump.neiintegration_fluidcontainer=Tekutinový kontejner
+nei.options.tools.dump.neiintegration_fluidcontainers=[NEII] Tekutinové kontejnery
+nei.options.tools.dump.neiintegration_inventory=Inventář hráče
+nei.options.tools.dump.neiintegration_inventorys=[NEII] Inventář hráče
+nei.options.tools.dump.neiintegration_loadedmod=Načtený mód
+nei.options.tools.dump.neiintegration_loadedmods=[NEII] Načtené módy
+nei.options.tools.dump.neiintegration_oredict=Slovník rud
+nei.options.tools.dump.neiintegration_oredicts=[NEII] Slovník rud
+nei.options.tools.dump.neiintegration_recipehandler=Správce receptu
+nei.options.tools.dump.neiintegration_recipehandlers=[NEII] Správce receptů
+nei.options.tools.dump.neiintegration_tileentity=Data entity
+nei.options.tools.dump.neiintegration_tileentitys=[NEII] Data entit
+
+# Forge
+neiintegration.handler.fluidRegistry=Registr tekutin
+neiintegration.handler.fluidRegistry.id=ID:
+neiintegration.handler.fluidRegistry.state=Stav:
+neiintegration.handler.fluidRegistry.state.gaseous=Plynný
+neiintegration.handler.fluidRegistry.state.liquid=Tekutý
+neiintegration.handler.fluidRegistry.placeable=Může být umístěna:
+neiintegration.handler.fluidRegistry.temperature=Teplota:
+neiintegration.handler.fluidRegistry.luminosity=Zářivost:
+neiintegration.handler.fluidRegistry.density=Hustota:
+neiintegration.handler.fluidRegistry.viscosity=Viskozita:
+
+neiintegration.handler.oreDictionary=Slovník rud
+neiintegration.handler.oreDictionary.warning=Načtení může chvilku trvat!
+
+# BuildCraft
+neiintegration.handler.refinery.energyRate=%d RF v %d RF/t
+
+# Electrical Age
+neiintegration.handler.electricalage.compressor=Kompresor (ELN)
+neiintegration.handler.electricalage.macerator=Drtič (ELN)
+neiintegration.handler.electricalage.magnetizer=Magnetizér
+neiintegration.handler.electricalage.plateMachine=Deskový stroj
+
+# Forestry
+neiintegration.handler.forestry.shaped=Výhodné v lesnictví
+neiintegration.handler.forestry.fabricator.worth=Cena:
+
+# MineFactory Reloaded
+neiintegration.handler.bioreactor.efficiency=Efektivita
+neiintegration.handler.bioreactor.efficiency.1=Záleží na množství
+neiintegration.handler.bioreactor.efficiency.2=odlišné předměty jsou právě zpracovávány.
+neiintegration.handler.bioreactor.efficiency.3=Více efektivity znamená více biopaliva.
+neiintegration.handler.grinder.mobs=Příšery
+neiintegration.handler.grinder.mobs.1=Příšery, které dávají více XP
+neiintegration.handler.grinder.mobs.2=produkují více esence.
+neiintegration.handler.harvester.harvestables=Skliditelné bloky
+neiintegration.handler.harvester.harvestables.1=Splašky jsou sekundárním produktem slizně.
+neiintegration.handler.laserdrill.focus=Ohnisko
+neiintegration.handler.sewer.animals=Zvířata nebo vesničani
+neiintegration.handler.sewer.animals.1=Větší zvířata produkují více kalu.
+neiintegration.handler.sewer.xp=Zkušenostní koule
+neiintegration.handler.sewer.xp.1=XP se přemění v esenci.
+neiintegration.handler.slaughterhouse.animals=Zvířata
+neiintegration.handler.slaughterhouse.animals.1=Větší zvířata produkují více masa.
