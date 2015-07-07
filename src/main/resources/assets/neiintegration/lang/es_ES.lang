@@ -1,0 +1,92 @@
+neiintegration.yes=Sí
+neiintegration.no=No
+
+neiintegration.shaped=Shaped
+neiintegration.shapeless=Shapeless
+
+neiintegration.chance=Oportunidad: %s
+neiintegration.chance.never=Nunca
+neiintegration.chance.lessThan1=<1%
+
+neiintegration.ticks=ticks
+
+neiintegration.tooltip.internalName=ID:
+neiintegration.tooltip.unlocalizedName=Unloc. nombre:
+neiintegration.tooltip.maxstack=Tamaño máximo de stacks:
+neiintegration.tooltip.burntime=Tiempo de quemado:
+neiintegration.tooltip.oredict=Diccionario de nombres de minerales:
+neiintegration.tooltip.fluidreg=Información del registro de fluidos:
+neiintegration.tooltip.fluidreg.empty=Contenedor Vacío
+
+neiintegration.config.title=Configuración de NEI Integration
+neiintegration.config.handlers=Configuración del controlador de recetas
+neiintegration.config.handlers.tooltip=Este mod añade activar o desactivar algunos de los controladores de las recetas.
+neiintegration.config.tooltips=Ajustes descripción de los items
+neiintegration.config.tooltips.tooltip=Sin descripción definida.
+
+nei.options.tools.dump.neiintegration_chestloots=[NEII] Contenido del cofre
+nei.options.tools.dump.neiintegration_chestloot=Contenido del cofre
+nei.options.tools.dump.neiintegration_dimension=Dimensión
+nei.options.tools.dump.neiintegration_dimensions=[NEII] Dimensiones
+nei.options.tools.dump.neiintegration_entity=Entidad
+nei.options.tools.dump.neiintegration_entitys=[NEII] Entidades
+nei.options.tools.dump.neiintegration_fluid=Fluido
+nei.options.tools.dump.neiintegration_fluids=[NEII] Fluidos
+nei.options.tools.dump.neiintegration_fluidcontainer=Recipiente de fluido
+nei.options.tools.dump.neiintegration_fluidcontainers=[NEII] Recipientes de fluido
+nei.options.tools.dump.neiintegration_inventory=Inventario del jugador
+nei.options.tools.dump.neiintegration_inventorys=[NEII] Inventario del jugador
+nei.options.tools.dump.neiintegration_loadedmod=Cargando Mod
+nei.options.tools.dump.neiintegration_loadedmods=[NEII] Cargando Mods
+nei.options.tools.dump.neiintegration_oredict=Diccionario de Minerales
+nei.options.tools.dump.neiintegration_oredicts=[NEII] Diccionario de Minerales
+nei.options.tools.dump.neiintegration_recipehandler=Controlador de Recetas
+nei.options.tools.dump.neiintegration_recipehandlers=[NEII] Controlador de Recetas
+nei.options.tools.dump.neiintegration_tileentity=Tile Entidad
+nei.options.tools.dump.neiintegration_tileentitys=[NEII] Tile Entidades
+
+# Forge
+neiintegration.handler.fluidRegistry=Registro de fluidos
+neiintegration.handler.fluidRegistry.id=ID:
+neiintegration.handler.fluidRegistry.state=Estado:
+neiintegration.handler.fluidRegistry.state.gaseous=Gaseoso
+neiintegration.handler.fluidRegistry.state.liquid=Líquido
+neiintegration.handler.fluidRegistry.placeable=Se puede colocar:
+neiintegration.handler.fluidRegistry.temperature=Temperatura:
+neiintegration.handler.fluidRegistry.luminosity=Luminosidad:
+neiintegration.handler.fluidRegistry.density=Densidad:
+neiintegration.handler.fluidRegistry.viscosity=Viscosidad:
+
+neiintegration.handler.oreDictionary=Diccionario de minerales.
+neiintegration.handler.oreDictionary.warning=Puede tardar un poco en cargar!
+
+# BuildCraft
+neiintegration.handler.refinery.energyRate=%d RF en %d RF/t
+
+# Electrical Age
+neiintegration.handler.electricalage.compressor=Compresor (ELN)
+neiintegration.handler.electricalage.macerator=Macerador (ELN)
+neiintegration.handler.electricalage.magnetizer=Magnetizador
+neiintegration.handler.electricalage.plateMachine=Máquina de placa
+
+# Forestry
+neiintegration.handler.forestry.shaped=Forestry Shaped
+neiintegration.handler.forestry.fabricator.worth=Valor:
+
+# MineFactory Reloaded
+neiintegration.handler.bioreactor.efficiency=Eficiencia
+neiintegration.handler.bioreactor.efficiency.1=Depende de la cantidad de
+neiintegration.handler.bioreactor.efficiency.2=los diferentes elementos que se están procesando.
+neiintegration.handler.bioreactor.efficiency.3=Más eficiente que el BioFuel.
+neiintegration.handler.grinder.mobs=Mobs
+neiintegration.handler.grinder.mobs.1=Los mobs pueden dropear más XP
+neiintegration.handler.grinder.mobs.2=produce más Esencia.
+neiintegration.handler.harvester.harvestables=Bloques Cosechables
+neiintegration.handler.harvester.harvestables.1=Sludge es un subproducto de la cosecha.
+neiintegration.handler.laserdrill.focus=Enfocar
+neiintegration.handler.sewer.animals=Animales o Aldeanos
+neiintegration.handler.sewer.animals.1=Los animales más grandes se producen en aguas residuales.
+neiintegration.handler.sewer.xp=Orbes de XP
+neiintegration.handler.sewer.xp.1=XP se convierte en Esencia.
+neiintegration.handler.slaughterhouse.animals=Animales
+neiintegration.handler.slaughterhouse.animals.1=Los animales más grandes producen más carne.
