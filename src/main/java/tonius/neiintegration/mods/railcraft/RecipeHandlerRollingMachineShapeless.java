@@ -49,7 +49,16 @@ public class RecipeHandlerRollingMachineShapeless extends RecipeHandlerRollingMa
         public void setIngredients(List<?> items) {
             this.inputs.clear();
             for (int ingred = 0; ingred < items.size(); ingred++) {
-                PositionedStack stack = new PositionedStack(items.get(ingred), 25 + RecipeHandlerRollingMachineShapeless.INPUTS[ingred][0] * 18, 6 + RecipeHandlerRollingMachineShapeless.INPUTS[ingred][1] * 18);
+                Object item = items.get(ingred);
+                if (item == null) {
+                    continue;
+                } else if (item instanceof ItemStack[] && ((ItemStack[]) item).length == 0) {
+                    continue;
+                } else if (item instanceof List && ((List) item).size() == 0) {
+                    continue;
+                }
+                
+                PositionedStack stack = new PositionedStack(item, 25 + RecipeHandlerRollingMachineShapeless.INPUTS[ingred][0] * 18, 6 + RecipeHandlerRollingMachineShapeless.INPUTS[ingred][1] * 18);
                 stack.setMaxSize(1);
                 this.inputs.add(stack);
             }

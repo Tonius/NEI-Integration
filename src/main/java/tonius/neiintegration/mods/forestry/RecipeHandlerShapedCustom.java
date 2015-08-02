@@ -31,10 +31,20 @@ public class RecipeHandlerShapedCustom extends RecipeHandlerBase {
         public void setIngredients(int width, int height, Object[] items) {
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    if (items.length <= y * width + x || items[y * width + x] == null) {
+                    if (items.length <= y * width + x) {
                         continue;
                     }
-                    PositionedStack stack = new PositionedStack(items[y * width + x], 25 + x * 18, 6 + y * 18);
+                    
+                    Object item = items[y * width + x];
+                    if (item == null) {
+                        continue;
+                    } else if (item instanceof ItemStack[] && ((ItemStack[]) item).length == 0) {
+                        continue;
+                    } else if (item instanceof List && ((List) item).size() == 0) {
+                        continue;
+                    }
+                    
+                    PositionedStack stack = new PositionedStack(item, 25 + x * 18, 6 + y * 18);
                     stack.setMaxSize(1);
                     this.inputs.add(stack);
                 }

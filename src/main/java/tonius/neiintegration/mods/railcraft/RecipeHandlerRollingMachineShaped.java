@@ -43,11 +43,16 @@ public class RecipeHandlerRollingMachineShaped extends RecipeHandlerRollingMachi
         public void setIngredients(int width, int height, Object[] items) {
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    if (items[y * width + x] == null) {
+                    Object item = items[y * width + x];
+                    if (item == null) {
+                        continue;
+                    } else if (item instanceof ItemStack[] && ((ItemStack[]) item).length == 0) {
+                        continue;
+                    } else if (item instanceof List && ((List) item).size() == 0) {
                         continue;
                     }
                     
-                    PositionedStack stack = new PositionedStack(items[y * width + x], 25 + x * 18, 8 + y * 18, false);
+                    PositionedStack stack = new PositionedStack(item, 25 + x * 18, 8 + y * 18, false);
                     stack.setMaxSize(1);
                     this.inputs.add(stack);
                 }
