@@ -19,6 +19,8 @@ neiintegration.tooltip.fluidreg=Fluid Registry info:
 neiintegration.tooltip.fluidreg.empty=Empty Container
 
 neiintegration.config.title=NEI Integration Configuration
+neiintegration.config.integrations=Mod Integrations settings
+neiintegration.config.integrations.tooltip=Enable or disable all recipe handlers for certain mods.
 neiintegration.config.handlers=Recipe Handler settings
 neiintegration.config.handlers.tooltip=Enable or disable some of the recipe handlers this mod adds.
 neiintegration.config.tooltips=Item Tooltip Settings

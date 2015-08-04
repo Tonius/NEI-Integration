@@ -6,11 +6,16 @@ import java.util.List;
 import org.apache.logging.log4j.Logger;
 
 import tonius.neiintegration.config.Config;
-import tonius.neiintegration.mods.ModIntegration;
+import tonius.neiintegration.mods.bigreactors.BigReactorsIntegration;
+import tonius.neiintegration.mods.electricalage.ElectricalAgeIntegration;
+import tonius.neiintegration.mods.forestry.ForestryIntegration;
+import tonius.neiintegration.mods.harvestcraft.HarvestCraftIntegration;
+import tonius.neiintegration.mods.mcforge.MCForgeIntegration;
+import tonius.neiintegration.mods.minefactoryreloaded.MFRIntegration;
+import tonius.neiintegration.mods.railcraft.RailcraftIntegration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 
@@ -25,22 +30,26 @@ public class NEIIntegration {
     @Instance(MODID)
     public static NEIIntegration instance;
     public static Logger log;
-    
     public static List<IntegrationBase> integrations = new ArrayList<IntegrationBase>();
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent evt) {
+        if (evt.getSide() != Side.CLIENT) {
+            return;
+        }
+        
         log = evt.getModLog();
         log.info("Starting NEI Integration");
         
+        integrations.add(new MCForgeIntegration());
+        integrations.add(new BigReactorsIntegration());
+        integrations.add(new ElectricalAgeIntegration());
+        integrations.add(new ForestryIntegration());
+        integrations.add(new HarvestCraftIntegration());
+        integrations.add(new MFRIntegration());
+        integrations.add(new RailcraftIntegration());
+        
         Config.preInit(evt);
-    }
-    
-    @EventHandler
-    public void init(FMLInitializationEvent evt) {
-        if (evt.getSide() == Side.CLIENT) {
-            ModIntegration.init(integrations);
-        }
     }
     
 }

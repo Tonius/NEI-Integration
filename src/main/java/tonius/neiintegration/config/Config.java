@@ -2,9 +2,11 @@ package tonius.neiintegration.config;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import net.minecraftforge.common.config.Configuration;
+import tonius.neiintegration.IntegrationBase;
 import tonius.neiintegration.NEIIntegration;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -16,6 +18,7 @@ public class Config {
     public static Configuration config;
     public static List<Section> configSections = new ArrayList<Section>();
     
+    public static final Section sectionIntegrations = new Section("Integrations", "integrations");
     public static final Section sectionHandlers = new Section("Handlers", "handlers");
     public static final Section sectionTooltips = new Section("Tooltips", "tooltips");
     
@@ -68,6 +71,17 @@ public class Config {
     }
     
     public static void processConfig() {
+        for (Iterator<IntegrationBase> itr = NEIIntegration.integrations.iterator(); itr.hasNext();) {
+            IntegrationBase integration = itr.next();
+            String name = integration.getName();
+            boolean enabledByDefault = integration.isEnabledByDefault();
+            if (!integration.isValid()) {
+                itr.remove();
+            } else if (!config.get(sectionIntegrations.name, name, enabledByDefault, String.format("Whether to enable %s integration. Disable if this part of the mod causes crashes.", name)).setRequiresMcRestart(true).getBoolean(enabledByDefault)) {
+                itr.remove();
+            }
+        }
+        
         handler_fluidRegistry = config.get(sectionHandlers.name, "Fluid Registry", Defaults.handler_fluidRegistry, "Shows information about registered fluids when looking them or related items up.").getBoolean(Defaults.handler_fluidRegistry);
         handler_oreDictionary = config.get(sectionHandlers.name, "Ore Dictionary", Defaults.handler_oreDictionary, "Shows information about items registered in the Ore Dictionary when looking up item usage.").getBoolean(Defaults.handler_oreDictionary);
         
@@ -90,5 +104,4 @@ public class Config {
         tooltip_fluidRegInfoShift = config.get(sectionTooltips.name, "Fluid Registry Info Shift", Defaults.tooltip_fluidRegInfoShift, "If fluid registry info is enabled, it will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltip_fluidRegInfoShift);
         tooltip_fluidRegInfoAdvanced = config.get(sectionTooltips.name, "Fluid Registry Info Advanced", Defaults.tooltip_fluidRegInfoAdvanced, "If fluid registry info is enabled, it will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltip_fluidRegInfoAdvanced);
     }
-    
 }

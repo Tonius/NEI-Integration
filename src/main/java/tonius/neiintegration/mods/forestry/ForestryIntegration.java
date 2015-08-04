@@ -17,15 +17,15 @@ public class ForestryIntegration extends IntegrationBase {
     
     @Override
     public void loadConfig() {
-        registerHandler(new RecipeHandlerShapedCustom());
-        registerHandler(new RecipeHandlerBottler());
-        registerHandler(new RecipeHandlerCarpenter());
-        registerHandler(new RecipeHandlerCentrifuge());
-        registerHandler(new RecipeHandlerFabricator());
-        registerHandler(new RecipeHandlerFermenter());
-        registerHandler(new RecipeHandlerMoistener());
-        registerHandler(new RecipeHandlerSqueezer());
-        registerHandler(new RecipeHandlerStill());
+        this.registerHandler(new RecipeHandlerShapedCustom());
+        this.registerHandler(new RecipeHandlerBottler());
+        this.registerHandler(new RecipeHandlerCarpenter());
+        this.registerHandler(new RecipeHandlerCentrifuge());
+        this.registerHandler(new RecipeHandlerFabricator());
+        this.registerHandler(new RecipeHandlerFermenter());
+        this.registerHandler(new RecipeHandlerMoistener());
+        this.registerHandler(new RecipeHandlerSqueezer());
+        this.registerHandler(new RecipeHandlerStill());
     }
     
 }

@@ -17,8 +17,8 @@ public class HarvestCraftIntegration extends IntegrationBase {
     
     @Override
     public void loadConfig() {
-        registerHandler(new RecipeHandlerApiary());
-        registerHandler(new RecipeHandlerPresser());
+        this.registerHandler(new RecipeHandlerApiary());
+        this.registerHandler(new RecipeHandlerPresser());
     }
     
 }

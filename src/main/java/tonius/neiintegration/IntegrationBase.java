@@ -6,11 +6,15 @@ public abstract class IntegrationBase {
     
     public abstract String getName();
     
+    public boolean isEnabledByDefault() {
+        return true;
+    }
+    
     public abstract boolean isValid();
     
     public abstract void loadConfig();
     
-    public static void registerHandler(IRecipeHandlerBase handler) {
+    protected void registerHandler(IRecipeHandlerBase handler) {
         handler.prepare();
         API.registerRecipeHandler(handler);
         API.registerUsageHandler(handler);

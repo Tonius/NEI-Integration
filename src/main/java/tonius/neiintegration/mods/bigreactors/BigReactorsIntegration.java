@@ -17,7 +17,7 @@ public class BigReactorsIntegration extends IntegrationBase {
     
     @Override
     public void loadConfig() {
-        registerHandler(new RecipeHandlerCyaniteReprocessor());
+        this.registerHandler(new RecipeHandlerCyaniteReprocessor());
     }
     
 }

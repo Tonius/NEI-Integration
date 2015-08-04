@@ -17,16 +17,16 @@ public class MFRIntegration extends IntegrationBase {
     
     @Override
     public void loadConfig() {
-        registerHandler(new RecipeHandlerBioReactor());
-        registerHandler(new RecipeHandlerComposter());
-        registerHandler(new RecipeHandlerGrinder());
-        registerHandler(new RecipeHandlerHarvester());
-        registerHandler(new RecipeHandlerLaserDrill());
-        registerHandler(new RecipeHandlerLavaFabricator());
-        registerHandler(new RecipeHandlerMeatPacker());
-        registerHandler(new RecipeHandlerSewer());
-        registerHandler(new RecipeHandlerSlaughterhouse());
-        registerHandler(new RecipeHandlerSludgeBoiler());
+        this.registerHandler(new RecipeHandlerBioReactor());
+        this.registerHandler(new RecipeHandlerComposter());
+        this.registerHandler(new RecipeHandlerGrinder());
+        this.registerHandler(new RecipeHandlerHarvester());
+        this.registerHandler(new RecipeHandlerLaserDrill());
+        this.registerHandler(new RecipeHandlerLavaFabricator());
+        this.registerHandler(new RecipeHandlerMeatPacker());
+        this.registerHandler(new RecipeHandlerSewer());
+        this.registerHandler(new RecipeHandlerSlaughterhouse());
+        this.registerHandler(new RecipeHandlerSludgeBoiler());
     }
     
 }

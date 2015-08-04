@@ -17,11 +17,11 @@ public class RailcraftIntegration extends IntegrationBase {
     
     @Override
     public void loadConfig() {
-        registerHandler(new RecipeHandlerBlastFurnace());
-        registerHandler(new RecipeHandlerCokeOven());
-        registerHandler(new RecipeHandlerRockCrusher());
-        registerHandler(new RecipeHandlerRollingMachineShaped());
-        registerHandler(new RecipeHandlerRollingMachineShapeless());
+        this.registerHandler(new RecipeHandlerBlastFurnace());
+        this.registerHandler(new RecipeHandlerCokeOven());
+        this.registerHandler(new RecipeHandlerRockCrusher());
+        this.registerHandler(new RecipeHandlerRollingMachineShaped());
+        this.registerHandler(new RecipeHandlerRollingMachineShapeless());
     }
     
 }

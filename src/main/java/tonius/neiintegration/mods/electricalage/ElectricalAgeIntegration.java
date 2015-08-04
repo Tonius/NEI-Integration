@@ -17,10 +17,10 @@ public class ElectricalAgeIntegration extends IntegrationBase {
     
     @Override
     public void loadConfig() {
-        registerHandler(new RecipeHandlerCompressor());
-        registerHandler(new RecipeHandlerMacerator());
-        registerHandler(new RecipeHandlerMagnetizer());
-        registerHandler(new RecipeHandlerPlateMachine());
+        this.registerHandler(new RecipeHandlerCompressor());
+        this.registerHandler(new RecipeHandlerMacerator());
+        this.registerHandler(new RecipeHandlerMagnetizer());
+        this.registerHandler(new RecipeHandlerPlateMachine());
     }
     
 }
