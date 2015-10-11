@@ -1,6 +1,7 @@
 package tonius.neiintegration.mods.mcforge.dumpers;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import codechicken.nei.config.DataDumper;
 import cpw.mods.fml.common.FMLModContainer;
@@ -10,7 +11,7 @@ import cpw.mods.fml.common.ModContainer;
 public class LoadedModDumper extends DataDumper {
     
     public LoadedModDumper() {
-        super("tools.dump.neiintegration_loadedmod");
+        super("tools.dump.neiintegration.loadedmod");
     }
     
     @Override
@@ -20,7 +21,7 @@ public class LoadedModDumper extends DataDumper {
     
     @Override
     public Iterable<String[]> dump(int mode) {
-        LinkedList<String[]> list = new LinkedList<String[]>();
+        List<String[]> list = new LinkedList<String[]>();
         
         for (ModContainer mod : Loader.instance().getModList()) {
             list.add(new String[] { mod.getModId(), mod.getName(), mod.getVersion(), String.valueOf(!(mod instanceof FMLModContainer)), String.valueOf(mod.canBeDisabled()), mod.getDependencies().toString() });

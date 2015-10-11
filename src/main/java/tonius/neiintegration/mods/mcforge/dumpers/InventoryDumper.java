@@ -1,6 +1,7 @@
 package tonius.neiintegration.mods.mcforge.dumpers;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
@@ -10,7 +11,7 @@ import codechicken.nei.config.DataDumper;
 public class InventoryDumper extends DataDumper {
     
     public InventoryDumper() {
-        super("tools.dump.neiintegration_inventory");
+        super("tools.dump.neiintegration.inventory");
     }
     
     @Override
@@ -20,7 +21,7 @@ public class InventoryDumper extends DataDumper {
     
     @Override
     public Iterable<String[]> dump(int mode) {
-        LinkedList<String[]> list = new LinkedList<String[]>();
+        List<String[]> list = new LinkedList<String[]>();
         
         this.addToList(list, Minecraft.getMinecraft().thePlayer.inventory.mainInventory, false);
         this.addToList(list, Minecraft.getMinecraft().thePlayer.inventory.armorInventory, true);
@@ -28,7 +29,7 @@ public class InventoryDumper extends DataDumper {
         return list;
     }
     
-    private void addToList(LinkedList<String[]> list, ItemStack[] stacks, boolean isArmor) {
+    private void addToList(List<String[]> list, ItemStack[] stacks, boolean isArmor) {
         for (int i = 0; i < stacks.length; i++) {
             ItemStack stack = stacks[i];
             if (stack == null || stack.getItem() == null) {

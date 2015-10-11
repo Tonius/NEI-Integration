@@ -11,7 +11,7 @@ import codechicken.nei.config.DataDumper;
 public class EntityDumper extends DataDumper {
     
     public EntityDumper() {
-        super("tools.dump.neiintegration_entity");
+        super("tools.dump.neiintegration.entity");
     }
     
     @Override
@@ -21,7 +21,7 @@ public class EntityDumper extends DataDumper {
     
     @Override
     public Iterable<String[]> dump(int mode) {
-        LinkedList<String[]> list = new LinkedList<String[]>();
+        List<String[]> list = new LinkedList<String[]>();
         
         List<Integer> ids = new ArrayList<Integer>();
         ids.addAll(EntityList.IDtoClassMapping.keySet());
