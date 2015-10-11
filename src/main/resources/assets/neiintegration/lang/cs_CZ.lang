@@ -69,10 +69,6 @@ neiintegration.handler.electricalage.macerator=Drtič (ELN)
 neiintegration.handler.electricalage.magnetizer=Magnetizér
 neiintegration.handler.electricalage.plateMachine=Deskový stroj
 
-# Forestry
-neiintegration.handler.forestry.shaped=Výhodné v lesnictví
-neiintegration.handler.forestry.fabricator.worth=Cena:
-
 # MineFactory Reloaded
 neiintegration.handler.bioreactor.efficiency=Efektivita
 neiintegration.handler.bioreactor.efficiency.1=Záleží na množství

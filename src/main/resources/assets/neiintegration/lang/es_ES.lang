@@ -69,10 +69,6 @@ neiintegration.handler.electricalage.macerator=Macerador (ELN)
 neiintegration.handler.electricalage.magnetizer=Magnetizador
 neiintegration.handler.electricalage.plateMachine=Máquina de placa
 
-# Forestry
-neiintegration.handler.forestry.shaped=Forestry Shaped
-neiintegration.handler.forestry.fabricator.worth=Valor:
-
 # MineFactory Reloaded
 neiintegration.handler.bioreactor.efficiency=Eficiencia
 neiintegration.handler.bioreactor.efficiency.1=Depende de la cantidad de
