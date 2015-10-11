@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.ReflectionHelper;
 public class TileEntityDumper extends DataDumper {
     
     public TileEntityDumper() {
-        super("tools.dump.neiintegration_tileentity");
+        super("tools.dump.neiintegration.tileentity");
     }
     
     @Override
@@ -24,7 +24,7 @@ public class TileEntityDumper extends DataDumper {
     
     @Override
     public Iterable<String[]> dump(int mode) {
-        LinkedList<String[]> list = new LinkedList<String[]>();
+        List<String[]> list = new LinkedList<String[]>();
         
         Map<Class, String> classToNameMap = ReflectionHelper.getPrivateValue(TileEntity.class, null, "field_145853_j", "classToNameMap");
         List<Class> classes = new ArrayList<Class>();

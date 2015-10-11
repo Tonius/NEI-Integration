@@ -13,7 +13,7 @@ import codechicken.nei.config.DataDumper;
 public class OreDictionaryDumper extends DataDumper {
     
     public OreDictionaryDumper() {
-        super("tools.dump.neiintegration_oredict");
+        super("tools.dump.neiintegration.oredict");
     }
     
     @Override
@@ -23,7 +23,7 @@ public class OreDictionaryDumper extends DataDumper {
     
     @Override
     public Iterable<String[]> dump(int mode) {
-        LinkedList<String[]> list = new LinkedList<String[]>();
+        List<String[]> list = new LinkedList<String[]>();
         
         List<String> oreNames = Arrays.asList(OreDictionary.getOreNames());
         Collections.sort(oreNames);

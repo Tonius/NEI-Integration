@@ -2,9 +2,9 @@ package tonius.neiintegration.mods.mcforge.dumpers;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.WeightedRandomChestContent;
@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.ReflectionHelper;
 public class ChestLootDumper extends DataDumper {
     
     public ChestLootDumper() {
-        super("tools.dump.neiintegration_chestloot");
+        super("tools.dump.neiintegration.chestloot");
     }
     
     @Override
@@ -25,15 +25,15 @@ public class ChestLootDumper extends DataDumper {
     
     @Override
     public Iterable<String[]> dump(int mode) {
-        LinkedList<String[]> list = new LinkedList<String[]>();
+        List<String[]> list = new LinkedList<String[]>();
         
-        HashMap<String, ChestGenHooks> lootTables = ReflectionHelper.getPrivateValue(ChestGenHooks.class, null, "chestInfo");
+        Map<String, ChestGenHooks> lootTables = ReflectionHelper.getPrivateValue(ChestGenHooks.class, null, "chestInfo");
         List<String> names = new ArrayList<String>();
         names.addAll(lootTables.keySet());
         Collections.sort(names);
         
         for (String name : names) {
-            ArrayList<WeightedRandomChestContent> contents = ReflectionHelper.getPrivateValue(ChestGenHooks.class, lootTables.get(name), "contents");
+            List<WeightedRandomChestContent> contents = ReflectionHelper.getPrivateValue(ChestGenHooks.class, lootTables.get(name), "contents");
             
             for (WeightedRandomChestContent w : contents) {
                 String displayName;

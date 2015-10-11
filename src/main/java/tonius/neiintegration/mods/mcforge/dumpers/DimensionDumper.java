@@ -3,9 +3,9 @@ package tonius.neiintegration.mods.mcforge.dumpers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraftforge.common.DimensionManager;
 import codechicken.nei.config.DataDumper;
@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.ReflectionHelper;
 public class DimensionDumper extends DataDumper {
     
     public DimensionDumper() {
-        super("tools.dump.neiintegration_dimension");
+        super("tools.dump.neiintegration.dimension");
     }
     
     @Override
@@ -24,7 +24,7 @@ public class DimensionDumper extends DataDumper {
     
     @Override
     public Iterable<String[]> dump(int mode) {
-        LinkedList<String[]> list = new LinkedList<String[]>();
+        List<String[]> list = new LinkedList<String[]>();
         
         List<Integer> ids = new ArrayList<Integer>();
         ids.addAll(Arrays.asList(DimensionManager.getStaticDimensionIDs()));
@@ -32,7 +32,7 @@ public class DimensionDumper extends DataDumper {
         
         for (int id : ids) {
             int providerId = DimensionManager.getProviderType(id);
-            Hashtable<Integer, Class> providers = ReflectionHelper.getPrivateValue(DimensionManager.class, null, "providers");
+            Map<Integer, Class> providers = ReflectionHelper.getPrivateValue(DimensionManager.class, null, "providers");
             Class providerClass = providers.get(providerId);
             list.add(new String[] { String.valueOf(id), String.valueOf(providerId), providerClass.getName() });
         }

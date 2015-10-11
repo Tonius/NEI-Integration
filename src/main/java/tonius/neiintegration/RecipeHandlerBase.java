@@ -20,7 +20,7 @@ import codechicken.nei.guihook.GuiContainerManager;
 import codechicken.nei.recipe.GuiRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
-public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements IRecipeHandlerBase {
+public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements IRecipeHandler {
     
     @Override
     public void prepare() {

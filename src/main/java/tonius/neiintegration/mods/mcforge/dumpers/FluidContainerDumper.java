@@ -15,7 +15,7 @@ import codechicken.nei.config.DataDumper;
 public class FluidContainerDumper extends DataDumper {
     
     public FluidContainerDumper() {
-        super("tools.dump.neiintegration_fluidcontainer");
+        super("tools.dump.neiintegration.fluidcontainer");
     }
     
     @Override
@@ -25,7 +25,7 @@ public class FluidContainerDumper extends DataDumper {
     
     @Override
     public Iterable<String[]> dump(int mode) {
-        LinkedList<String[]> list = new LinkedList<String[]>();
+        List<String[]> list = new LinkedList<String[]>();
         
         List<FluidContainerData> datas = new ArrayList<FluidContainerData>();
         datas.addAll(Arrays.asList(FluidContainerRegistry.getRegisteredFluidContainerData()));
