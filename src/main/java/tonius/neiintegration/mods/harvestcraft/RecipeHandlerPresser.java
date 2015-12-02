@@ -84,11 +84,6 @@ public class RecipeHandlerPresser extends RecipeHandlerBase {
     }
     
     @Override
-    public int recipiesPerPage() {
-        return 2;
-    }
-    
-    @Override
     public void loadAllRecipes() {
         Map<ItemStack, ItemStack[]> recipes = PresserRecipes.pressing().getPressingList();
         for (Entry<ItemStack, ItemStack[]> recipe : recipes.entrySet()) {
@@ -123,7 +118,9 @@ public class RecipeHandlerPresser extends RecipeHandlerBase {
                 if (outputs.length != 2) {
                     continue;
                 }
-                this.arecipes.add(new CachedPresserRecipe(recipe.getKey(), outputs[0], outputs[1]));
+                ingredient = ingredient.copy();
+                ingredient.stackSize = 1;
+                this.arecipes.add(new CachedPresserRecipe(ingredient, outputs[0], outputs[1]));
             }
         }
     }
