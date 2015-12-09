@@ -5,9 +5,9 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fluids.Fluid;
@@ -15,7 +15,6 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidBlock;
 import tonius.neiintegration.PositionedFluidTank;
 import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
@@ -25,26 +24,6 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
 
 public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
-    
-    private static List<Fluid> fluids = new ArrayList<Fluid>();
-    
-    @Override
-    public void prepare() {
-        for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
-            fluids.add(fluid);
-        }
-        Collections.sort(fluids, new Comparator<Fluid>() {
-            
-            @Override
-            public int compare(Fluid f1, Fluid f2) {
-                if (f1 == null || f1 == null) {
-                    return 0;
-                }
-                return Integer.compare(f1.getID(), f2.getID());
-            }
-            
-        });
-    }
     
     public class CachedFluidRegistryRecipe extends CachedBaseRecipe {
         
@@ -166,10 +145,34 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
         return currenttip;
     }
     
+    public List<Fluid> getFluids() {
+        List<Fluid> fluids = new LinkedList<Fluid>();
+        
+        for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
+            if (fluid != null) {
+                fluids.add(fluid);
+            }
+        }
+        
+        Collections.sort(fluids, new Comparator<Fluid>() {
+            
+            @Override
+            public int compare(Fluid f1, Fluid f2) {
+                if (f1 == null || f1 == null) {
+                    return 0;
+                }
+                return Integer.compare(f1.getID(), f2.getID());
+            }
+            
+        });
+        
+        return fluids;
+    }
+    
     @Override
     public void loadAllRecipes() {
-        if (Config.handler_fluidRegistry) {
-            for (Fluid fluid : fluids) {
+        if (Config.handlerFluidRegistry) {
+            for (Fluid fluid : this.getFluids()) {
                 this.arecipes.add(new CachedFluidRegistryRecipe(fluid));
             }
         }
@@ -177,11 +180,11 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
     
     @Override
     public void loadCraftingRecipes(ItemStack result) {
-        if (Block.getBlockFromItem(result.getItem()) instanceof IFluidBlock) {
+        if (Utils.isFluidBlock(result)) {
             super.loadCraftingRecipes(result);
         }
-        if (Config.handler_fluidRegistry) {
-            for (Fluid fluid : fluids) {
+        if (Config.handlerFluidRegistry) {
+            for (Fluid fluid : this.getFluids()) {
                 CachedFluidRegistryRecipe crecipe = new CachedFluidRegistryRecipe(fluid);
                 if (crecipe.filledContainer != null && crecipe.filledContainer.contains(result)) {
                     crecipe.setPermutation(crecipe.filledContainer, result);
@@ -198,7 +201,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
     
     @Override
     public void loadCraftingRecipes(FluidStack result) {
-        if (Config.handler_fluidRegistry) {
+        if (Config.handlerFluidRegistry) {
             for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
                 if (fluid == result.getFluid()) {
                     this.arecipes.add(new CachedFluidRegistryRecipe(fluid));
@@ -210,8 +213,8 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         super.loadUsageRecipes(ingredient);
-        if (Config.handler_fluidRegistry) {
-            for (Fluid fluid : fluids) {
+        if (Config.handlerFluidRegistry) {
+            for (Fluid fluid : this.getFluids()) {
                 CachedFluidRegistryRecipe crecipe = new CachedFluidRegistryRecipe(fluid);
                 if (crecipe.emptyContainer != null && crecipe.emptyContainer.contains(ingredient)) {
                     crecipe.setPermutation(crecipe.emptyContainer, ingredient);
@@ -228,8 +231,8 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
     
     @Override
     public void loadUsageRecipes(FluidStack ingredient) {
-        if (Config.handler_fluidRegistry) {
-            for (Fluid fluid : fluids) {
+        if (Config.handlerFluidRegistry) {
+            for (Fluid fluid : this.getFluids()) {
                 if (fluid == ingredient.getFluid()) {
                     this.arecipes.add(new CachedFluidRegistryRecipe(fluid));
                 }

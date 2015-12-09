@@ -9,30 +9,46 @@ import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
+import codechicken.nei.api.API;
 
 import com.pam.harvestcraft.GuiPamPresser;
 import com.pam.harvestcraft.PresserRecipes;
 
 public class RecipeHandlerPresser extends RecipeHandlerBase {
     
+    @Override
+    public void prepare() {
+        API.setGuiOffset(GuiPamPresser.class, 7, -18);
+    }
+    
     public class CachedPresserRecipe extends CachedBaseRecipe {
         
         public PositionedStack input;
-        public PositionedStack output;
+        public PositionedStack outputPrimary;
+        public PositionedStack outputSecondary;
         
-        public CachedPresserRecipe(ItemStack inputStack, ItemStack outputStack) {
-            this.input = new PositionedStack(inputStack, 75, 12);
-            this.output = new PositionedStack(outputStack, 57, 43);
+        public CachedPresserRecipe(ItemStack input, ItemStack outputPrimary, ItemStack outputSecondary) {
+            this.input = new PositionedStack(input, 72, 9);
+            this.outputPrimary = new PositionedStack(outputPrimary, 54, 40);
+            if (outputSecondary != null) {
+                this.outputSecondary = new PositionedStack(outputSecondary, 90, 40);
+            }
         }
         
         @Override
         public PositionedStack getIngredient() {
+            this.randomRenderPermutation(this.input, RecipeHandlerPresser.this.cycleticks / 40);
             return this.input;
         }
         
         @Override
         public PositionedStack getResult() {
-            return this.output;
+            return this.outputPrimary;
+        }
+        
+        @Override
+        public PositionedStack getOtherStack() {
+            return this.outputSecondary;
         }
         
     }
@@ -49,12 +65,12 @@ public class RecipeHandlerPresser extends RecipeHandlerBase {
     
     @Override
     public String getGuiTexture() {
-        return "harvestcraft:textures/gui/presser.png";
+        return "neiintegration:textures/harvestcraft/presser.png";
     }
     
     @Override
     public void loadTransferRects() {
-        this.addTransferRect(71, 0, 25, 9);
+        this.addTransferRect(59, 27, 42, 11);
     }
     
     @Override
@@ -65,43 +81,52 @@ public class RecipeHandlerPresser extends RecipeHandlerBase {
     @Override
     public void drawBackground(int recipe) {
         this.changeToGuiTexture();
-        GuiDraw.drawTexturedModalRect(-2, -5, 3, 6, 170, 68);
+        GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 160, 65);
     }
     
     @Override
     public void drawExtras(int recipe) {
-        this.drawProgressBar(71, -3, 176, 18, 24, 13, 80, 0);
-    }
-    
-    @Override
-    public int recipiesPerPage() {
-        return 1;
+        this.drawProgressBar(59, 27, 160, 0, 42, 11, 40, 1);
     }
     
     @Override
     public void loadAllRecipes() {
-        Map<ItemStack, ItemStack> recipes = PresserRecipes.smelting().getSmeltingList();
-        for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet()) {
-            this.arecipes.add(new CachedPresserRecipe(recipe.getKey(), recipe.getValue()));
+        Map<ItemStack, ItemStack[]> recipes = PresserRecipes.pressing().getPressingList();
+        for (Entry<ItemStack, ItemStack[]> recipe : recipes.entrySet()) {
+            ItemStack[] outputs = recipe.getValue();
+            if (outputs.length != 2) {
+                continue;
+            }
+            this.arecipes.add(new CachedPresserRecipe(recipe.getKey(), outputs[0], outputs[1]));
         }
     }
     
     @Override
     public void loadCraftingRecipes(ItemStack result) {
-        Map<ItemStack, ItemStack> recipes = PresserRecipes.smelting().getSmeltingList();
-        for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet()) {
-            if (Utils.areStacksSameTypeCraftingSafe(recipe.getValue(), result)) {
-                this.arecipes.add(new CachedPresserRecipe(recipe.getKey(), recipe.getValue()));
+        Map<ItemStack, ItemStack[]> recipes = PresserRecipes.pressing().getPressingList();
+        for (Entry<ItemStack, ItemStack[]> recipe : recipes.entrySet()) {
+            ItemStack[] outputs = recipe.getValue();
+            if (outputs.length != 2) {
+                continue;
+            }
+            if (Utils.areStacksSameTypeCraftingSafe(outputs[0], result) || Utils.areStacksSameTypeCraftingSafe(outputs[1], result)) {
+                this.arecipes.add(new CachedPresserRecipe(recipe.getKey(), outputs[0], outputs[1]));
             }
         }
     }
     
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
-        Map<ItemStack, ItemStack> recipes = PresserRecipes.smelting().getSmeltingList();
-        for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet()) {
+        Map<ItemStack, ItemStack[]> recipes = PresserRecipes.pressing().getPressingList();
+        for (Entry<ItemStack, ItemStack[]> recipe : recipes.entrySet()) {
             if (Utils.areStacksSameTypeCraftingSafe(recipe.getKey(), ingredient)) {
-                this.arecipes.add(new CachedPresserRecipe(recipe.getKey(), recipe.getValue()));
+                ItemStack[] outputs = recipe.getValue();
+                if (outputs.length != 2) {
+                    continue;
+                }
+                ingredient = ingredient.copy();
+                ingredient.stackSize = 1;
+                this.arecipes.add(new CachedPresserRecipe(ingredient, outputs[0], outputs[1]));
             }
         }
     }
