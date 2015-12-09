@@ -5,12 +5,18 @@ import java.util.Map;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import tonius.neiintegration.Utils;
+import codechicken.nei.api.API;
 
 import com.pam.harvestcraft.ChurnRecipes;
 import com.pam.harvestcraft.GuiChurn;
 import com.pam.harvestcraft.ItemRegistry;
 
 public class RecipeHandlerChurn extends RecipeHandlerHCBase {
+    
+    @Override
+    public void prepare() {
+        API.setGuiOffset(GuiChurn.class, 11, 13);
+    }
     
     @Override
     protected String getRecipeSubID() {

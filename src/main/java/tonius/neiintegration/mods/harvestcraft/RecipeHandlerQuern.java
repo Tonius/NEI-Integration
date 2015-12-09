@@ -6,11 +6,17 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import tonius.neiintegration.Utils;
+import codechicken.nei.api.API;
 
 import com.pam.harvestcraft.GuiQuern;
 import com.pam.harvestcraft.QuernRecipes;
 
 public class RecipeHandlerQuern extends RecipeHandlerHCBase {
+    
+    @Override
+    public void prepare() {
+        API.setGuiOffset(GuiQuern.class, 11, 13);
+    }
     
     @Override
     protected String getRecipeSubID() {

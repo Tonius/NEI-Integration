@@ -9,11 +9,17 @@ import tonius.neiintegration.RecipeHandlerBase;
 import tonius.neiintegration.Utils;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
+import codechicken.nei.api.API;
 
 import com.pam.harvestcraft.GuiPamPresser;
 import com.pam.harvestcraft.PresserRecipes;
 
 public class RecipeHandlerPresser extends RecipeHandlerBase {
+    
+    @Override
+    public void prepare() {
+        API.setGuiOffset(GuiPamPresser.class, 7, -18);
+    }
     
     public class CachedPresserRecipe extends CachedBaseRecipe {
         
