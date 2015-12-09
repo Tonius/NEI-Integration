@@ -2,9 +2,8 @@ package tonius.neiintegration.mods.mcforge;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
@@ -18,14 +17,6 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
 
 public class RecipeHandlerOreDictionary extends RecipeHandlerBase {
-    
-    private static List<String> oreNames = new ArrayList<String>();
-    
-    @Override
-    public void prepare() {
-        oreNames.addAll(Arrays.asList(OreDictionary.getOreNames()));
-        Collections.sort(oreNames);
-    }
     
     public class CachedOreDictionaryRecipe extends CachedBaseRecipe {
         
@@ -92,10 +83,21 @@ public class RecipeHandlerOreDictionary extends RecipeHandlerBase {
         return currenttip;
     }
     
+    public List<String> getOreNames() {
+        List<String> oreNames = new LinkedList<String>();
+        for (String oreName : OreDictionary.getOreNames()) {
+            if (oreName != null) {
+                oreNames.add(oreName);
+            }
+        }
+        Collections.sort(oreNames);
+        return oreNames;
+    }
+    
     @Override
     public void loadAllRecipes() {
-        if (Config.handler_oreDictionary) {
-            for (String oreName : oreNames) {
+        if (Config.handlerOreDictionary) {
+            for (String oreName : this.getOreNames()) {
                 for (ItemStack ore : OreDictionary.getOres(oreName)) {
                     this.arecipes.add(new CachedOreDictionaryRecipe(oreName, ore, OreDictionary.getOres(oreName)));
                 }
@@ -105,9 +107,9 @@ public class RecipeHandlerOreDictionary extends RecipeHandlerBase {
     
     @Override
     public void loadUsageRecipes(ItemStack ingred) {
-        if (Config.handler_oreDictionary) {
+        if (Config.handlerOreDictionary) {
             for (int id : OreDictionary.getOreIDs(ingred)) {
-                for (String oreName : oreNames) {
+                for (String oreName : this.getOreNames()) {
                     if (OreDictionary.getOreName(id).equals(oreName)) {
                         CachedOreDictionaryRecipe crecipe = new CachedOreDictionaryRecipe(oreName, new ItemStack(ingred.getItem(), 1, ingred.getItemDamage()), OreDictionary.getOres(oreName));
                         crecipe.setIngredientPermutation(Collections.singletonList(crecipe.input), ingred);

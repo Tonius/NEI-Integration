@@ -23,28 +23,28 @@ public class Config {
     public static final Section sectionTooltips = new Section("Tooltips", "tooltips");
     
     // handlers
-    public static boolean handler_fluidRegistry = Defaults.handler_fluidRegistry;
-    public static boolean handler_oreDictionary = Defaults.handler_oreDictionary;
+    public static boolean handlerFluidRegistry = Defaults.handlerFluidRegistry;
+    public static boolean handlerOreDictionary = Defaults.handlerOreDictionary;
     
     // tooltips
-    public static boolean tooltip_unlocalizedName = Defaults.tooltip_unlocalizedName;
-    public static boolean tooltip_unlocalizedNameShift = Defaults.tooltip_unlocalizedNameShift;
-    public static boolean tooltip_unlocalizedNameAdvanced = Defaults.tooltip_unlocalizedNameAdvanced;
-    public static boolean tooltip_internalName = Defaults.tooltip_internalName;
-    public static boolean tooltip_internalNameShift = Defaults.tooltip_internalNameShift;
-    public static boolean tooltip_internalNameAdvanced = Defaults.tooltip_internalNameAdvanced;
-    public static boolean tooltip_maxStack = Defaults.tooltip_maxStack;
-    public static boolean tooltip_maxStackShift = Defaults.tooltip_maxStackShift;
-    public static boolean tooltip_maxStackAdvanced = Defaults.tooltip_maxStackAdvanced;
-    public static boolean tooltip_burnTime = Defaults.tooltip_burnTime;
-    public static boolean tooltip_burnTimeShift = Defaults.tooltip_burnTimeShift;
-    public static boolean tooltip_burnTimeAdvanced = Defaults.tooltip_burnTimeAdvanced;
-    public static boolean tooltip_oreDictNames = Defaults.tooltip_oreDictNames;
-    public static boolean tooltip_oreDictNamesShift = Defaults.tooltip_oreDictNamesShift;
-    public static boolean tooltip_oreDictNamesAdvanced = Defaults.tooltip_oreDictNamesAdvanced;
-    public static boolean tooltip_fluidRegInfo = Defaults.tooltip_fluidRegInfo;
-    public static boolean tooltip_fluidRegInfoShift = Defaults.tooltip_fluidRegInfoShift;
-    public static boolean tooltip_fluidRegInfoAdvanced = Defaults.tooltip_fluidRegInfoAdvanced;
+    public static boolean tooltipUnlocalizedName = Defaults.tooltipUnlocalizedName;
+    public static boolean tooltipUnlocalizedNameShift = Defaults.tooltipUnlocalizedNameShift;
+    public static boolean tooltipUnlocalizedNameAdvanced = Defaults.tooltipUnlocalizedNameAdvanced;
+    public static boolean tooltipInternalName = Defaults.tooltipInternalName;
+    public static boolean tooltipInternalNameShift = Defaults.tooltipInternalNameShift;
+    public static boolean tooltipInternalNameAdvanced = Defaults.tooltipInternalNameAdvanced;
+    public static boolean tooltipMaxStack = Defaults.tooltipMaxStack;
+    public static boolean tooltipMaxStackShift = Defaults.tooltipMaxStackShift;
+    public static boolean tooltipMaxStackAdvanced = Defaults.tooltipMaxStackAdvanced;
+    public static boolean tooltipBurnTime = Defaults.tooltipBurnTime;
+    public static boolean tooltipBurnTimeShift = Defaults.tooltipBurnTimeShift;
+    public static boolean tooltipBurnTimeAdvanced = Defaults.tooltipBurnTimeAdvanced;
+    public static boolean tooltipOreDictNames = Defaults.tooltipOreDictNames;
+    public static boolean tooltipOreDictNamesShift = Defaults.tooltipOreDictNamesShift;
+    public static boolean tooltipOreDictNamesAdvanced = Defaults.tooltipOreDictNamesAdvanced;
+    public static boolean tooltipFluidRegInfo = Defaults.tooltipFluidRegInfo;
+    public static boolean tooltipFluidRegInfoShift = Defaults.tooltipFluidRegInfoShift;
+    public static boolean tooltipFluidRegInfoAdvanced = Defaults.tooltipFluidRegInfoAdvanced;
     
     public static void preInit(FMLPreInitializationEvent evt) {
         FMLCommonHandler.instance().bus().register(new Config());
@@ -82,26 +82,26 @@ public class Config {
             }
         }
         
-        handler_fluidRegistry = config.get(sectionHandlers.name, "Fluid Registry", Defaults.handler_fluidRegistry, "Shows information about registered fluids when looking them or related items up.").getBoolean(Defaults.handler_fluidRegistry);
-        handler_oreDictionary = config.get(sectionHandlers.name, "Ore Dictionary", Defaults.handler_oreDictionary, "Shows information about items registered in the Ore Dictionary when looking up item usage.").getBoolean(Defaults.handler_oreDictionary);
+        handlerFluidRegistry = config.get(sectionHandlers.name, "Fluid Registry", Defaults.handlerFluidRegistry, "Shows information about registered fluids when looking them or related items up.").getBoolean(Defaults.handlerFluidRegistry);
+        handlerOreDictionary = config.get(sectionHandlers.name, "Ore Dictionary", Defaults.handlerOreDictionary, "Shows information about items registered in the Ore Dictionary when looking up item usage.").getBoolean(Defaults.handlerOreDictionary);
         
-        tooltip_unlocalizedName = config.get(sectionTooltips.name, "Unlocalized Name", Defaults.tooltip_unlocalizedName, "Show the unlocalized name (example: 'tile.stone') of items.").getBoolean(Defaults.tooltip_unlocalizedName);
-        tooltip_unlocalizedNameShift = config.get(sectionTooltips.name, "Unlocalized Name Shift", Defaults.tooltip_unlocalizedNameShift, "If unlocalized names are enabled, they will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltip_unlocalizedNameShift);
-        tooltip_unlocalizedNameAdvanced = config.get(sectionTooltips.name, "Unlocalized Name Advanced", Defaults.tooltip_unlocalizedNameAdvanced, "If unlocalized names are enabled, they will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltip_unlocalizedNameAdvanced);
-        tooltip_internalName = config.get(sectionTooltips.name, "Internal Name", Defaults.tooltip_internalName, "Show the internal name (example: 'minecraft:stone') of items.").getBoolean(Defaults.tooltip_internalName);
-        tooltip_internalNameShift = config.get(sectionTooltips.name, "Internal Name Shift", Defaults.tooltip_internalNameShift, "If internal names are enabled, they will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltip_internalNameShift);
-        tooltip_internalNameAdvanced = config.get(sectionTooltips.name, "Internal Name Advanced", Defaults.tooltip_internalNameAdvanced, "If internal names are enabled, they will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltip_internalNameAdvanced);
-        tooltip_maxStack = config.get(sectionTooltips.name, "Maximum Stack Size", Defaults.tooltip_maxStack, "Show the maximum stack size of items.").getBoolean(Defaults.tooltip_maxStack);
-        tooltip_maxStackShift = config.get(sectionTooltips.name, "Maximum Stack Size Shift", Defaults.tooltip_maxStackShift, "If maximum stack sizes are enabled, they will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltip_maxStackShift);
-        tooltip_maxStackAdvanced = config.get(sectionTooltips.name, "Maximum Stack Size Advanced", Defaults.tooltip_maxStackAdvanced, "If maximum stack sizes are enabled, they will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltip_maxStackAdvanced);
-        tooltip_burnTime = config.get(sectionTooltips.name, "Burn Time", Defaults.tooltip_burnTime, "Show the burn time of items when used as furnace fuel.").getBoolean(Defaults.tooltip_burnTime);
-        tooltip_burnTimeShift = config.get(sectionTooltips.name, "Burn Time Shift", Defaults.tooltip_burnTimeShift, "If burn times are enabled, they will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltip_burnTimeShift);
-        tooltip_burnTimeAdvanced = config.get(sectionTooltips.name, "Burn Time Advanced", Defaults.tooltip_burnTimeAdvanced, "If burn times are enabled, they will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltip_burnTimeAdvanced);
-        tooltip_oreDictNames = config.get(sectionTooltips.name, "Ore Dictionary Names", Defaults.tooltip_oreDictNames, "Show the Ore Dictionary names of items.").getBoolean(Defaults.tooltip_oreDictNames);
-        tooltip_oreDictNamesShift = config.get(sectionTooltips.name, "Ore Dictionary Names Shift", Defaults.tooltip_oreDictNamesShift, "If Ore Dictionary names are enabled, they will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltip_oreDictNamesShift);
-        tooltip_oreDictNamesAdvanced = config.get(sectionTooltips.name, "Ore Dictionary Names Advanced", Defaults.tooltip_oreDictNamesAdvanced, "If Ore Dictionary names are enabled, they will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltip_oreDictNamesAdvanced);
-        tooltip_fluidRegInfo = config.get(sectionTooltips.name, "Fluid Registry Info", Defaults.tooltip_fluidRegInfo, "Show some fluid info on fluid-related items.").getBoolean(Defaults.tooltip_fluidRegInfo);
-        tooltip_fluidRegInfoShift = config.get(sectionTooltips.name, "Fluid Registry Info Shift", Defaults.tooltip_fluidRegInfoShift, "If fluid registry info is enabled, it will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltip_fluidRegInfoShift);
-        tooltip_fluidRegInfoAdvanced = config.get(sectionTooltips.name, "Fluid Registry Info Advanced", Defaults.tooltip_fluidRegInfoAdvanced, "If fluid registry info is enabled, it will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltip_fluidRegInfoAdvanced);
+        tooltipUnlocalizedName = config.get(sectionTooltips.name, "Unlocalized Name", Defaults.tooltipUnlocalizedName, "Show the unlocalized name (example: 'tile.stone') of items.").getBoolean(Defaults.tooltipUnlocalizedName);
+        tooltipUnlocalizedNameShift = config.get(sectionTooltips.name, "Unlocalized Name Shift", Defaults.tooltipUnlocalizedNameShift, "If unlocalized names are enabled, they will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltipUnlocalizedNameShift);
+        tooltipUnlocalizedNameAdvanced = config.get(sectionTooltips.name, "Unlocalized Name Advanced", Defaults.tooltipUnlocalizedNameAdvanced, "If unlocalized names are enabled, they will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltipUnlocalizedNameAdvanced);
+        tooltipInternalName = config.get(sectionTooltips.name, "Internal Name", Defaults.tooltipInternalName, "Show the internal name (example: 'minecraft:stone') of items.").getBoolean(Defaults.tooltipInternalName);
+        tooltipInternalNameShift = config.get(sectionTooltips.name, "Internal Name Shift", Defaults.tooltipInternalNameShift, "If internal names are enabled, they will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltipInternalNameShift);
+        tooltipInternalNameAdvanced = config.get(sectionTooltips.name, "Internal Name Advanced", Defaults.tooltipInternalNameAdvanced, "If internal names are enabled, they will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltipInternalNameAdvanced);
+        tooltipMaxStack = config.get(sectionTooltips.name, "Maximum Stack Size", Defaults.tooltipMaxStack, "Show the maximum stack size of items.").getBoolean(Defaults.tooltipMaxStack);
+        tooltipMaxStackShift = config.get(sectionTooltips.name, "Maximum Stack Size Shift", Defaults.tooltipMaxStackShift, "If maximum stack sizes are enabled, they will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltipMaxStackShift);
+        tooltipMaxStackAdvanced = config.get(sectionTooltips.name, "Maximum Stack Size Advanced", Defaults.tooltipMaxStackAdvanced, "If maximum stack sizes are enabled, they will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltipMaxStackAdvanced);
+        tooltipBurnTime = config.get(sectionTooltips.name, "Burn Time", Defaults.tooltipBurnTime, "Show the burn time of items when used as furnace fuel.").getBoolean(Defaults.tooltipBurnTime);
+        tooltipBurnTimeShift = config.get(sectionTooltips.name, "Burn Time Shift", Defaults.tooltipBurnTimeShift, "If burn times are enabled, they will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltipBurnTimeShift);
+        tooltipBurnTimeAdvanced = config.get(sectionTooltips.name, "Burn Time Advanced", Defaults.tooltipBurnTimeAdvanced, "If burn times are enabled, they will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltipBurnTimeAdvanced);
+        tooltipOreDictNames = config.get(sectionTooltips.name, "Ore Dictionary Names", Defaults.tooltipOreDictNames, "Show the Ore Dictionary names of items.").getBoolean(Defaults.tooltipOreDictNames);
+        tooltipOreDictNamesShift = config.get(sectionTooltips.name, "Ore Dictionary Names Shift", Defaults.tooltipOreDictNamesShift, "If Ore Dictionary names are enabled, they will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltipOreDictNamesShift);
+        tooltipOreDictNamesAdvanced = config.get(sectionTooltips.name, "Ore Dictionary Names Advanced", Defaults.tooltipOreDictNamesAdvanced, "If Ore Dictionary names are enabled, they will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltipOreDictNamesAdvanced);
+        tooltipFluidRegInfo = config.get(sectionTooltips.name, "Fluid Registry Info", Defaults.tooltipFluidRegInfo, "Show some fluid info on fluid-related items.").getBoolean(Defaults.tooltipFluidRegInfo);
+        tooltipFluidRegInfoShift = config.get(sectionTooltips.name, "Fluid Registry Info Shift", Defaults.tooltipFluidRegInfoShift, "If fluid registry info is enabled, it will only be shown if the Shift key is held. Effect stacks with Advanced if enabled.").getBoolean(Defaults.tooltipFluidRegInfoShift);
+        tooltipFluidRegInfoAdvanced = config.get(sectionTooltips.name, "Fluid Registry Info Advanced", Defaults.tooltipFluidRegInfoAdvanced, "If fluid registry info is enabled, it will only be shown in advanced (F3+H) tooltips. Effect stacks with Shift if enabled.").getBoolean(Defaults.tooltipFluidRegInfoAdvanced);
     }
 }

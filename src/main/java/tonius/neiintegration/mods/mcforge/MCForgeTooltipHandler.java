@@ -19,26 +19,26 @@ public class MCForgeTooltipHandler {
     
     @SubscribeEvent
     public void onItemTooltip(ItemTooltipEvent evt) {
-        if (Config.tooltip_unlocalizedName && (!Config.tooltip_unlocalizedNameShift || Utils.isShiftKeyDown()) && (!Config.tooltip_unlocalizedNameAdvanced || evt.showAdvancedItemTooltips)) {
+        if (Config.tooltipUnlocalizedName && (!Config.tooltipUnlocalizedNameShift || Utils.isShiftKeyDown()) && (!Config.tooltipUnlocalizedNameAdvanced || evt.showAdvancedItemTooltips)) {
             evt.toolTip.add(EnumChatFormatting.DARK_GRAY + Utils.translate("tooltip.unlocalizedName") + " " + evt.itemStack.getUnlocalizedName());
         }
         
-        if (Config.tooltip_internalName && (!Config.tooltip_internalNameShift || Utils.isShiftKeyDown()) && (!Config.tooltip_internalNameAdvanced || evt.showAdvancedItemTooltips)) {
+        if (Config.tooltipInternalName && (!Config.tooltipInternalNameShift || Utils.isShiftKeyDown()) && (!Config.tooltipInternalNameAdvanced || evt.showAdvancedItemTooltips)) {
             evt.toolTip.add(EnumChatFormatting.DARK_GRAY + Utils.translate("tooltip.internalName") + " " + Item.itemRegistry.getNameForObject(evt.itemStack.getItem()));
         }
         
-        if (Config.tooltip_maxStack && (!Config.tooltip_maxStackShift || Utils.isShiftKeyDown()) && (!Config.tooltip_maxStackAdvanced || evt.showAdvancedItemTooltips)) {
+        if (Config.tooltipMaxStack && (!Config.tooltipMaxStackShift || Utils.isShiftKeyDown()) && (!Config.tooltipMaxStackAdvanced || evt.showAdvancedItemTooltips)) {
             evt.toolTip.add(EnumChatFormatting.DARK_GRAY + Utils.translate("tooltip.maxstack") + " " + String.valueOf(evt.itemStack.getMaxStackSize()));
         }
         
-        if (Config.tooltip_burnTime && (!Config.tooltip_burnTimeShift || Utils.isShiftKeyDown()) && (!Config.tooltip_burnTimeAdvanced || evt.showAdvancedItemTooltips)) {
+        if (Config.tooltipBurnTime && (!Config.tooltipBurnTimeShift || Utils.isShiftKeyDown()) && (!Config.tooltipBurnTimeAdvanced || evt.showAdvancedItemTooltips)) {
             int burnTime = TileEntityFurnace.getItemBurnTime(evt.itemStack);
             if (burnTime > 0) {
                 evt.toolTip.add(Utils.translate("tooltip.burntime") + " " + burnTime + " " + Utils.translate("ticks"));
             }
         }
         
-        if (Config.tooltip_oreDictNames && (!Config.tooltip_oreDictNamesShift || Utils.isShiftKeyDown()) && (!Config.tooltip_oreDictNamesAdvanced || evt.showAdvancedItemTooltips)) {
+        if (Config.tooltipOreDictNames && (!Config.tooltipOreDictNamesShift || Utils.isShiftKeyDown()) && (!Config.tooltipOreDictNamesAdvanced || evt.showAdvancedItemTooltips)) {
             List<String> names = new ArrayList<String>();
             for (int id : OreDictionary.getOreIDs(evt.itemStack)) {
                 String name = OreDictionary.getOreName(id);
@@ -55,7 +55,7 @@ public class MCForgeTooltipHandler {
             }
         }
         
-        if (Config.tooltip_fluidRegInfo && (!Config.tooltip_fluidRegInfoShift || Utils.isShiftKeyDown()) && (!Config.tooltip_fluidRegInfoAdvanced || evt.showAdvancedItemTooltips)) {
+        if (Config.tooltipFluidRegInfo && (!Config.tooltipFluidRegInfoShift || Utils.isShiftKeyDown()) && (!Config.tooltipFluidRegInfoAdvanced || evt.showAdvancedItemTooltips)) {
             List<String> names = new ArrayList<String>();
             if (FluidContainerRegistry.isEmptyContainer(evt.itemStack)) {
                 names.add("  " + Utils.translate("tooltip.fluidreg.empty"));

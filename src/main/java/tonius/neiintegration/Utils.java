@@ -6,10 +6,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.IFluidContainerItem;
@@ -55,18 +57,27 @@ public class Utils {
     public static FluidStack getFluidStack(ItemStack stack) {
         if (stack != null) {
             FluidStack fluidStack = null;
+            Block block = Block.getBlockFromItem(stack.getItem());
+            
             if (stack.getItem() instanceof IFluidContainerItem) {
                 fluidStack = ((IFluidContainerItem) stack.getItem()).getFluid(stack);
             }
             if (fluidStack == null) {
                 fluidStack = FluidContainerRegistry.getFluidForFilledItem(stack);
             }
-            if (fluidStack == null && Block.getBlockFromItem(stack.getItem()) instanceof IFluidBlock) {
-                Fluid fluid = ((IFluidBlock) Block.getBlockFromItem(stack.getItem())).getFluid();
+            if (fluidStack == null && block instanceof IFluidBlock) {
+                Fluid fluid = ((IFluidBlock) block).getFluid();
                 if (fluid != null) {
                     fluidStack = new FluidStack(fluid, 1000);
                 }
             }
+            if (fluidStack == null && (block == Blocks.water || block == Blocks.flowing_water)) {
+                fluidStack = new FluidStack(FluidRegistry.WATER, 1000);
+            }
+            if (fluidStack == null && (block == Blocks.lava || block == Blocks.flowing_lava)) {
+                fluidStack = new FluidStack(FluidRegistry.LAVA, 1000);
+            }
+            
             return fluidStack;
         }
         return null;
@@ -77,6 +88,19 @@ public class Utils {
             return false;
         }
         return fluidStack1.getFluid() == fluidStack2.getFluid();
+    }
+    
+    public static boolean isFluidBlock(ItemStack stack) {
+        if (stack == null || stack.getItem() == null) {
+            return false;
+        }
+        
+        Block block = Block.getBlockFromItem(stack.getItem());
+        if (block == null) {
+            return false;
+        }
+        
+        return block instanceof IFluidBlock || block == Blocks.water || block == Blocks.flowing_water || block == Blocks.lava || block == Blocks.flowing_lava;
     }
     
     public static boolean isShiftKeyDown() {
