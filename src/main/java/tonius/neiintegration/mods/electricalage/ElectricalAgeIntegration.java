@@ -1,7 +1,7 @@
 package tonius.neiintegration.mods.electricalage;
 
 import tonius.neiintegration.IntegrationBase;
-import cpw.mods.fml.common.Loader;
+import tonius.neiintegration.Utils;
 
 public class ElectricalAgeIntegration extends IntegrationBase {
     
@@ -12,7 +12,7 @@ public class ElectricalAgeIntegration extends IntegrationBase {
     
     @Override
     public boolean isValid() {
-        return Loader.isModLoaded("Eln");
+        return Utils.isModLoaded("Eln");
     }
     
     @Override

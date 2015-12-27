@@ -43,7 +43,13 @@ public class RecipeHandlerRollingMachineShaped extends RecipeHandlerRollingMachi
         public void setIngredients(int width, int height, Object[] items) {
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    Object item = items[y * width + x];
+                    int index = y * width + x;
+                    if (index >= items.length) {
+                        continue;
+                    }
+                    
+                    Object item = items[index];
+                    
                     if (item == null) {
                         continue;
                     } else if (item instanceof ItemStack[] && ((ItemStack[]) item).length == 0) {

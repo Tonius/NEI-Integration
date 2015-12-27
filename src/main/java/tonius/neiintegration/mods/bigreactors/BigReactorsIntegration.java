@@ -1,7 +1,7 @@
 package tonius.neiintegration.mods.bigreactors;
 
 import tonius.neiintegration.IntegrationBase;
-import cpw.mods.fml.common.Loader;
+import tonius.neiintegration.Utils;
 
 public class BigReactorsIntegration extends IntegrationBase {
     
@@ -12,7 +12,7 @@ public class BigReactorsIntegration extends IntegrationBase {
     
     @Override
     public boolean isValid() {
-        return Loader.isModLoaded("BigReactors");
+        return Utils.isModLoaded("BigReactors");
     }
     
     @Override

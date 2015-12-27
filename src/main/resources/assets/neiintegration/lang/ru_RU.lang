@@ -69,6 +69,10 @@ neiintegration.handler.electricalage.macerator=Дробитель (ELN)
 neiintegration.handler.electricalage.magnetizer=Намагничиватель
 neiintegration.handler.electricalage.plateMachine=Производитель пластин
 
+# Forestry
+neiintegration.handler.forestry.shaped=Forestry: Форменное
+neiintegration.handler.forestry.fabricator.worth=Стоимость:
+
 # MineFactory Reloaded
 neiintegration.handler.bioreactor.efficiency=Эффективность
 neiintegration.handler.bioreactor.efficiency.1=Зависит от количества

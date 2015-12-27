@@ -5,8 +5,6 @@ import tonius.neiintegration.Utils;
 
 import com.pam.harvestcraft.PresserRecipes;
 
-import cpw.mods.fml.common.Loader;
-
 public class HarvestCraftIntegration extends IntegrationBase {
     
     @Override
@@ -16,7 +14,7 @@ public class HarvestCraftIntegration extends IntegrationBase {
     
     @Override
     public boolean isValid() {
-        return Loader.isModLoaded("harvestcraft");
+        return Utils.isModLoaded("harvestcraft");
     }
     
     @Override
