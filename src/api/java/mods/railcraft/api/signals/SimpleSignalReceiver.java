@@ -1,27 +1,27 @@
 /*
- * This code is the property of CovertJaguar
- * and may only be used with explicit written
- * permission unless otherwise specified on the
- * license page at railcraft.wikispaces.com.
+ * ******************************************************************************
+ *  Copyright 2011-2015 CovertJaguar
+ *
+ *  This work (the API) is licensed under the "MIT" License, see LICENSE.md for details.
+ * ***************************************************************************
  */
 package mods.railcraft.api.signals;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
 /**
- *
  * @author CovertJaguar <http://www.railcraft.info>
  */
 public class SimpleSignalReceiver extends SignalReceiver {
-
     private SignalAspect aspect = SignalAspect.BLINK_RED;
 
-    public SimpleSignalReceiver(String desc, TileEntity tile) {
-        super(desc, tile, 1);
+    public SimpleSignalReceiver(String locTag, TileEntity tile) {
+        super(locTag, tile, 1);
     }
 
     public SignalAspect getAspect() {
@@ -62,7 +62,6 @@ public class SimpleSignalReceiver extends SignalReceiver {
 
     @Override
     public String toString() {
-        return "Receiver: " + aspect.toString();
+        return String.format("Receiver:%s (%s)", aspect,  super.toString());
     }
-
 }

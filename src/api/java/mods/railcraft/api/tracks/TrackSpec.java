@@ -1,3 +1,11 @@
+/*
+ * ******************************************************************************
+ *  Copyright 2011-2015 CovertJaguar
+ *
+ *  This work (the API) is licensed under the "MIT" License, see LICENSE.md for details.
+ * ***************************************************************************
+ */
+
 package mods.railcraft.api.tracks;
 
 import java.util.List;
@@ -46,7 +54,7 @@ public final class TrackSpec {
      * @param iconProvider The provider for Track item icons
      * @param instanceClass The ITrackInstance class that corresponds to this
      * TrackSpec
-     * @see ITextureProvider
+     * @see ITrackItemIconProvider
      */
     public TrackSpec(short trackId, String tag, ITrackItemIconProvider iconProvider, Class<? extends ITrackInstance> instanceClass) {
         this(trackId, tag, iconProvider, instanceClass, null);
@@ -63,7 +71,7 @@ public final class TrackSpec {
      * @param instanceClass The ITrackInstance class that corresponds to this
      * TrackSpec
      * @param tooltip The tool tip for the Track Item
-     * @see ITextureProvider
+     * @see ITrackItemIconProvider
      */
     public TrackSpec(short trackId, String tag, ITrackItemIconProvider iconProvider, Class<? extends ITrackInstance> instanceClass, List<String> tooltip) {
         this.trackId = trackId;
@@ -98,7 +106,7 @@ public final class TrackSpec {
      */
     public ItemStack getItem(int qty) {
         if (blockTrack != null) {
-            ItemStack stack = new ItemStack(blockTrack, qty);
+            ItemStack stack = new ItemStack(blockTrack, qty, getTrackTag().hashCode() % (Short.MAX_VALUE - 1));
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setString("track", tag);
             stack.setTagCompound(nbt);

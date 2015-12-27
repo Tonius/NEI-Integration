@@ -1,11 +1,11 @@
 /*
- * Copyright (c) CovertJaguar, 2011 http://railcraft.info
- * 
- * This code is the property of CovertJaguar
- * and may only be used with explicit written
- * permission unless otherwise specified on the
- * license page at railcraft.wikispaces.com.
+ * ******************************************************************************
+ *  Copyright 2011-2015 CovertJaguar
+ *
+ *  This work (the API) is licensed under the "MIT" License, see LICENSE.md for details.
+ * ***************************************************************************
  */
+
 package mods.railcraft.api.electricity;
 
 import java.util.Random;
@@ -178,7 +178,7 @@ public interface IElectricMinecart {
 
             if (drewFromTrack > 0)
                 drewFromTrack--;
-            else if (type == Type.USER && charge < capacity && clock % DRAW_INTERVAL == 0) {
+            else if (type == Type.USER && charge < (capacity / 2.0) && clock % DRAW_INTERVAL == 0) {
                 ILinkageManager lm = CartTools.getLinkageManager(minecart.worldObj);
                 for (EntityMinecart cart : lm.getCartsInTrain(minecart)) {
                     if (cart instanceof IElectricMinecart) {

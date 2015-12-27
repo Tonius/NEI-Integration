@@ -1,22 +1,21 @@
 /*
- * This code is the property of CovertJaguar
- * and may only be used with explicit written
- * permission unless otherwise specified on the
- * license page at railcraft.wikispaces.com.
+ * ******************************************************************************
+ *  Copyright 2011-2015 CovertJaguar
+ *
+ *  This work (the API) is licensed under the "MIT" License, see LICENSE.md for details.
+ * ***************************************************************************
  */
 package mods.railcraft.api.signals;
 
-import net.minecraft.tileentity.TileEntity;
 import mods.railcraft.api.core.WorldCoordinate;
+import net.minecraft.tileentity.TileEntity;
 
 /**
- *
  * @author CovertJaguar <http://www.railcraft.info>
  */
 public abstract class SignalController extends AbstractPair {
-
-    public SignalController(String name, TileEntity tile, int maxPairings) {
-        super(name, tile, maxPairings);
+    public SignalController(String locTag, TileEntity tile, int maxPairings) {
+        super(locTag, tile, maxPairings);
     }
 
     public SignalReceiver getReceiverAt(WorldCoordinate coord) {
@@ -44,9 +43,14 @@ public abstract class SignalController extends AbstractPair {
     }
 
     @Override
-    public boolean isValidPair(TileEntity tile) {
-        if (tile instanceof IReceiverTile) {
-            SignalReceiver receiver = ((IReceiverTile) tile).getReceiver();
+    public boolean isValidPair(TileEntity otherTile) {
+        return isValidPair(null, otherTile);
+    }
+
+    @Override
+    public boolean isValidPair(WorldCoordinate otherCoord, TileEntity otherTile) {
+        if (otherTile instanceof IReceiverTile) {
+            SignalReceiver receiver = ((IReceiverTile) otherTile).getReceiver();
             return receiver.isPairedWith(getCoords());
         }
         return false;
@@ -68,7 +72,7 @@ public abstract class SignalController extends AbstractPair {
     public void tickClient() {
         super.tickClient();
         if (SignalTools.effectManager != null && SignalTools.effectManager.isTuningAuraActive()) {
-            for (WorldCoordinate coord : pairings) {
+            for (WorldCoordinate coord : getPairs()) {
                 SignalReceiver receiver = getReceiverAt(coord);
                 if (receiver != null) {
                     SignalTools.effectManager.tuningEffect(getTile(), receiver.getTile());

@@ -1,29 +1,29 @@
 /*
- * This code is the property of CovertJaguar
- * and may only be used with explicit written
- * permission unless otherwise specified on the
- * license page at railcraft.wikispaces.com.
+ * ******************************************************************************
+ *  Copyright 2011-2015 CovertJaguar
+ *
+ *  This work (the API) is licensed under the "MIT" License, see LICENSE.md for details.
+ * ***************************************************************************
  */
 package mods.railcraft.api.signals;
+
+import mods.railcraft.api.core.WorldCoordinate;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import mods.railcraft.api.core.WorldCoordinate;
 
 /**
- *
  * @author CovertJaguar <http://www.railcraft.info>
  */
 public class DualSignalReceiver extends SignalReceiver {
-
     private SignalAspect topAspect = SignalAspect.BLINK_RED;
     private SignalAspect bottomAspect = SignalAspect.BLINK_RED;
 
-    public DualSignalReceiver(String desc, TileEntity tile) {
-        super(desc, tile, 2);
+    public DualSignalReceiver(String locTag, TileEntity tile) {
+        super(locTag, tile, 2);
     }
 
     @Override

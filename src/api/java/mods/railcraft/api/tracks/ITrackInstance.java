@@ -1,5 +1,14 @@
+/*
+ * ******************************************************************************
+ *  Copyright 2011-2015 CovertJaguar
+ *
+ *  This work (the API) is licensed under the "MIT" License, see LICENSE.md for details.
+ * ***************************************************************************
+ */
+
 package mods.railcraft.api.tracks;
 
+import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,6 +18,7 @@ import net.minecraft.util.IIcon;
 import mods.railcraft.api.core.INetworkedObject;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 
 /**
  * This interface defines a track.
@@ -29,6 +39,8 @@ import net.minecraft.entity.EntityLivingBase;
 public interface ITrackInstance extends INetworkedObject {
 
     public TrackSpec getTrackSpec();
+    
+    public List<ItemStack> getDrops(int fortune);
 
     /**
      * Return the rail's metadata (without the power bit if the rail uses one).
