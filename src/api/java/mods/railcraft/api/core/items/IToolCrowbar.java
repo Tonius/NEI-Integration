@@ -1,8 +1,9 @@
 /*
- * This code is the property of CovertJaguar
- * and may only be used with explicit written
- * permission unless otherwise specified on the
- * license page at railcraft.wikispaces.com.
+ * ******************************************************************************
+ *  Copyright 2011-2015 CovertJaguar
+ *
+ *  This work (the API) is licensed under the "MIT" License, see LICENSE.md for details.
+ * ***************************************************************************
  */
 package mods.railcraft.api.core.items;
 

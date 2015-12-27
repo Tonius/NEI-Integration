@@ -1,5 +1,11 @@
+/*
+ * ******************************************************************************
+ *  Copyright 2011-2015 CovertJaguar
+ *
+ *  This work (the API) is licensed under the "MIT" License, see LICENSE.md for details.
+ * ***************************************************************************
+ */
 package mods.railcraft.api.core;
-// TODO: Add NBT functions
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -10,8 +16,7 @@ import net.minecraft.tileentity.TileEntity;
  *
  * @author CovertJaguar <http://www.railcraft.info>
  */
-public class WorldCoordinate {
-
+public class WorldCoordinate implements Comparable<WorldCoordinate> {
     /**
      * The dimension
      */
@@ -32,10 +37,10 @@ public class WorldCoordinate {
     /**
      * Creates a new WorldCoordinate
      *
-     * @param dimension
-     * @param x
-     * @param y
-     * @param z
+     * @param dimension Dimension ID
+     * @param x         World Coordinate
+     * @param y         World Coordinate
+     * @param z         World Coordinate
      */
     public WorldCoordinate(int dimension, int x, int y, int z) {
         this.dimension = dimension;
@@ -51,15 +56,6 @@ public class WorldCoordinate {
         this.z = tile.zCoord;
     }
 
-    public void writeToNBT(NBTTagCompound data, String tag) {
-        NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setInteger("dim", dimension);
-        nbt.setInteger("x", x);
-        nbt.setInteger("y", y);
-        nbt.setInteger("z", z);
-        data.setTag(tag, nbt);
-    }
-
     public static WorldCoordinate readFromNBT(NBTTagCompound data, String tag) {
         if (data.hasKey(tag)) {
             NBTTagCompound nbt = data.getCompoundTag(tag);
@@ -72,8 +68,30 @@ public class WorldCoordinate {
         return null;
     }
 
+    public void writeToNBT(NBTTagCompound data, String tag) {
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setInteger("dim", dimension);
+        nbt.setInteger("x", x);
+        nbt.setInteger("y", y);
+        nbt.setInteger("z", z);
+        data.setTag(tag, nbt);
+    }
+
     public boolean isEqual(int dim, int x, int y, int z) {
         return this.x == x && this.y == y && this.z == z && this.dimension == dim;
+    }
+
+    @Override
+    public int compareTo(WorldCoordinate o) {
+        if (dimension != o.dimension)
+            return dimension - o.dimension;
+        if (x != o.x)
+            return x - o.x;
+        if (y != o.y)
+            return y - o.y;
+        if (z != o.z)
+            return z - o.z;
+        return 0;
     }
 
     @Override
@@ -94,17 +112,15 @@ public class WorldCoordinate {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + this.dimension;
-        hash = 13 * hash + this.x;
-        hash = 13 * hash + this.y;
-        hash = 13 * hash + this.z;
-        return hash;
+        int result = dimension;
+        result = 31 * result + x;
+        result = 31 * result + y;
+        result = 31 * result + z;
+        return result;
     }
 
     @Override
     public String toString() {
         return "WorldCoordinate{" + "dimension=" + dimension + ", x=" + x + ", y=" + y + ", z=" + z + '}';
     }
-
 }

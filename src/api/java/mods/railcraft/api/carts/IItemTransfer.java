@@ -1,3 +1,10 @@
+/*
+ * ******************************************************************************
+ *  Copyright 2011-2015 CovertJaguar
+ *
+ *  This work (the API) is licensed under the "MIT" License, see LICENSE.md for details.
+ * ***************************************************************************
+ */
 package mods.railcraft.api.carts;
 
 import net.minecraft.item.ItemStack;
@@ -8,17 +15,18 @@ import mods.railcraft.api.core.items.IStackFilter;
  * to know anything about the underlying implementation of the inventories.
  *
  * @author CovertJaguar <http://www.railcraft.info>
+ * @see mods.railcraft.api.carts.IItemCart
+ * @deprecated This class has been depreciated in favor of a more general system that doesn't require a cart to implement anything. This interface is no longer used.
  */
-public interface IItemTransfer
-{
-
+@Deprecated
+public interface IItemTransfer {
     /**
      * Offers an ItemStack to the object implementing this interface.
      * This function will return null if the item is accepted in full,
      * otherwise it will return whatever is rejected.
      *
      * @param source The Object offering the item
-     * @param offer The ItemStack being offered
+     * @param offer  The ItemStack being offered
      * @return Unused or unwanted portions of offer
      */
     public ItemStack offerItem(Object source, ItemStack offer);
@@ -42,7 +50,7 @@ public interface IItemTransfer
      * it should fulfill the following condition:<br/>
      * InvTools.isItemEqual(it.requestItem(this,request), request) == true
      *
-     * @param source The Object submitting the request
+     * @param source  The Object submitting the request
      * @param request The type of item requested
      * @return An ItemStack to fulfill the request or null if refused.
      */
@@ -57,7 +65,7 @@ public interface IItemTransfer
      * it should fulfill the following condition:<br/>
      * IStackFilter.matches(it.requestItem(this,request), request) == true
      *
-     * @param source The Object submitting the request
+     * @param source  The Object submitting the request
      * @param request The type of item requested
      * @return An ItemStack to fulfill the request or null if refused.
      */

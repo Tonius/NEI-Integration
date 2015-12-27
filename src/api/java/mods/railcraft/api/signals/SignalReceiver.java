@@ -1,24 +1,23 @@
 /*
- * This code is the property of CovertJaguar
- * and may only be used with explicit written
- * permission unless otherwise specified on the
- * license page at railcraft.wikispaces.com.
+ * ******************************************************************************
+ *  Copyright 2011-2015 CovertJaguar
+ *
+ *  This work (the API) is licensed under the "MIT" License, see LICENSE.md for details.
+ * ***************************************************************************
  */
 package mods.railcraft.api.signals;
 
-import net.minecraft.tileentity.TileEntity;
 import mods.railcraft.api.core.WorldCoordinate;
+import net.minecraft.tileentity.TileEntity;
 
 /**
- *
  * @author CovertJaguar <http://www.railcraft.info>
  */
 public abstract class SignalReceiver extends AbstractPair {
-
     protected boolean needsInit = true;
 
-    public SignalReceiver(String name, TileEntity tile, int maxPairings) {
-        super(name, tile, maxPairings);
+    public SignalReceiver(String locTag, TileEntity tile, int maxPairings) {
+        super(locTag, tile, maxPairings);
     }
 
     public SignalController getControllerAt(WorldCoordinate coord) {
@@ -35,9 +34,14 @@ public abstract class SignalReceiver extends AbstractPair {
     }
 
     @Override
-    public boolean isValidPair(TileEntity tile) {
-        if (tile instanceof IControllerTile) {
-            SignalController controller = ((IControllerTile) tile).getController();
+    public boolean isValidPair(TileEntity otherTile) {
+        return isValidPair(null, otherTile);
+    }
+
+    @Override
+    public boolean isValidPair(WorldCoordinate otherCoord, TileEntity otherTile) {
+        if (otherTile instanceof IControllerTile) {
+            SignalController controller = ((IControllerTile) otherTile).getController();
             return controller.isPairedWith(getCoords());
         }
         return false;
@@ -56,7 +60,7 @@ public abstract class SignalReceiver extends AbstractPair {
         super.tickServer();
         if (needsInit) {
             needsInit = false;
-            for (WorldCoordinate pair : pairings) {
+            for (WorldCoordinate pair : getPairs()) {
                 SignalController controller = getControllerAt(pair);
                 if (controller != null) {
                     SignalAspect aspect = controller.getAspectFor(getCoords());

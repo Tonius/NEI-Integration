@@ -1,7 +1,6 @@
 package tonius.neiintegration.mods.harvestcraft;
 
-import java.util.Collections;
-import java.util.List;
+import java.awt.Point;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -17,16 +16,23 @@ public abstract class RecipeHandlerHCBase extends RecipeHandlerBase {
         
         public PositionedStack input;
         public PositionedStack output;
-        public PositionedStack fuels;
+        public PositionedStack fuel;
         
-        public CachedHCRecipe(ItemStack input, ItemStack output, List<ItemStack> fuels) {
-            this.input = new PositionedStack(input, 45, 4);
-            this.output = new PositionedStack(output, 105, 22);
-            this.fuels = new PositionedStack(fuels, 45, 40);
+        public CachedHCRecipe(ItemStack input, ItemStack output, ItemStack fuel) {
+            Point inputStackPos = RecipeHandlerHCBase.this.getInputStackPos();
+            Point outputStackPos = RecipeHandlerHCBase.this.getOutputStackPos();
+            Point fuelStackPos = RecipeHandlerHCBase.this.getFuelStackPos();
+            
+            this.input = new PositionedStack(input, inputStackPos.x, inputStackPos.y);
+            this.output = new PositionedStack(output, outputStackPos.x, outputStackPos.y);
+            if (fuel != null) {
+                this.fuel = new PositionedStack(fuel, fuelStackPos.x, fuelStackPos.y);
+            }
         }
         
         @Override
         public PositionedStack getIngredient() {
+            this.randomRenderPermutation(this.input, RecipeHandlerHCBase.this.cycleticks / 40);
             return this.input;
         }
         
@@ -37,8 +43,7 @@ public abstract class RecipeHandlerHCBase extends RecipeHandlerBase {
         
         @Override
         public PositionedStack getOtherStack() {
-            this.randomRenderPermutation(this.fuels, RecipeHandlerHCBase.this.cycleticks / 20);
-            return this.fuels;
+            return this.fuel;
         }
         
     }
@@ -53,6 +58,18 @@ public abstract class RecipeHandlerHCBase extends RecipeHandlerBase {
     @Override
     public String getRecipeID() {
         return "harvestcraft." + this.getRecipeSubID();
+    }
+    
+    public Point getInputStackPos() {
+        return new Point(45, 4);
+    }
+    
+    public Point getOutputStackPos() {
+        return new Point(105, 22);
+    }
+    
+    public Point getFuelStackPos() {
+        return new Point(45, 40);
     }
     
     @Override
@@ -73,10 +90,6 @@ public abstract class RecipeHandlerHCBase extends RecipeHandlerBase {
     
     public abstract Map<ItemStack, ItemStack> getRecipes();
     
-    public List<ItemStack> getFuelItems() {
-        return Collections.singletonList(this.getFuelItem());
-    }
-    
     public ItemStack getFuelItem() {
         return null;
     }
@@ -84,7 +97,7 @@ public abstract class RecipeHandlerHCBase extends RecipeHandlerBase {
     @Override
     public void loadAllRecipes() {
         for (Entry<ItemStack, ItemStack> recipe : this.getRecipes().entrySet()) {
-            this.arecipes.add(new CachedHCRecipe(recipe.getKey(), recipe.getValue(), this.getFuelItems()));
+            this.arecipes.add(new CachedHCRecipe(recipe.getKey(), recipe.getValue(), this.getFuelItem()));
         }
     }
     
@@ -92,7 +105,7 @@ public abstract class RecipeHandlerHCBase extends RecipeHandlerBase {
     public void loadCraftingRecipes(ItemStack result) {
         for (Entry<ItemStack, ItemStack> recipe : this.getRecipes().entrySet()) {
             if (Utils.areStacksSameTypeCraftingSafe(recipe.getValue(), result)) {
-                this.arecipes.add(new CachedHCRecipe(recipe.getKey(), recipe.getValue(), this.getFuelItems()));
+                this.arecipes.add(new CachedHCRecipe(recipe.getKey(), recipe.getValue(), this.getFuelItem()));
             }
         }
     }
@@ -102,18 +115,16 @@ public abstract class RecipeHandlerHCBase extends RecipeHandlerBase {
         ingredient = ingredient.copy();
         ingredient.stackSize = 1;
         
-        for (ItemStack stack : this.getFuelItems()) {
-            if (Utils.areStacksSameTypeCraftingSafe(stack, ingredient)) {
-                for (Entry<ItemStack, ItemStack> recipe : this.getRecipes().entrySet()) {
-                    this.arecipes.add(new CachedHCRecipe(recipe.getKey(), recipe.getValue(), Collections.singletonList(ingredient)));
-                }
-                return;
+        if (Utils.areStacksSameTypeCraftingSafe(this.getFuelItem(), ingredient)) {
+            for (Entry<ItemStack, ItemStack> recipe : this.getRecipes().entrySet()) {
+                this.arecipes.add(new CachedHCRecipe(recipe.getKey(), recipe.getValue(), ingredient));
             }
+            return;
         }
         
         for (Entry<ItemStack, ItemStack> recipe : this.getRecipes().entrySet()) {
             if (Utils.areStacksSameTypeCraftingSafe(recipe.getKey(), ingredient)) {
-                this.arecipes.add(new CachedHCRecipe(ingredient, recipe.getValue(), this.getFuelItems()));
+                this.arecipes.add(new CachedHCRecipe(ingredient, recipe.getValue(), this.getFuelItem()));
             }
         }
     }

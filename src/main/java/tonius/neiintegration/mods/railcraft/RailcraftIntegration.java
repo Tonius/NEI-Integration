@@ -1,7 +1,7 @@
 package tonius.neiintegration.mods.railcraft;
 
 import tonius.neiintegration.IntegrationBase;
-import cpw.mods.fml.common.Loader;
+import tonius.neiintegration.Utils;
 
 public class RailcraftIntegration extends IntegrationBase {
     
@@ -12,7 +12,7 @@ public class RailcraftIntegration extends IntegrationBase {
     
     @Override
     public boolean isValid() {
-        return Loader.isModLoaded("Railcraft");
+        return Utils.isModLoaded("Railcraft");
     }
     
     @Override

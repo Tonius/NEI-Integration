@@ -19,6 +19,11 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 import org.lwjgl.input.Keyboard;
 
 import codechicken.nei.NEIServerUtils;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModContainer;
+import cpw.mods.fml.common.versioning.DefaultArtifactVersion;
+import cpw.mods.fml.common.versioning.VersionParser;
+import cpw.mods.fml.common.versioning.VersionRange;
 
 public class Utils {
     
@@ -115,6 +120,22 @@ public class Utils {
             NEIIntegration.log.error("Failed to find class " + name);
         }
         return null;
+    }
+    
+    public static boolean isModLoaded(String modid) {
+        return Loader.isModLoaded(modid);
+    }
+    
+    public static boolean isModLoaded(String modid, String versionRangeString) {
+        if (!isModLoaded(modid)) {
+            return false;
+        }
+        
+        ModContainer mod = Loader.instance().getIndexedModList().get(modid);
+        VersionRange versionRange = VersionParser.parseRange(versionRangeString);
+        DefaultArtifactVersion required = new DefaultArtifactVersion(modid, versionRange);
+        
+        return required.containsVersion(mod.getProcessedVersion());
     }
     
 }

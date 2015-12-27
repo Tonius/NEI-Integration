@@ -1,3 +1,11 @@
+/*
+ * ******************************************************************************
+ *  Copyright 2011-2015 CovertJaguar
+ *
+ *  This work (the API) is licensed under the "MIT" License, see LICENSE.md for details.
+ * ***************************************************************************
+ */
+
 package mods.railcraft.api.fuel;
 
 import cpw.mods.fml.common.FMLLog;
@@ -31,7 +39,7 @@ public class FuelManager {
             return;
         }
         boilerFuel.put(fluid, heatValuePerBucket);
-        FMLLog.log("Railcraft", Level.INFO, String.format("%s registered \"%s\" as a valid Boiler fuel source with %d heat.", modName, fluid.getName(), heatValuePerBucket));
+        FMLLog.log("Railcraft", Level.DEBUG, String.format("%s registered \"%s\" as a valid Boiler fuel source with %d heat.", modName, fluid.getName(), heatValuePerBucket));
     }
 
     public static int getBoilerFuelValue(Fluid fluid) {

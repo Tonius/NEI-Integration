@@ -1,7 +1,7 @@
 package tonius.neiintegration.mods.minefactoryreloaded;
 
 import tonius.neiintegration.IntegrationBase;
-import cpw.mods.fml.common.Loader;
+import tonius.neiintegration.Utils;
 
 public class MFRIntegration extends IntegrationBase {
     
@@ -12,7 +12,7 @@ public class MFRIntegration extends IntegrationBase {
     
     @Override
     public boolean isValid() {
-        return Loader.isModLoaded("MineFactoryReloaded");
+        return Utils.isModLoaded("MineFactoryReloaded");
     }
     
     @Override

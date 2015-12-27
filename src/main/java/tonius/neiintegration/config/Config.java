@@ -59,7 +59,9 @@ public class Config {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            config.save();
+            if (config.hasChanged()) {
+                config.save();
+            }
         }
     }
     
