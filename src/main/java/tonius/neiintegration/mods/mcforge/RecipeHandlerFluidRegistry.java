@@ -158,7 +158,7 @@ public class RecipeHandlerFluidRegistry extends RecipeHandlerBase {
             
             @Override
             public int compare(Fluid f1, Fluid f2) {
-                if (f1 == null || f1 == null) {
+                if (f1 == null || f2 == null) {
                     return 0;
                 }
                 return Integer.compare(f1.getID(), f2.getID());
