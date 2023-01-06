@@ -1,6 +1,9 @@
 NEI-Integration
 ===============
 
+# This Project is unmaintained please use:https://www.curseforge.com/minecraft/mc-mods/jei-integration
+for 1.12.2 and above
+
 NEI Integration is two things-- a playground to try out new types of NEI handlers, and a place to put NEI handlers if I somehow can't get them into the mods they were made for. The mod aims to stimulate other mod developers to add NEI handlers to their own mods.  
   
 ### Requests
